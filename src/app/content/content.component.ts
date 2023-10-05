@@ -24,11 +24,11 @@ export class ContentComponent {
 		        password: input.password
 		    }).then(
 		    response => {
-		        //this.axiosService.setAuthToken(response.data.token);
+		        this.axiosService.setAuthToken(response.data.token);
 		        this.componentToShow = "messages";
 		    }).catch(
 		    error => {
-		        //this.axiosService.setAuthToken(null);
+		        this.axiosService.setAuthToken(null);
 		        this.componentToShow = "welcome";
 		    }
 		);
@@ -40,17 +40,16 @@ export class ContentComponent {
 		    "POST",
 		    "/register",
 		    {
-		        firstName: input.firstName,
-		        lastName: input.lastName,
+		        email: input.email,
 		        login: input.login,
 		        password: input.password
 		    }).then(
 		    response => {
-		        //this.axiosService.setAuthToken(response.data.token);
+		        this.axiosService.setAuthToken(response.data.token);
 		        this.componentToShow = "messages";
 		    }).catch(
 		    error => {
-		        //this.axiosService.setAuthToken(null);
+		        this.axiosService.setAuthToken(null);
 		        this.componentToShow = "welcome";
 		    }
 		);
