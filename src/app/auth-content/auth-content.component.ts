@@ -21,7 +21,7 @@ export class AuthContentComponent {
         }).catch(
         (error) => {
             if (error.response.status === 401) {
-                //this.axiosService.setAuthToken(null);
+                this.axiosService.setAuthToken(null);
             } else {
                 this.data = error.response.code;
             }
