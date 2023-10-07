@@ -1,0 +1,8 @@
+<div class="col-md-12 text-center">
+  <button *ngIf="!isAuth" class="btn btn-primary" style="margin: 10px" (click)="loginEvent.emit()">
+    Login
+  </button>
+  <button *ngIf="isAuth" class="btn btn-dark" style="margin: 10px" (click)="logoutEvent.emit()">
+    Logout
+  </button>
+</div>

@@ -1,0 +1,17 @@
+<div>
+
+	<div class="row">
+		<div class="col-12 mt-1">
+			<app-auth-content *ngIf="componentToShow == 'messages'"/>
+			<app-buttons (loginEvent)="showComponent('login')" (logoutEvent)="logout()" [isAuth]="isAuth" />
+		</div>
+
+	</div>
+
+
+	<app-welcome-content *ngIf="componentToShow == 'welcome'"/>
+	<app-habits *ngIf="componentToShow == 'messages'"/>
+	
+	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)" (onSubmitRegisterEvent)="onRegister($event)"/>
+
+</div>

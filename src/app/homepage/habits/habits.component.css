@@ -1,0 +1,9 @@
+.strokeme {
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+
+  /* Add to your component’s CSS file */
+.clickable-card:hover {
+    cursor: pointer;
+}
