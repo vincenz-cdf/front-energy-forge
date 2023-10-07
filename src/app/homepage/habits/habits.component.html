@@ -2,22 +2,22 @@
     <div className="jumbotron jumbotron-fluid">
         <div className="container">
             <div class="row">
-                <!--
-                <div class="col-4 mb-1">
+                <div class="col-4 mb-1" *ngFor="let habit of habits">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-2">
-                                    Checkbox
+                                    <input type="checkbox" [checked]="habit.checked"
+                                        (change)="onCheckboxChange(habit)" />
                                 </div>
                                 <div class="col-10">
-                                    Description
+                                    {{ habit.title }}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                -->
+
 
                 <div class="col-4 mb-1 clickable-card" (click)="addHabit()">
                     <div class="card">
@@ -32,8 +32,8 @@
                         </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
 
 

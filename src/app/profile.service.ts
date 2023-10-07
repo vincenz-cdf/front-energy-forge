@@ -8,7 +8,12 @@ export class ProfileService {
   constructor() { }
 
   setUserInfo(user: any) {
-    window.localStorage.setItem('userId', JSON.stringify(user.id));
+    if(user == null) {
+      window.localStorage.setItem('userId', JSON.stringify(null));
+    } else {
+      window.localStorage.setItem('userId', JSON.stringify(user.id));
+    }
+
   }
 
   getUserInfo() {
