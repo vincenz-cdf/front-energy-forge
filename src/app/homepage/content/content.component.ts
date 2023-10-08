@@ -14,16 +14,16 @@ export class ContentComponent implements OnInit {
 	constructor(private axiosService: AxiosService, private profileService: ProfileService) { }
 
 	ngOnInit(): void {
-	  this.handleRedirect();
+		this.handleRedirect();
 	}
-  
+
 	handleRedirect(): void {
-	  if (this.axiosService.getAuthToken() !== null) {
-		this.componentToShow = "messages";
-		this.isAuth = true;
-	  } else {
-		this.logout();
-	  }
+		if (this.axiosService.getAuthToken() !== null) {
+			this.componentToShow = "messages";
+			this.isAuth = true;
+		} else {
+			this.logout();
+		}
 	}
 
 	showComponent(componentToShow: string): void {

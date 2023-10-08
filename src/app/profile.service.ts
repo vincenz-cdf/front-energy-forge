@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AxiosService } from './axios.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,13 @@ import { AxiosService } from './axios.service';
 export class ProfileService {
 
   constructor(private axiosService: AxiosService) { }
+
+  private notifyD = new Subject<void>();
+  notifyD$ = this.notifyD.asObservable();
+
+  notifyChildD() {
+    this.notifyD.next();
+  }
 
   setUserId(user: any) {
     if (user == null) {

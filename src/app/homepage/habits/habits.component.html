@@ -1,41 +1,35 @@
-<div className="row justify-content-md-center">
-    <div className="jumbotron jumbotron-fluid">
-        <div className="container">
-            <div class="row">
-                <div class="col-4 mb-1" *ngFor="let habit of habits">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-2">
-                                    <input type="checkbox" [checked]="habit.checked" [disabled]="habit.checked"
-                                        (change)="updateHabit(habit, { checked: true })" />
-                                    <img *ngIf="showImage" [@fadeInOutTranslateY]
-                                        src="../../../assets/sprites/ui/energy.png" style="width: 40%;">
-                                </div>
-                                <div class="col-10 title-edit">
-                                    <input *ngIf="habit.editMode" [(ngModel)]="habit.title"
-                                        (blur)="updateHabit(habit, { title: habit.title })"
-                                        (keyup.enter)="updateHabit(habit, { title: habit.title })" />
+<div class="row">
+    <div class="col-4 mb-1" *ngFor="let habit of habits">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <input type="checkbox" [checked]="habit.checked" [disabled]="habit.checked"
+                            (change)="updateHabit(habit, { checked: true })" />
+                        <img *ngIf="showImage" [@fadeInOutTranslateY] src="../../../assets/sprites/ui/energy.png"
+                            style="width: 40%;">
+                    </div>
+                    <div class="col-10 title-edit">
+                        <input *ngIf="habit.editMode" [(ngModel)]="habit.title"
+                            (blur)="updateHabit(habit, { title: habit.title })"
+                            (keyup.enter)="updateHabit(habit, { title: habit.title })" />
 
-                                    <span *ngIf="!habit.editMode" (click)="enableEditMode(habit)">
-                                        {{ habit.title }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        <span *ngIf="!habit.editMode" (click)="enableEditMode(habit)">
+                            {{ habit.title }}
+                        </span>
                     </div>
                 </div>
-                <div class="col-4 mb-1 clickable-card" (click)="addHabit()">
-                    <div class="card">
-                        <div class="card-body" style="background-color: #983939;">
-                            <div class="row">
-                                <div class="col-12">
-                                    <span class="strokeme">
-                                        <i class="fa fa-plus"></i> Ajouter une tâche
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 mb-1 clickable-card" (click)="addHabit()">
+        <div class="card">
+            <div class="card-body" style="background-color: #983939;">
+                <div class="row">
+                    <div class="col-12">
+                        <span class="strokeme">
+                            <i class="fa fa-plus"></i> Ajouter une tâche
+                        </span>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { fadeInOutTranslateXAnimation } from 'src/app/animations/fadeInOutTranslateXAnimation';
 import { PlayerService } from 'src/app/dbservice/player.service';
+import { ProfileService } from 'src/app/profile.service';
 
 @Component({
   selector: 'app-habits',
@@ -14,7 +15,7 @@ export class HabitsComponent implements OnInit {
 
   @Output() onHabitChangeEvent = new EventEmitter();
 
-  constructor(private playerService: PlayerService) {
+  constructor(private playerService: PlayerService, private profileService: ProfileService) {
 
   }
 
@@ -69,7 +70,7 @@ export class HabitsComponent implements OnInit {
         habit.editMode = false;
       }
 
-      this.onHabitChange();
+      this.profileService.notifyChildD();
       this.energyAnimation();
     }, (error) => {
       // Handle error accordingly...
@@ -79,10 +80,6 @@ export class HabitsComponent implements OnInit {
 
   enableEditMode(habit: any) {
     habit.editMode = true;
-  }
-
-  onHabitChange(): void {
-    this.onHabitChangeEvent.emit();
   }
 
   energyAnimation() {

@@ -10,6 +10,7 @@ import { LoginFormComponent } from './homepage/login-form/login-form.component';
 import { ContentComponent } from './homepage/content/content.component';
 import { HabitsComponent } from './homepage/habits/habits.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ResoucesComponent } from './homepage/header/resouces/resouces.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     WelcomeContentComponent,
     LoginFormComponent,
     ContentComponent,
-    HabitsComponent
+    HabitsComponent,
+    ResoucesComponent
   ],
   imports: [
     BrowserModule,
