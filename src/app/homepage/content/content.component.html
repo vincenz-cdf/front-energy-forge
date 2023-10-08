@@ -1,17 +1,13 @@
 <div>
 
-	<div class="row">
-		<div class="col-12 mt-1">
-			<app-auth-content *ngIf="componentToShow == 'messages'"/>
-			<app-buttons (loginEvent)="showComponent('login')" (logoutEvent)="logout()" [isAuth]="isAuth" />
-		</div>
+	<app-header [pageTitle]="'EnergyForge'" [isAuth]="isAuth" [logoSrc]="'../assets/images/logo.png'"
+		(logoutEvent)="logout()" (loginEvent)="onLoginEvent()"></app-header>
 
-	</div>
+	<app-auth-content *ngIf="componentToShow == 'messages'" />
 
 
-	<app-welcome-content *ngIf="componentToShow == 'welcome'"/>
-	<app-habits *ngIf="componentToShow == 'messages'"/>
-	
-	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)" (onSubmitRegisterEvent)="onRegister($event)"/>
+	<app-welcome-content *ngIf="componentToShow == 'welcome'" />
+	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)"
+		(onSubmitRegisterEvent)="onRegister($event)" />
 
 </div>

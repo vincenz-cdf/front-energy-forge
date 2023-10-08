@@ -8,8 +8,8 @@ import { AuthContentComponent } from './homepage/auth-content/auth-content.compo
 import { WelcomeContentComponent } from './homepage/welcome-content/welcome-content.component';
 import { LoginFormComponent } from './homepage/login-form/login-form.component';
 import { ContentComponent } from './homepage/content/content.component';
-import { ButtonsComponent } from './homepage/buttons/buttons.component';
 import { HabitsComponent } from './homepage/habits/habits.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,11 +19,11 @@ import { HabitsComponent } from './homepage/habits/habits.component';
     WelcomeContentComponent,
     LoginFormComponent,
     ContentComponent,
-    ButtonsComponent,
     HabitsComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule
   ],
   providers: [],

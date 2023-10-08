@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+import { AxiosService } from './axios.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor() { }
+  constructor(private axiosService: AxiosService) { }
 
-  setUserInfo(user: any) {
-    if(user == null) {
+  setUserId(user: any) {
+    if (user == null) {
       window.localStorage.setItem('userId', JSON.stringify(null));
     } else {
       window.localStorage.setItem('userId', JSON.stringify(user.id));
@@ -16,8 +17,18 @@ export class ProfileService {
 
   }
 
-  getUserInfo() {
+  getUserId() {
     const userInfo = window.localStorage.getItem('userId');
     return userInfo ? JSON.parse(userInfo) : null;
   }
+
+  getUserInfo() {
+    return this.axiosService.request(
+      "GET",
+      "/profile/" + this.getUserId(),
+      {}
+    );
+  }
+
+
 }

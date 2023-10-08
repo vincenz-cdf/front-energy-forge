@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AxiosService } from '../../axios.service';
 import { ProfileService } from '../../profile.service';
+import { ErrorService } from 'src/app/error.service';
 
 @Component({
   selector: 'app-auth-content',
@@ -10,33 +11,18 @@ import { ProfileService } from '../../profile.service';
 export class AuthContentComponent {
   data: any;
 
-  constructor(private axiosService: AxiosService, private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService, private errorService: ErrorService) { }
 
   ngOnInit(): void {
     this.fetchProfile();
   }
 
-  fetchProfile(): void {
-    this.axiosService.request(
-      "GET",
-      "/profile/" + this.profileService.getUserInfo(),
-      {}
-    ).then(
-      (response) => {
-        this.data = response.data;
-      }
-    ).catch(
-      (error) => {
-        this.handleProfileError(error);
-      }
-    );
+  fetchProfile() {
+    this.profileService.getUserInfo().then((response) => {
+      this.data = response.data;
+    }, (error) => {
+      this.errorService.handleProfileError(error);
+    });
   }
 
-  handleProfileError(error: any): void {
-    // Optionally: Add some user feedback here (like a toaster notification)
-    console.error('Profile retrieval failed', error);
-    this.axiosService.setAuthToken(null);
-    // Ensure that the user is navigated to the 'welcome' page.
-    window.location.reload();  // Force reload to ensure clean slate and apply route guards if any.
-  }
 }

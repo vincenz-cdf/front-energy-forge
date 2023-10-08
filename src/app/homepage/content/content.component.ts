@@ -33,7 +33,7 @@ export class ContentComponent implements OnInit {
 
 	logout() {
 		this.axiosService.setAuthToken(null);
-		this.profileService.setUserInfo(null);
+		this.profileService.setUserId(null);
 		this.isAuth = false;
 		this.showComponent('welcome');
 	}
@@ -49,18 +49,22 @@ export class ContentComponent implements OnInit {
 			}).then(
 				response => {
 					this.axiosService.setAuthToken(response.data.token);
-					this.profileService.setUserInfo(response.data);
+					this.profileService.setUserId(response.data);
 					this.isAuth = true;
 					this.componentToShow = "messages";
 				}).catch(
 					error => {
 						this.axiosService.setAuthToken(null);
-						this.profileService.setUserInfo(null);
+						this.profileService.setUserId(null);
 						this.isAuth = false;
 						this.componentToShow = "welcome";
 					}
 				);
 
+	}
+
+	onLoginEvent() {
+		this.showComponent('login');
 	}
 
 	onRegister(input: any): void {
@@ -74,13 +78,13 @@ export class ContentComponent implements OnInit {
 			}).then(
 				response => {
 					this.axiosService.setAuthToken(response.data.token);
-					this.profileService.setUserInfo(response.data);
+					this.profileService.setUserId(response.data);
 					this.isAuth = true;
 					this.componentToShow = "messages";
 				}).catch(
 					error => {
 						this.axiosService.setAuthToken(null);
-						this.profileService.setUserInfo(null);
+						this.profileService.setUserId(null);
 						this.isAuth = false;
 						this.componentToShow = "welcome";
 					}

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +8,16 @@ import { Component, Input } from '@angular/core';
 export class HeaderComponent {
   @Input() pageTitle!: string;
   @Input() logoSrc!: string;
+
+  @Input() isAuth!: boolean;
+
+  @Output() logoutEvent = new EventEmitter();
+  @Output() loginEvent = new EventEmitter();
+  
+
+  constructor(
+  ) {
+
+  }
+
 }

@@ -1,19 +1,26 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { AxiosService } from 'src/app/axios.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { fadeInOutTranslateXAnimation } from 'src/app/animations/fadeInOutTranslateXAnimation';
 import { PlayerService } from 'src/app/dbservice/player.service';
 
 @Component({
   selector: 'app-habits',
   templateUrl: './habits.component.html',
-  styleUrls: ['./habits.component.css']
+  styleUrls: ['./habits.component.css'],
+  animations: [
+    fadeInOutTranslateXAnimation
+  ]
 })
 export class HabitsComponent implements OnInit {
 
-  constructor(private axiosService: AxiosService, private playerService: PlayerService) {
+  @Output() onHabitChangeEvent = new EventEmitter();
+
+  constructor(private playerService: PlayerService) {
 
   }
 
   habits: any = null;
+
+  showImage = false;
 
   ngOnInit(): void {
     this.showHabits()
@@ -49,26 +56,38 @@ export class HabitsComponent implements OnInit {
 
   }
 
-  updateHabit(habit: any, check: boolean) {
-
-    if(check) {
-      habit.checked = true;
-    } else {
-
-    }
+  updateHabit(habit: any, changes: any) {
+    // Apply changes directly to habit object
+    Object.assign(habit, changes);
 
     this.playerService.updateHabit(habit).then((response) => {
       if (response.data.status === 'success') {
         this.showHabits();
       }
-    }, (error) => {
-      if (error.response && error.response.data) {
-        console.error('Error:', error.response.data.message); // Specific error message from server
-      } else {
-        console.error('An unknown error occurred while trying to create the habit.');
-        // Generic error message for scenarios where no specific message is received
+
+      if (changes.title !== undefined) {
+        habit.editMode = false;
       }
+
+      this.onHabitChange();
+      this.energyAnimation();
+    }, (error) => {
+      // Handle error accordingly...
+      console.error(error);
     });
+  }
+
+  enableEditMode(habit: any) {
+    habit.editMode = true;
+  }
+
+  onHabitChange(): void {
+    this.onHabitChangeEvent.emit();
+  }
+
+  energyAnimation() {
+    this.showImage = true;
+    setTimeout(() => this.showImage = false, 1500);
   }
 
 }
