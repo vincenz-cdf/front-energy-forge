@@ -1,9 +1,20 @@
 .strokeme {
-    color: white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  }
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
 
-  /* Add to your component’s CSS file */
+/* Add to your component’s CSS file */
 .clickable-card:hover {
-    cursor: pointer;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 500ms;
+}
+
+.clickable-card:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+}
+.clickable-card:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }

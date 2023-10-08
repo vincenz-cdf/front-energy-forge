@@ -7,8 +7,10 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-2">
-                                    <input type="checkbox" [checked]="habit.checked"
-                                        (change)="onCheckboxChange(habit)" />
+                                    <input type="checkbox" 
+                                           [checked]="habit.checked"
+                                           [disabled]="habit.checked"
+                                           (change)="updateHabit(habit, true)" />
                                 </div>
                                 <div class="col-10">
                                     {{ habit.title }}
@@ -17,6 +19,7 @@
                         </div>
                     </div>
                 </div>
+                
 
 
                 <div class="col-4 mb-1 clickable-card" (click)="addHabit()">
