@@ -1,18 +1,22 @@
 <div class="row">
-    <div class="col-4 mb-1" *ngFor="let habit of habits">
+    <div class="col-4 mb-1" *ngFor="let habit of habits; let i = index">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
                         <input type="checkbox" [checked]="habit.checked" [disabled]="habit.checked"
-                            (change)="updateHabit(habit, { checked: true })" />
-                        <img *ngIf="showImage" [@fadeInOutTranslateY] src="../../../assets/sprites/ui/energy.png"
-                            style="width: 40%;">
+                        (change)="updateHabit(habit, { checked: true }, i)" />
+
+
+                        <div *ngIf="habit.showImage" class="icon-container" @bounceFadeOutAnimation>
+                            <img src="../../../assets/sprites/ui/energy.png" alt="Bouncing image" />
+                        </div>
+                        
                     </div>
                     <div class="col-10 title-edit">
                         <input *ngIf="habit.editMode" [(ngModel)]="habit.title"
-                            (blur)="updateHabit(habit, { title: habit.title })"
-                            (keyup.enter)="updateHabit(habit, { title: habit.title })" />
+                            (blur)="updateHabit(habit, { title: habit.title }, i)"
+                            (keyup.enter)="updateHabit(habit, { title: habit.title}, i)" />
 
                         <span *ngIf="!habit.editMode" (click)="enableEditMode(habit)">
                             {{ habit.title }}

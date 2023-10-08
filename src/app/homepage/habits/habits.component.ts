@@ -1,21 +1,24 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { fadeInOutTranslateXAnimation } from 'src/app/animations/fadeInOutTranslateXAnimation';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ProfileService } from 'src/app/profile.service';
+
+import { AnimationEvent } from '@angular/animations';
+
+import { bounceFadeOutAnimation } from 'src/app/animations/bounceFadeOutAnimation';
+import { ErrorService } from 'src/app/error.service';
 
 @Component({
   selector: 'app-habits',
   templateUrl: './habits.component.html',
   styleUrls: ['./habits.component.css'],
-  animations: [
-    fadeInOutTranslateXAnimation
+  animations: [bounceFadeOutAnimation
   ]
 })
 export class HabitsComponent implements OnInit {
 
   @Output() onHabitChangeEvent = new EventEmitter();
 
-  constructor(private playerService: PlayerService, private profileService: ProfileService) {
+  constructor(private playerService: PlayerService, private profileService: ProfileService, private errorService: ErrorService) {
 
   }
 
@@ -30,7 +33,7 @@ export class HabitsComponent implements OnInit {
   showHabits() {
     this.playerService.listHabitsById().then((response) => {
       if (response.data.status === 'success') {
-        this.habits = response.data.data;
+        this.habits = response.data.data.map((habit: any) => ({ ...habit, showImage: false }));
       }
     }, (error) => {
       //SweetAlert
@@ -42,28 +45,27 @@ export class HabitsComponent implements OnInit {
   addHabit() {
     this.playerService.createHabit().then((response) => {
       if (response.data.status === 'success') {
-        console.log(response.data.message); // Success message from server
-        // Optionally, update UI or store state here to reflect the newly created habit
-        this.showHabits()
+        console.log(response.data.message);
+        this.habits.push({
+          ...response.data.newHabit,
+          showImage: false
+        });
       }
-    }, (error) => {
-      if (error.response && error.response.data) {
-        console.error('Error:', error.response.data.message); // Specific error message from server
-      } else {
-        console.error('An unknown error occurred while trying to create the habit.');
-        // Generic error message for scenarios where no specific message is received
-      }
-    })
-
+    }).catch(error => {
+      this.errorService.handleError(error);
+    });
   }
+  
 
-  updateHabit(habit: any, changes: any) {
+  updateHabit(habit: any, changes: any, habitIndex: number) {
     // Apply changes directly to habit object
     Object.assign(habit, changes);
 
     this.playerService.updateHabit(habit).then((response) => {
-      if (response.data.status === 'success') {
+
+      if (response.data.status === 'success' && changes.checked !== true) {
         this.showHabits();
+
       }
 
       if (changes.title !== undefined) {
@@ -71,7 +73,7 @@ export class HabitsComponent implements OnInit {
       }
 
       this.profileService.notifyChildD();
-      this.energyAnimation();
+      this.startAnimation(habitIndex);
     }, (error) => {
       // Handle error accordingly...
       console.error(error);
@@ -82,9 +84,20 @@ export class HabitsComponent implements OnInit {
     habit.editMode = true;
   }
 
-  energyAnimation() {
-    this.showImage = true;
-    setTimeout(() => this.showImage = false, 1500);
+  startAnimation(habitIndex: number) {
+    console.log("lol")
+    this.habits[habitIndex].showImage = true;
+    setTimeout(() => {
+      this.habits[habitIndex].showImage = false;
+    }, 2000);
+  }
+
+  animationStart(event: AnimationEvent) {
+    console.log('Animation Start', event);
+  }
+
+  animationDone(event: AnimationEvent) {
+    console.log('Animation Done', event);
   }
 
 }

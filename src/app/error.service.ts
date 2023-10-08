@@ -15,4 +15,13 @@ export class ErrorService {
     // Ensure that the user is navigated to the 'welcome' page.
     window.location.reload();  // Force reload to ensure clean slate and apply route guards if any.
   }
+
+  handleError(error: any) {
+    if (error.response && error.response.data) {
+      console.error('Error:', error.response.data.message);
+    } else {
+      console.error('An unknown error occurred.');
+    }
+  }
+  
 }

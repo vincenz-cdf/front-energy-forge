@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AxiosService } from 'src/app/axios.service';
 import { ErrorService } from 'src/app/error.service';
 import { ProfileService } from 'src/app/profile.service';
 
@@ -13,7 +14,7 @@ export class ResoucesComponent implements OnInit, OnDestroy {
   data: any;
   private subscription: Subscription;
 
-  constructor(private profileService: ProfileService, private errorService: ErrorService) {
+  constructor(private profileService: ProfileService, private errorService: ErrorService, private axiosService: AxiosService) {
     this.subscription = this.profileService.notifyD$.subscribe(() => {
       this.fetchProfile();
     });
@@ -25,11 +26,14 @@ export class ResoucesComponent implements OnInit, OnDestroy {
   }
 
   fetchProfile() {
-    this.profileService.getUserInfo().then((response) => {
-      this.data = response.data;
-    }, (error) => {
-      this.errorService.handleProfileError(error);
-    });
+    if(this.axiosService.getAuthToken() !== null) {
+      this.profileService.getUserInfo().then((response) => {
+        this.data = response.data;
+      }, (error) => {
+        this.errorService.handleProfileError(error);
+      });
+    }
+
   }
 
   ngOnDestroy(): void {

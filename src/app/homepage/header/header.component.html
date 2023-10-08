@@ -15,7 +15,7 @@
 			<div class="text-end">
 				<div class="row">
 					<div class="col-6 mt-3">
-						<app-resouces />
+						<app-resouces *ngIf="isAuth" />
 					</div>
 					<div class="col-6">
 						<button *ngIf="!isAuth" class="btn btn-danger active" style="margin: 10px"
