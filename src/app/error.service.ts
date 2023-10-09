@@ -30,13 +30,21 @@ export class ErrorService {
         position: 'top-end',
         icon: 'error',
         title: 'Erreur',
-        text: error,
+        text: error.response.data.message,
         showConfirmButton: false,
         timer: 1500,
         backdrop: false
       });
     } else {
-      console.error('An unknown error occurred.');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Erreur',
+        text: "An unknown error occurred.",
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: false
+      });
     }
   }
   

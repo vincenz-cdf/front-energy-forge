@@ -36,7 +36,7 @@ export class HabitsComponent implements OnInit {
         this.habits = response.data.data.map((habit: any) => ({ ...habit, showImage: false }));
       }
     }, (error) => {
-      //SweetAlert
+      this.errorService.handleError(error)
     })
 
   }
@@ -45,17 +45,12 @@ export class HabitsComponent implements OnInit {
   addHabit() {
     this.playerService.createHabit().then((response) => {
       if (response.data.status === 'success') {
-        console.log(response.data.message); // Success message from server
         // Optionally, update UI or store state here to reflect the newly created habit
         this.showHabits()
       }
     }, (error) => {
-      if (error.response && error.response.data) {
-        console.error('Error:', error.response.data.message); // Specific error message from server
-      } else {
-        console.error('An unknown error occurred while trying to create the habit.');
-        // Generic error message for scenarios where no specific message is received
-    }})
+      this.errorService.handleError(error)
+    })
   }
   
 
@@ -77,8 +72,7 @@ export class HabitsComponent implements OnInit {
       this.profileService.notifyChildD();
       this.startAnimation(habitIndex);
     }, (error) => {
-      // Handle error accordingly...
-      console.error(error);
+      this.errorService.handleError(error)
     });
   }
 
