@@ -1,18 +1,19 @@
 <div class="card bg-image" style="border-radius: 0px;">
     <div class="card-body">
         <div class="row mx-1">
-            <!-- Image box with custom styling -->
-            <div class="image-box">
-                <img [src]="mainCharPath" alt="Main Character" class="rotated-image" />
+            <div *ngFor="let char of characters" class="character-box">
+                <div class="image-box">
+                    <img [src]="char.spritePath" alt="Main Character" class="rotated-image" />
+                </div>
+                
+                <!-- Text beside the image -->
+                <div class="col-3 strokeme">
+                    <div>{{char.name}} Lvl.{{char.level}}</div>
+                    <div>Hp : {{char.hp}}/equipmenthp</div>
+                    <div>Ar : {{char.armor}}/equipemntar</div>
+                    <div>Atk : {{char.atk}}/equipemntattack</div>
+                </div>
             </div>
-            
-            <!-- Text beside the image -->
-            <div class="col-3 strokeme">
-                <div>yes</div>
-                <div>no</div>
-            </div>
-
-            <!-- Add more characters and their corresponding text here -->
         </div>
     </div>
 </div>

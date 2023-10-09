@@ -1,22 +1,27 @@
-.flex-container {
+.character-box {
   display: flex;
+  align-items: flex-start; /* Align items to the top */
+  margin-bottom: 16px; /* Optional: add some space between character boxes */
 }
 
-.image-container {
-  position: relative;
+.image-box {
+  border: 2px solid #222222;
+  padding: 10px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  background-color: #E9CA7B;
+  margin-right: 16px; /* Add space between the image box and the text */
 }
 
 .rotated-image {
   width: 100px;
-  /* Adjust to your needs */
   height: auto;
 }
 
-.overlaid-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+.strokeme {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .bg-image {
@@ -24,23 +29,4 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-}
-
-.image-box {
-  border: 2px solid #222222;
-  /* Add a border */
-  padding: 10px;
-  /* Some padding */
-  width: 128px;
-  /* Specify a width */
-  display: inline-block;
-  /* Make it inline */
-  vertical-align: top;
-  /* Align with the text */
-  background-color: #E9CA7B;
-}
-
-.strokeme {
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }

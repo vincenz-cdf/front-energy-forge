@@ -19,4 +19,8 @@ export class PlayerService {
   updateHabit(habit: any) {
     return this.axiosService.request("POST", "/habits/" + habit.id, habit)
   }
+
+  listCharactersByUserId() {
+    return this.axiosService.request("GET", "/characters", {});
+  }
 }
