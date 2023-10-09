@@ -1,4 +1,5 @@
 import { EventEmitter, Component, Output } from '@angular/core';
+import { ErrorService } from 'src/app/error.service';
 
 @Component({
   selector: 'app-login-form',
@@ -14,6 +15,13 @@ export class LoginFormComponent {
   email: string = "";
   login: string = "";
   password: string = "";
+  confirmPassword: string = "";
+
+  constructor(
+    private errorService: ErrorService
+  ) {
+
+  }
 
 	onLoginTab(): void {
 		this.active = "login";
@@ -28,7 +36,12 @@ export class LoginFormComponent {
   }
 
   onSubmitRegister(): void {
-    this.onSubmitRegisterEvent.emit({"email": this.email, "login": this.login, "password": this.password});
+    if(this.confirmPassword !== this.password) {
+      this.errorService.notifyError("Passwords does not match")
+    } else {
+      this.onSubmitRegisterEvent.emit({"email": this.email, "login": this.login, "password": this.password});
+    }
+
   }
 
 }

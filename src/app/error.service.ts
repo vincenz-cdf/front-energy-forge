@@ -47,5 +47,16 @@ export class ErrorService {
       });
     }
   }
+
+  notifyError(text: any) {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Erreur',
+      text: text,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
   
 }

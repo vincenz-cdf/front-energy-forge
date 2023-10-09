@@ -7,10 +7,7 @@ import { Component } from '@angular/core';
 })
 export class CharactersComponent {
 
+  mainCharPath = 'assets/sprites/characters/mainchar.png';
   yes:any = false;
-
-  public yesClick() {
-    this.yes = !this.yes
-  }
 
 }

@@ -3,6 +3,9 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@characters/*": ["src/assets/sprites/characters/*"]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -22,7 +25,8 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
