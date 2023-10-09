@@ -31,3 +31,10 @@
   height: 100px;
   margin-top: -24px;
 }
+
+.no-border {
+  border: none;
+  outline: none;
+  background-color: #f0f0f0;  /* Light grey background */
+  border-bottom: 2px solid #000;  /* Black underline */
+}

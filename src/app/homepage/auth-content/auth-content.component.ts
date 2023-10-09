@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AxiosService } from '../../axios.service';
 import { ProfileService } from '../../profile.service';
 import { ErrorService } from 'src/app/error.service';
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AxiosService } from './axios.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,15 @@ export class ErrorService {
   constructor(private axiosService: AxiosService) { }
 
   handleProfileError(error: any): void {
-    // Optionally: Add some user feedback here (like a toaster notification)
-    console.error('Profile retrieval failed', error);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Profile Error',
+      text: error,
+      showConfirmButton: false,
+      timer: 1500,
+      backdrop: false
+    });
     this.axiosService.setAuthToken(null);
     // Ensure that the user is navigated to the 'welcome' page.
     window.location.reload();  // Force reload to ensure clean slate and apply route guards if any.
@@ -18,7 +26,15 @@ export class ErrorService {
 
   handleError(error: any) {
     if (error.response && error.response.data) {
-      console.error('Error:', error.response.data.message);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Erreur',
+        text: error,
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: false
+      });
     } else {
       console.error('An unknown error occurred.');
     }

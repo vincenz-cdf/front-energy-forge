@@ -45,15 +45,17 @@ export class HabitsComponent implements OnInit {
   addHabit() {
     this.playerService.createHabit().then((response) => {
       if (response.data.status === 'success') {
-        console.log(response.data.message);
-        this.habits.push({
-          ...response.data.newHabit,
-          showImage: false
-        });
+        console.log(response.data.message); // Success message from server
+        // Optionally, update UI or store state here to reflect the newly created habit
+        this.showHabits()
       }
-    }).catch(error => {
-      this.errorService.handleError(error);
-    });
+    }, (error) => {
+      if (error.response && error.response.data) {
+        console.error('Error:', error.response.data.message); // Specific error message from server
+      } else {
+        console.error('An unknown error occurred while trying to create the habit.');
+        // Generic error message for scenarios where no specific message is received
+    }})
   }
   
 
@@ -85,7 +87,6 @@ export class HabitsComponent implements OnInit {
   }
 
   startAnimation(habitIndex: number) {
-    console.log("lol")
     this.habits[habitIndex].showImage = true;
     setTimeout(() => {
       this.habits[habitIndex].showImage = false;

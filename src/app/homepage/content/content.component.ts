@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AxiosService } from '../../axios.service';
 import { ProfileService } from '../../profile.service';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
 	selector: 'app-content',
@@ -11,7 +12,7 @@ export class ContentComponent implements OnInit {
 	componentToShow: string = "welcome";
 	isAuth = false;
 
-	constructor(private axiosService: AxiosService, private profileService: ProfileService) { }
+	constructor(private axiosService: AxiosService, private profileService: ProfileService, private authService: AuthService) { }
 
 	ngOnInit(): void {
 		this.handleRedirect();
@@ -39,28 +40,18 @@ export class ContentComponent implements OnInit {
 	}
 
 
-	onLogin(input: any): void {
-		this.axiosService.request(
-			"POST",
-			"/login",
-			{
-				login: input.login,
-				password: input.password
-			}).then(
-				response => {
-					this.axiosService.setAuthToken(response.data.token);
-					this.profileService.setUserId(response.data);
-					this.isAuth = true;
-					this.componentToShow = "messages";
-				}).catch(
-					error => {
-						this.axiosService.setAuthToken(null);
-						this.profileService.setUserId(null);
-						this.isAuth = false;
-						this.componentToShow = "welcome";
-					}
-				);
-
+	onLogin(input: any) {
+		this.authService.login(input).then((response) => {
+			this.axiosService.setAuthToken(response.data.token);
+			this.profileService.setUserId(response.data);
+			this.isAuth = true;
+			this.componentToShow = "messages";
+		}, (error) => {
+			this.axiosService.setAuthToken(null);
+			this.profileService.setUserId(null);
+			this.isAuth = false;
+			this.componentToShow = "welcome";
+		})
 	}
 
 	onLoginEvent() {
@@ -68,27 +59,18 @@ export class ContentComponent implements OnInit {
 	}
 
 	onRegister(input: any): void {
-		this.axiosService.request(
-			"POST",
-			"/register",
-			{
-				email: input.email,
-				login: input.login,
-				password: input.password
-			}).then(
-				response => {
-					this.axiosService.setAuthToken(response.data.token);
-					this.profileService.setUserId(response.data);
-					this.isAuth = true;
-					this.componentToShow = "messages";
-				}).catch(
-					error => {
-						this.axiosService.setAuthToken(null);
-						this.profileService.setUserId(null);
-						this.isAuth = false;
-						this.componentToShow = "welcome";
-					}
-				);
+
+		this.authService.register(input).then((response) => {
+			this.axiosService.setAuthToken(response.data.token);
+			this.profileService.setUserId(response.data);
+			this.isAuth = true;
+			this.componentToShow = "messages";
+		}, (error) => {
+			this.axiosService.setAuthToken(null);
+			this.profileService.setUserId(null);
+			this.isAuth = false;
+			this.componentToShow = "welcome";
+		});
 	}
 
 }

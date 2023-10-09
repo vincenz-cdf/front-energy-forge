@@ -1,0 +1,20 @@
+.flex-container {
+    display: flex;
+  }
+  
+  .image-container {
+    position: relative;
+  }
+  
+  .rotated-image {
+    width: 100px; /* Adjust to your needs */
+    height: auto;
+  }
+  
+  .overlaid-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  

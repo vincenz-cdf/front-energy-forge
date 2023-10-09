@@ -14,7 +14,7 @@
                         
                     </div>
                     <div class="col-10 title-edit">
-                        <input *ngIf="habit.editMode" [(ngModel)]="habit.title"
+                        <input class="no-border" *ngIf="habit.editMode" [(ngModel)]="habit.title"
                             (blur)="updateHabit(habit, { title: habit.title }, i)"
                             (keyup.enter)="updateHabit(habit, { title: habit.title}, i)" />
 

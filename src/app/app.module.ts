@@ -11,6 +11,7 @@ import { ContentComponent } from './homepage/content/content.component';
 import { HabitsComponent } from './homepage/habits/habits.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResoucesComponent } from './homepage/header/resouces/resouces.component';
+import { CharactersComponent } from './homepage/characters/characters.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ResoucesComponent } from './homepage/header/resouces/resouces.component
     LoginFormComponent,
     ContentComponent,
     HabitsComponent,
-    ResoucesComponent
+    ResoucesComponent,
+    CharactersComponent
   ],
   imports: [
     BrowserModule,
