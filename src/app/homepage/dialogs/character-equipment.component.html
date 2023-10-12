@@ -22,14 +22,14 @@
         <div class="col-9">
             <div class="row">
                 <h5 class="col-12">Headgear</h5>
-                <div *ngFor="let equip of allEquipments" class="col-auto">
-                    <div class="card">
+                <div *ngFor="let armor of allArmors" class="col-auto">
+                    <div *ngIf="armor.equipment.slot == 'HEAD'" class="card">
                         <div class="card-body" [ngStyle]="{
                             'padding': '0',
-                            'background-color': isItemEquipped(equip.equipment.id) ? '#f0daa0' : ''
+                            'background-color': isItemEquipped(armor.equipment.id) ? '#f0daa0' : ''
                         }">
-                            <img [src]="equip.equipment.spritePath" alt="X" class="img-fluid equipment-image"
-                                (click)="equipEquipment(equip.id)" />
+                            <img [src]="armor.equipment.spritePath" alt="X" class="img-fluid equipment-image"
+                                (click)="equipEquipment(armor.id)" />
                         </div>
                     </div>
                 </div>

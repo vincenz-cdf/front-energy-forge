@@ -9,7 +9,8 @@ import { ErrorService } from 'src/app/error.service';
 })
 export class CharacterEquipment implements OnInit {
     @Input() character: any;
-    allEquipments: any;
+    allArmors: any;
+    allWeapons: any;
   
     constructor(private activeModal: NgbActiveModal, private equipmentService: EquipmentService, private errorService: ErrorService) {}
 
@@ -18,8 +19,14 @@ export class CharacterEquipment implements OnInit {
     }
 
     initializeEquipments() {
-      this.equipmentService.listAllEquipment().then((response) => {
-        this.allEquipments = response.data.data
+      this.equipmentService.listAllArmors().then((response) => {
+        this.allArmors = response.data.data
+      }, (error) => {
+        this.errorService.handleError(error);
+      });
+
+      this.equipmentService.listAllWeapons().then((response) => {
+        this.allWeapons = response.data.data
       }, (error) => {
         this.errorService.handleError(error);
       });

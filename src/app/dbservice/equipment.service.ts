@@ -9,8 +9,11 @@ export class EquipmentService {
   constructor(private axiosService: AxiosService) { }
 
   //TODO list equipment from user inventory
-  listAllEquipment() {
-    return this.axiosService.request("GET", "/equipments", {});
+  listAllArmors() {
+    return this.axiosService.request("GET", "/armors", {});
+  }
+  listAllWeapons() {
+    return this.axiosService.request("GET", "/weapons", {});
   }
 
   equipGear(gearId: any, charId: any) {
