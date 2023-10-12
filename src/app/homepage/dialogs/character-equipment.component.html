@@ -1,0 +1,68 @@
+<div class="modal-header">
+    <h3>{{character.name}} Lvl.{{character.level}}</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-3">
+            <div class="character-box">
+                <div class="image-box">
+                    <img [src]="character.spritePath" alt="Main Character" class="rotated-image" />
+                </div>
+                <!-- Text under the image -->
+                <div style="text-align: left;">
+                    <div>Hp : {{character.hp}}/equipmenthp</div>
+                    <div>Ar : {{character.armor}}/equipemntar</div>
+                    <div>Atk : {{character.atk}}/equipemntattack</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <h5 class="col-12">Headgear</h5>
+                <div *ngFor="let equip of allEquipments" class="col-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <img [src]="equip.equipment.spritePath" alt="X" class="rotated-image" style="width: 50%;" (click)="equipEquipment(equip.id)"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+</div>
+
+<style>
+    .character-box {
+        text-align: center;
+        margin-bottom: 16px;
+        /* Optional: add some space between character boxes */
+    }
+
+    .image-box {
+        border: 2px solid #222222;
+        padding: 10px;
+        width: 120px;
+        background-color: #E9CA7B;
+        margin-bottom: 16px;
+        /* Add space between the image box and the text */
+    }
+
+    .rotated-image {
+        width: 100px;
+        height: auto;
+    }
+
+    .strokeme {
+        color: white;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+
+    .bg-image {
+        background-image: url("../../../assets/images/wallpaper.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>

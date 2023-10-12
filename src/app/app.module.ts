@@ -12,6 +12,8 @@ import { HabitsComponent } from './homepage/habits/habits.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResoucesComponent } from './homepage/header/resouces/resouces.component';
 import { CharactersComponent } from './homepage/characters/characters.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CharacterEquipment } from './homepage/dialogs/character-equipment.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { CharactersComponent } from './homepage/characters/characters.component'
     ContentComponent,
     HabitsComponent,
     ResoucesComponent,
-    CharactersComponent
+    CharactersComponent,
+    CharacterEquipment
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

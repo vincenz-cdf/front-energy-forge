@@ -25,11 +25,17 @@ export class CharactersComponent implements OnInit {
     this.playerService.listCharactersByUserId().then((response) => {
       if (response.data.status === 'success') {
         this.characters = response.data.data;
+        for(let i of this.characters) {
+          this.playerService.listEquippedItemsByCharId(i.id).then((response) => {
+            i.equippedItems.push(response.data.data);
+          });
+        }
       }
     }, (error) => {
       this.errorService.handleError(error)
     });
   }
-
-  
+  openDialog(char: any) {
+    this.playerService.manageCharacterStuff(char);
+  }
 }
