@@ -25,17 +25,28 @@ export class CharactersComponent implements OnInit {
     this.playerService.listCharactersByUserId().then((response) => {
       if (response.data.status === 'success') {
         this.characters = response.data.data;
-        for(let i of this.characters) {
-          this.playerService.listEquippedItemsByCharId(i.id).then((response) => {
-            i.equippedItems.push(response.data.data);
-          });
-        }
+
       }
     }, (error) => {
       this.errorService.handleError(error)
     });
   }
+
   openDialog(char: any) {
-    this.playerService.manageCharacterStuff(char);
+    const modalRef = this.playerService.manageCharacterStuff(char);
+
+    modalRef.result.then(
+      (result) => {
+        this.listCharacters();
+      },
+      (reason) => {
+      }
+    );
+  }
+
+  splitEquipmentSlots(array: any, slot: string) {
+
+    return array.find((element: any) => element.slot === slot);
+
   }
 }

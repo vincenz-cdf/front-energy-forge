@@ -7,9 +7,12 @@
             <div class="character-box">
                 <div class="image-box">
                     <img [src]="character.spritePath" alt="Main Character" class="rotated-image" />
+                    <img *ngIf="character.equippedItems.length > 0" style="z-index: 2;"
+                        [src]="splitEquipmentSlots(character.equippedItems, 'HEAD').equipmentSpritePath"
+                        class="rotated-image" />
                 </div>
                 <!-- Text under the image -->
-                <div style="text-align: left;">
+                <div class="mt-1" style="text-align: left;">
                     <div>Hp : {{character.hp}}/equipmenthp</div>
                     <div>Ar : {{character.armor}}/equipemntar</div>
                     <div>Atk : {{character.atk}}/equipemntattack</div>
@@ -21,8 +24,12 @@
                 <h5 class="col-12">Headgear</h5>
                 <div *ngFor="let equip of allEquipments" class="col-auto">
                     <div class="card">
-                        <div class="card-body">
-                            <img [src]="equip.equipment.spritePath" alt="X" class="rotated-image" style="width: 50%;" (click)="equipEquipment(equip.id)"/>
+                        <div class="card-body" [ngStyle]="{
+                            'padding': '0',
+                            'background-color': isItemEquipped(equip.equipment.id) ? '#f0daa0' : ''
+                        }">
+                            <img [src]="equip.equipment.spritePath" alt="X" class="img-fluid equipment-image"
+                                (click)="equipEquipment(equip.id)" />
                         </div>
                     </div>
                 </div>
@@ -31,6 +38,7 @@
     </div>
 </div>
 <div class="modal-footer">
+    <button class="btn btn-success" (click)="save()">Save</button>
 </div>
 
 <style>
@@ -41,15 +49,25 @@
     }
 
     .image-box {
-        border: 2px solid #222222;
+        position: relative;
+        /* Make sure this is here */
+        border: none;
         padding: 10px;
-        width: 120px;
-        background-color: #E9CA7B;
-        margin-bottom: 16px;
+        width: 110px;
+        height: 110px;
+        display: flex;
+        align-items: center;
+        margin-right: 16px;
         /* Add space between the image box and the text */
     }
 
     .rotated-image {
+        position: absolute;
+        /* Make both images absolute */
+        top: 0;
+        /* Align to the top of the image-box */
+        left: 0;
+        /* Align to the left of the image-box */
         width: 100px;
         height: auto;
     }
@@ -64,5 +82,12 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+    }
+
+    .equipment-image {
+        width: 50px;
+        /* Or whatever width you desire */
+        height: auto;
+        /* Maintain the aspect ratio */
     }
 </style>

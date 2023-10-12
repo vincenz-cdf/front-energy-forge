@@ -4,8 +4,8 @@
             <div *ngFor="let char of characters" class="character-box">
                 <div class="image-box">
                     <img [src]="char.spritePath" alt="Main Character" class="rotated-image" (click)="openDialog(char)"/>
+                    <img *ngIf="char.equippedItems.length > 0" style="z-index: 2;" [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment" class="rotated-image" (click)="openDialog(char)"/>
                 </div>
-                
                 <!-- Text beside the image -->
                 <div class="col-3 strokeme">
                     <div>{{char.name}} Lvl.{{char.level}}</div>

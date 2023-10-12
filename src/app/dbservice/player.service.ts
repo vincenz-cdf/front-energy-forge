@@ -29,6 +29,8 @@ export class PlayerService {
   manageCharacterStuff(char: any) {
     const modalRef = this.modalService.open(CharacterEquipment, { size: 'xl' });
     modalRef.componentInstance.character = char;
+
+    return modalRef;
   }
 
   listEquippedItemsByCharId(id: any) {
