@@ -4,14 +4,17 @@
             <div *ngFor="let char of characters" class="character-box">
                 <div class="image-box">
                     <img [src]="char.spritePath" alt="Main Character" class="rotated-image" (click)="openDialog(char)"/>
-                    <img *ngIf="char.equippedItems.length > 0" style="z-index: 2;" [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment" class="rotated-image" (click)="openDialog(char)"/>
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'HEAD')" style="z-index: 2;" [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment" class="rotated-image" (click)="openDialog(char)"/>
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'ZWEIHAND')" style="z-index: 3;"
+                    [src]="splitEquipmentSlots(char.equippedItems, 'ZWEIHAND').equipmentSpritePath"
+                    class="rotated-image" (click)="openDialog(char)"/>
                 </div>
                 <!-- Text beside the image -->
                 <div class="col-3 strokeme">
                     <div>{{char.name}} Lvl.{{char.level}}</div>
-                    <div>Hp : {{char.hp}}/equipmenthp</div>
-                    <div>Ar : {{char.armor}}/equipemntar</div>
-                    <div>Atk : {{char.atk}}/equipemntattack</div>
+                    <div>Hp : {{char.hp}}/{{char.maxHp}}</div>
+                    <div>Ar : {{char.armor}}/{{char.maxArmor}}</div>
+                    <div>Atk : {{char.atk}}</div>
                 </div>
             </div>
         </div>

@@ -45,8 +45,10 @@ export class CharactersComponent implements OnInit {
   }
 
   splitEquipmentSlots(array: any, slot: string) {
-
     return array.find((element: any) => element.slot === slot);
+  }
 
+  isItemEquippedBySlot(array: any, slot: string) {
+    return array.findIndex((element: any) => element.slot === slot) != -1;
   }
 }

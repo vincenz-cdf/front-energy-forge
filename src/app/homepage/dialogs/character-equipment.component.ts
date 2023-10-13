@@ -35,17 +35,18 @@ export class CharacterEquipment implements OnInit {
 
 
     equipEquipment(gearId: any) {
-      this.equipmentService.equipGear(gearId, this.character.id).then((response) => {
-        const newEquippedItem = response.data.data
-        const oldItemIndex = this.character.equippedItems.findIndex((element: any) => element.id === newEquippedItem.id);
-        if(oldItemIndex != -1) {
-          this.character.equippedItems[oldItemIndex] = newEquippedItem;
-        } else {
-          this.character.equippedItems.push(response.data.data)
-        }
-      }, (error) => {
-        this.errorService.handleError(error);
-      });
+
+      if(!this.isItemEquipped(gearId)) {
+        this.equipmentService.equipGear(gearId, this.character.id).then((response) => {
+          console.log(response.data.data)
+          this.character = response.data.data;
+
+        }, (error) => {
+          this.errorService.handleError(error);
+        });
+      } 
+
+
     }
 
     splitEquipmentSlots(array: any, slot: string) {
@@ -57,6 +58,10 @@ export class CharacterEquipment implements OnInit {
         return true
       }
       return false;
+    }
+
+    isItemEquippedBySlot(array: any, slot: string) {
+      return array.findIndex((element: any) => element.slot === slot) != -1;
     }
 
     save() {
