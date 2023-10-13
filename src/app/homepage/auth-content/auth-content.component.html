@@ -1,8 +1,9 @@
-<!--Character Screen-->
-<app-characters/>
+<div class="d-flex flex-column min-vh-100">
+  <app-characters/>
 
-<div class="card no-border">
-  <div class="card-body">
-    <app-habits (onHabitChangeEvent)="fetchProfile()" />
+  <div class="card no-border flex-grow-1 overflow-auto">
+      <div class="card-body">
+          <app-habits (onHabitChangeEvent)="fetchProfile()" />
+      </div>
   </div>
 </div>

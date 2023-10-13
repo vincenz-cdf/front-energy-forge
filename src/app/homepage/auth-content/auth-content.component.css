@@ -1,8 +1,18 @@
 .no-border {
-    border: none;
-    outline: none;
-  }
+  border: none;
+  outline: none;
+}
 
 * {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
+}
+
+.card {
+  margin: 0;
+  padding: 0;
+  border: none;  /* Ensure no additional spacing via a border */
+}
+
+.card-body {
+  padding: 1em;  /* or whatever your desired internal spacing is */
 }

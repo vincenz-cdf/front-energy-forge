@@ -11,6 +11,10 @@ export class CharacterEquipment implements OnInit {
     @Input() character: any;
     allArmors: any;
     allWeapons: any;
+
+    armorUiPath = "assets/sprites/ui/armor.png"
+    attackUiPath = "assets/sprites/ui/damage.png"
+    coinPath = "assets/sprites/ui/coin.png"
   
     constructor(private activeModal: NgbActiveModal, private equipmentService: EquipmentService, private errorService: ErrorService) {}
 

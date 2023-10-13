@@ -8,6 +8,9 @@
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'ZWEIHAND')" style="z-index: 3;"
                     [src]="splitEquipmentSlots(char.equippedItems, 'ZWEIHAND').equipmentSpritePath"
                     class="rotated-image" (click)="openDialog(char)"/>
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'LEFTHAND')" style="z-index: 3;"
+                    [src]="splitEquipmentSlots(char.equippedItems, 'LEFTHAND').equipmentSpritePath"
+                    class="rotated-image" (click)="openDialog(char)"/>
                 </div>
                 <!-- Text beside the image -->
                 <div class="col-3 strokeme">
