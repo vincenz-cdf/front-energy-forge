@@ -7,7 +7,7 @@
 
 			<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 				<li><span class="app-title strokeme px-2">{{pageTitle}}</span></li>
-				<li><a href="/" class="nav-link px-2 text-secondary">Tâches</a></li>
+				<li *ngIf="isAuth"><a href="/" class="nav-link px-2 text-secondary">Tâches</a></li>
 			</ul>
 			
 
