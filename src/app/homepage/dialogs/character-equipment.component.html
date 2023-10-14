@@ -35,18 +35,17 @@
                                 <strong>{{armor.equipment.name}}</strong>
                             </div>
                             <div style="display: flex; align-items: center;">
-                                <span>{{armor.armorValue}}</span><img [src]="armorUiPath"/>
+                                <span>{{armor.armorValue}}</span><img [src]="armorUiPath" />
                             </div>
                             <div style="display: flex; align-items: center;">
-                                <span>{{armor.equipment.value}}</span><img [src]="coinPath"/>
+                                <span>{{armor.equipment.value}}</span><img [src]="coinPath" />
                             </div>
-                        </ng-template>                        
-                        <div class="card-body" [ngStyle]="{
+                        </ng-template>
+                        <div class="card-body" (click)="equipEquipment(armor.equipment.id)" [ngStyle]="{
                             'padding': '0',
                             'background-color': isItemEquipped(armor.equipment.id) ? '#f0daa0' : ''
                         }" [ngbTooltip]="armorTooltip">
-                            <img [src]="armor.equipment.spritePath" alt="X" class="img-fluid equipment-image"
-                                (click)="equipEquipment(armor.equipment.id)" />
+                            <img [src]="armor.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
                         </div>
                     </div>
                 </div>
@@ -55,23 +54,27 @@
                 <h5 class="col-12">Weapons</h5>
                 <div *ngFor="let weapon of allWeapons" class="col-auto">
                     <ng-template #weaponTooltip>
-                        <div style="display: flex; align-items: center;">
-                            <strong>{{weapon.equipment.name}}</strong>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <span>{{weapon.atkValue}}</span><img [src]="attackUiPath"/>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <span>{{weapon.equipment.value}}</span><img [src]="coinPath"/>
+                        <div style="min-width: 200px; max-width: 450px; overflow-wrap: break-word;">
+                            <div style="display: flex; align-items: center;">
+                                <strong>{{weapon.equipment.name}}</strong>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span>{{weapon.atkValue}}</span><img [src]="attackUiPath" />
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span>{{weapon.equipment.value}}</span><img [src]="coinPath" />
+                            </div>
+                            <div *ngFor="let a of weapon.weaponAbilities" style="display: flex; align-items: center;">
+                                <span>{{a.equipmentAbilityName}} : {{a.equipmentAbilityDescription}}</span>
+                            </div>
                         </div>
                     </ng-template>
                     <div class="card">
-                        <div class="card-body" [ngStyle]="{
+                        <div class="card-body" (click)="equipEquipment(weapon.equipment.id)" [ngStyle]="{
                             'padding': '0',
                             'background-color': isItemEquipped(weapon.equipment.id) ? '#f0daa0' : ''
                         }" [ngbTooltip]="weaponTooltip">
-                            <img [src]="weapon.equipment.spritePath" alt="X" class="img-fluid equipment-image"
-                                (click)="equipEquipment(weapon.equipment.id)" />
+                            <img [src]="weapon.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
                         </div>
                     </div>
                 </div>

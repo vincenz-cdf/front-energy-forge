@@ -2,15 +2,17 @@
     <div class="card-body">
         <div class="row mx-1">
             <div *ngFor="let char of characters" class="character-box">
-                <div class="image-box">
-                    <img [src]="char.spritePath" alt="Main Character" class="rotated-image" (click)="openDialog(char)"/>
-                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'HEAD')" style="z-index: 2;" [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment" class="rotated-image" (click)="openDialog(char)"/>
+                <div class="image-box" (click)="openDialog(char)">
+                    <img [src]="char.spritePath" alt="Main Character" class="rotated-image" />
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'HEAD')" style="z-index: 2;"
+                        [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment"
+                        class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'ZWEIHAND')" style="z-index: 3;"
-                    [src]="splitEquipmentSlots(char.equippedItems, 'ZWEIHAND').equipmentSpritePath"
-                    class="rotated-image" (click)="openDialog(char)"/>
+                        [src]="splitEquipmentSlots(char.equippedItems, 'ZWEIHAND').equipmentSpritePath"
+                        class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'LEFTHAND')" style="z-index: 3;"
-                    [src]="splitEquipmentSlots(char.equippedItems, 'LEFTHAND').equipmentSpritePath"
-                    class="rotated-image" (click)="openDialog(char)"/>
+                        [src]="splitEquipmentSlots(char.equippedItems, 'LEFTHAND').equipmentSpritePath"
+                        class="rotated-image" />
                 </div>
                 <!-- Text beside the image -->
                 <div class="col-3 strokeme">
