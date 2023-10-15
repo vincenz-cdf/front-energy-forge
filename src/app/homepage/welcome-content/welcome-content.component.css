@@ -1,0 +1,22 @@
+.expedition-background {
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    height: 100vh; 
+    width: 100vw;
+    background-image: url('../../../assets/images/wallpaper.jpeg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    display: flex; 
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+}
+
+.expedition-text {
+    font-size: 2rem; /* Adjust size as needed */
+    color: white; /* Adjust color as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: Adds shadow to make text more readable against backgrounds */
+    z-index: 1; /* Makes sure the text appears above the background */
+}

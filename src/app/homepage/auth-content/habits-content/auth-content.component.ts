@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfileService } from '../../profile.service';
+import { ProfileService } from '../../../profile.service';
 import { ErrorService } from 'src/app/error.service';
 
 @Component({

@@ -7,6 +7,9 @@
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'HEAD')" style="z-index: 2;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment"
                         class="rotated-image" />
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'BODY')" style="z-index: 1;"
+                        [src]="splitEquipmentSlots(char.equippedItems, 'BODY').equipmentSpritePath" alt="Equipment"
+                        class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'ZWEIHAND')" style="z-index: 3;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'ZWEIHAND').equipmentSpritePath"
                         class="rotated-image" />

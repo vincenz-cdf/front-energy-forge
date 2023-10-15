@@ -73,4 +73,12 @@ export class ContentComponent implements OnInit {
 		});
 	}
 
+	homepageEvent() {
+		this.componentToShow = "messages";
+	}
+
+	expeditionEvent() {
+		this.componentToShow = "expedition";
+	}
+
 }

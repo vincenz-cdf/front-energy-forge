@@ -10,6 +10,9 @@
                     <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'HEAD')" style="z-index: 2;"
                         [src]="splitEquipmentSlots(character.equippedItems, 'HEAD').equipmentSpritePath"
                         class="rotated-image" />
+                    <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'BODY')" style="z-index: 1;"
+                        [src]="splitEquipmentSlots(character.equippedItems, 'BODY').equipmentSpritePath"
+                        class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'ZWEIHAND')" style="z-index: 3;"
                         [src]="splitEquipmentSlots(character.equippedItems, 'ZWEIHAND').equipmentSpritePath"
                         class="rotated-image" />
@@ -28,8 +31,32 @@
         <div class="col-9">
             <div class="row">
                 <h5 class="col-12">Headgear</h5>
-                <div *ngFor="let armor of allArmors" class="col-auto">
+                <div *ngFor="let armor of headArmors" class="col-auto">
                     <div *ngIf="armor.equipment.slot == 'HEAD'" class="card">
+                        <ng-template #armorTooltip>
+                            <div style="display: flex; align-items: center;">
+                                <strong>{{armor.equipment.name}}</strong>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span>{{armor.armorValue}}</span><img [src]="armorUiPath" />
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span>{{armor.equipment.value}}</span><img [src]="coinPath" />
+                            </div>
+                        </ng-template>
+                        <div class="card-body" (click)="equipEquipment(armor.equipment.id)" [ngStyle]="{
+                            'padding': '0',
+                            'background-color': isItemEquipped(armor.equipment.id) ? '#f0daa0' : ''
+                        }" [ngbTooltip]="armorTooltip">
+                            <img [src]="armor.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h5 class="col-12">Body Armor</h5>
+                <div *ngFor="let armor of bodyArmors" class="col-auto">
+                    <div *ngIf="armor.equipment.slot == 'BODY'" class="card">
                         <ng-template #armorTooltip>
                             <div style="display: flex; align-items: center;">
                                 <strong>{{armor.equipment.name}}</strong>

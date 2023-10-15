@@ -9,8 +9,10 @@ import { ErrorService } from 'src/app/error.service';
 })
 export class CharacterEquipment implements OnInit {
     @Input() character: any;
-    allArmors: any;
     allWeapons: any;
+
+    headArmors:any;
+    bodyArmors:any;
 
     armorUiPath = "assets/sprites/ui/armor.png"
     attackUiPath = "assets/sprites/ui/damage.png"
@@ -24,7 +26,10 @@ export class CharacterEquipment implements OnInit {
 
     initializeEquipments() {
       this.equipmentService.listAllArmors().then((response) => {
-        this.allArmors = response.data.data
+        const all = response.data.data
+        this.headArmors = all.filter((armor: any) => armor.equipment.slot === 'HEAD');
+        this.bodyArmors = all.filter((armor: any) => armor.equipment.slot === 'BODY');
+
       }, (error) => {
         this.errorService.handleError(error);
       });
@@ -35,9 +40,6 @@ export class CharacterEquipment implements OnInit {
         this.errorService.handleError(error);
       });
     }
-
-
-
     equipEquipment(gearId: any) {
 
       if(!this.isItemEquipped(gearId)) {

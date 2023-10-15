@@ -13,11 +13,11 @@ export class HeaderComponent {
 
   @Output() logoutEvent = new EventEmitter();
   @Output() loginEvent = new EventEmitter();
+  @Output() homepageEvent = new EventEmitter();
+  @Output() expeditionEvent = new EventEmitter();
   
-
-  constructor(
-  ) {
-
+  constructor() {
   }
+
 
 }

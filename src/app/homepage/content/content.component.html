@@ -1,9 +1,11 @@
 <div>
 
 	<app-header [pageTitle]="'EnergyForge'" [isAuth]="isAuth" [logoSrc]="'../assets/images/logo.png'"
-		(logoutEvent)="logout()" (loginEvent)="onLoginEvent()"></app-header>
+		(logoutEvent)="logout()" (loginEvent)="onLoginEvent()"
+		(homepageEvent)="homepageEvent()" (expeditionEvent)="expeditionEvent()"></app-header>
 
 	<app-auth-content *ngIf="componentToShow == 'messages'" />
+	<app-expedition-content *ngIf="componentToShow == 'expedition'" />
 
 	<app-welcome-content *ngIf="componentToShow == 'welcome'" />
 	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)"

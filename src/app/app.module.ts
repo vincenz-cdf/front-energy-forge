@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './homepage/header/header.component';
-import { AuthContentComponent } from './homepage/auth-content/auth-content.component';
+import { AuthContentComponent } from './homepage/auth-content/habits-content/auth-content.component';
 import { WelcomeContentComponent } from './homepage/welcome-content/welcome-content.component';
 import { LoginFormComponent } from './homepage/login-form/login-form.component';
 import { ContentComponent } from './homepage/content/content.component';
@@ -14,6 +14,7 @@ import { ResoucesComponent } from './homepage/header/resouces/resouces.component
 import { CharactersComponent } from './homepage/characters/characters.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CharacterEquipment } from './homepage/dialogs/character-equipment.component';
+import { ExpeditionContentComponent } from './homepage/auth-content/expedition-content/expedition-content.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CharacterEquipment } from './homepage/dialogs/character-equipment.compo
     HabitsComponent,
     ResoucesComponent,
     CharactersComponent,
-    CharacterEquipment
+    CharacterEquipment,
+    ExpeditionContentComponent
   ],
   imports: [
     BrowserModule,
