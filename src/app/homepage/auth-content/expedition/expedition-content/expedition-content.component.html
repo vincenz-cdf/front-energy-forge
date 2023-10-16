@@ -1,0 +1,49 @@
+<div class="expedition-background">
+
+</div>
+<div style="z-index: 1000;">
+    <div class="container">
+        <div *ngIf="choosenContent == 'mainmenu'">
+            <div class="row">
+                <div class="col-6 mb-2" (click)="switchContent('campaign')">
+                    <div class="clickable-card card">
+                        <div class="card-body strokeme" style="background-color: #993938;">
+                            <strong>Campaign</strong> : Single Player Campaign are battles against pregenerated NPC.
+                            Each level has varying loot rewards that can be obtained.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 mb-2" (click)="switchContent('contracts')">
+                    <div class="clickable-card card">
+                        <div class="card-body strokeme" style="background-color: #993938;">
+                            <strong>Open contracts</strong> : Contracts are missions facing you with random generated
+                            NPC. You may only have one active contract per region at a time.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" (click)="switchContent('pvp')">
+                    <div class="clickable-card card">
+                        <div class="card-body strokeme" style="background-color: #993938;">
+                            <strong>PvP</strong> : Coming soon
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="choosenContent == 'campaign'">
+            <div class="row">
+                <div class="col-6 mb-2" (click)='openCombatInstance("T_L1")'>
+                    <div class="clickable-card card">
+                        <div class="card-body strokeme" style="background-color: #993938;">
+                            <strong>Stage 1-1</strong> : Brand new adventure!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

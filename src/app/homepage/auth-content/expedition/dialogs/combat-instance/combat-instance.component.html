@@ -1,0 +1,45 @@
+<div class="modal-header">
+    Level X
+</div>
+<div class="modal-body">
+    <div class="row mx-1" *ngFor="let _ of [].constructor(4); let i = index">
+        <div class="col-6">
+            <div class="character-box">
+                <div class="image-box">
+                    <div *ngIf="heroCharacters && heroCharacters[i]">
+                        <img [src]="heroCharacters[i].spritePath" alt="Main Character" class="rotated-image" />
+                        <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'HEAD')" style="z-index: 2;"
+                            [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'HEAD').equipmentSpritePath"
+                            alt="Equipment" class="rotated-image" />
+                        <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'BODY')" style="z-index: 1;"
+                            [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'BODY').equipmentSpritePath"
+                            alt="Equipment" class="rotated-image" />
+                        <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'ZWEIHAND')"
+                            style="z-index: 3;"
+                            [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'ZWEIHAND').equipmentSpritePath"
+                            class="rotated-image" />
+                        <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'LEFTHAND')"
+                            style="z-index: 3;"
+                            [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'LEFTHAND').equipmentSpritePath"
+                            class="rotated-image" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="enemy-box">
+                <div class="image-box">
+                    <img *ngIf="npcCharacters && npcCharacters[i]" [src]="npcCharacters[i].imagePath"
+                        alt="NPC Character Image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+</div>
+
+<!--
+    (click)="openDialog(char)"
+-->

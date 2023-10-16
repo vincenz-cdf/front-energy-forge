@@ -1,0 +1,43 @@
+.character-box {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.enemy-box {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end; /* Align the content to the far right */
+    margin-bottom: 16px;
+}
+
+.image-box {
+    position: relative;
+    /* Make sure this is here */
+    border: 2px solid #222222;
+    padding: 10px;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    background-color: #E9CA7B;
+    margin-right: 16px;
+    /* Add space between the image box and the text */
+}
+
+.rotated-image {
+    position: absolute;
+    /* Make both images absolute */
+    top: 0;
+    /* Align to the top of the image-box */
+    left: 0;
+    /* Align to the left of the image-box */
+    width: 100px;
+    height: auto;
+}
+
+
+.strokeme {
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}

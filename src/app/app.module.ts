@@ -14,7 +14,8 @@ import { ResoucesComponent } from './homepage/header/resouces/resouces.component
 import { CharactersComponent } from './homepage/characters/characters.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CharacterEquipment } from './homepage/dialogs/character-equipment.component';
-import { ExpeditionContentComponent } from './homepage/auth-content/expedition-content/expedition-content.component';
+import { ExpeditionContentComponent } from './homepage/auth-content/expedition/expedition-content/expedition-content.component';
+import { CombatInstanceComponent } from './homepage/auth-content/expedition/dialogs/combat-instance/combat-instance.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ExpeditionContentComponent } from './homepage/auth-content/expedition-c
     ResoucesComponent,
     CharactersComponent,
     CharacterEquipment,
-    ExpeditionContentComponent
+    ExpeditionContentComponent,
+    CombatInstanceComponent
   ],
   imports: [
     BrowserModule,
