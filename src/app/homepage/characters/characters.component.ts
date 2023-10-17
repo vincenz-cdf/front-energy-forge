@@ -12,6 +12,7 @@ export class CharactersComponent implements OnInit {
 
   @Input() isCombatInstance: boolean = false;
   @Input() combatInstanceCharactersPresentIds: any;
+  @Input() fromHabitScreen: boolean = false;
 
   @Output() characterPicked = new EventEmitter<number>();
 
@@ -25,7 +26,8 @@ export class CharactersComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    if(this.isCombatInstance) {
+
+    if(this.isCombatInstance || this.fromHabitScreen) {
       this.loadAllYourCharacter();
     } else {
       this.listCharacters();
@@ -70,5 +72,9 @@ export class CharactersComponent implements OnInit {
 
   isItemEquippedBySlot(array: any, slot: string) {
     return array.findIndex((element: any) => element.slot === slot) != -1;
+  }
+
+  openAllCharactersDialog() {
+    this.expeditionService.openListOfCharactersDialog(null);
   }
 }
