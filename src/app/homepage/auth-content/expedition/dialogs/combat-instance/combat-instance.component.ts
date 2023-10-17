@@ -51,11 +51,11 @@ export class CombatInstanceComponent implements OnInit {
   }
 
   openListOfCharacters() {
-    const modalRef = this.expeditionService.openListOfCharactersDialog(this.combatInstance.id);
+    const modalRef = this.expeditionService.openListOfCharactersDialog(this.combatInstance);
 
     modalRef.result.then(
       (result) => {
-        //faire qqchose
+        this.loadDataCombatInstance();
       },
       (reason) => {
       }

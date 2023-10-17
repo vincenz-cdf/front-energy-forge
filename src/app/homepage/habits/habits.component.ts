@@ -87,12 +87,4 @@ export class HabitsComponent implements OnInit {
     }, 2000);
   }
 
-  animationStart(event: AnimationEvent) {
-    console.log('Animation Start', event);
-  }
-
-  animationDone(event: AnimationEvent) {
-    console.log('Animation Done', event);
-  }
-
 }

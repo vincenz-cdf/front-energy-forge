@@ -17,10 +17,6 @@ export class ExpeditionContentComponent implements OnInit {
 
   constructor(private expeditionService: ExpeditionService) {}
 
-  a() {
-    console.log("a")
-  }
-
   switchContent(content: any) {
     this.choosenContent = content;
   }

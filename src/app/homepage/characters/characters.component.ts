@@ -11,6 +11,7 @@ import { ErrorService } from 'src/app/error.service';
 export class CharactersComponent implements OnInit {
 
   @Input() isCombatInstance: boolean = false;
+  @Input() combatInstanceCharactersPresentIds: any;
 
   @Output() characterPicked = new EventEmitter<number>();
 
@@ -25,21 +26,23 @@ export class CharactersComponent implements OnInit {
   }
   ngOnInit(): void {
     if(this.isCombatInstance) {
-
+      this.loadAllYourCharacter();
+    } else {
+      this.listCharacters();
     }
-    this.listCharacters();
   }
 
   loadAllYourCharacter() {
     this.expeditionService.listAllCharactersByUserId().then((response) => {
       this.characters = response.data.data;
+      //this.characters = this.characters.filter((char: any) => !this.combatInstanceCharactersPresentIds.includes(char.id))
     }, (error) => {
       this.errorService.handleError(error);
     })
   }
 
   listCharacters() {
-    this.playerService.listCharactersByUserId().then((response) => {
+    this.playerService.list3CharactersByUserId().then((response) => {
       if (response.data.status === 'success') {
         this.characters = response.data.data;
 
@@ -50,7 +53,7 @@ export class CharactersComponent implements OnInit {
   }
 
   openDialog(char: any) {
-    const modalRef = this.playerService.manageCharacterStuff(char);
+    const modalRef = this.playerService.manageCharacterStuff(char, this.characters);
 
     modalRef.result.then(
       (result) => {

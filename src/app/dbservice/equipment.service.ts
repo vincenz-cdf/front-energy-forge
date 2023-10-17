@@ -17,6 +17,8 @@ export class EquipmentService {
   }
 
   equipGear(gearId: any, charId: any) {
+    console.log(gearId)
+    console.log(charId)
     return this.axiosService.request("POST", "/equipments/" + charId, gearId);
   }
 }

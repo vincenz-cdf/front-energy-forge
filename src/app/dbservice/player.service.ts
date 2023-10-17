@@ -22,13 +22,14 @@ export class PlayerService {
     return this.axiosService.request("POST", "/habits/" + habit.id, habit)
   }
 
-  listCharactersByUserId() {
+  list3CharactersByUserId() {
     return this.axiosService.request("GET", "/characters", {});
   }
 
-  manageCharacterStuff(char: any) {
+  manageCharacterStuff(char: any, characters: any) {
     const modalRef = this.modalService.open(CharacterEquipment, { size: 'xl' });
     modalRef.componentInstance.character = char;
+    modalRef.componentInstance.characters = characters;
 
     return modalRef;
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AxiosService } from '../axios.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CombatInstanceComponent } from '../homepage/auth-content/expedition/dialogs/combat-instance/combat-instance.component';
 import { CharacterCombatSelectComponent } from '../homepage/auth-content/expedition/dialogs/character-combat-select/character-combat-select.component';
 
@@ -27,9 +27,9 @@ export class ExpeditionService {
     return this.axiosService.request("GET", "/combatinstance/" + ciId + "/characters", {});
   }
 
-  openListOfCharactersDialog(ciId: any) {
-    const modalRef = this.modalService.open(CharacterCombatSelectComponent, { size: 'md' });
-    modalRef.componentInstance.ciId = ciId;
+  openListOfCharactersDialog(ci: any) {
+    const modalRef = this.modalService.open(CharacterCombatSelectComponent, { size: 'md', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.combatInstance = ci;
 
     return modalRef;
   }

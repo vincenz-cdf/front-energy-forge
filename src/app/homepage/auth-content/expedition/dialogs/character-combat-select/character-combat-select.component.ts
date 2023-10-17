@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { ErrorService } from 'src/app/error.service';
 
@@ -9,17 +10,29 @@ import { ErrorService } from 'src/app/error.service';
 })
 export class CharacterCombatSelectComponent implements OnInit {
 
-  @Input() ciId: any;
-  yourChars: any;
+  @Input() combatInstance: any;
 
-  constructor(private expeditionService: ExpeditionService, private errorService: ErrorService) { }
+  yourChars: any;
+  combatInstanceCharactersPresentIds: any;
+
+  constructor(
+    private expeditionService: ExpeditionService, 
+    private errorService: ErrorService,
+    private activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+    this.combatInstanceCharactersPresentIds = this.combatInstance.characterIds;
+  }
+
+  close() {
+    this.activeModal.close();
   }
 
   pickCharacter(event: number) {
-    this.expeditionService.pickCharacterForCombat(event, this.ciId).then((response) => {
-      console.log(response)
+    this.expeditionService.pickCharacterForCombat(event, this.combatInstance.id).then((response) => {
+      this.activeModal.close()
+    }, (error) => {
+      this.errorService.handleError(error);
     });
   }
 }

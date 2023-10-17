@@ -8,69 +8,75 @@ import { ErrorService } from 'src/app/error.service';
   templateUrl: './character-equipment.component.html',
 })
 export class CharacterEquipment implements OnInit {
-    @Input() character: any;
-    allWeapons: any;
+  @Input() character: any;
+  @Input() characters: any;
+  allWeapons: any;
 
-    headArmors:any;
-    bodyArmors:any;
+  headArmors: any;
+  bodyArmors: any;
 
-    armorUiPath = "assets/sprites/ui/armor.png"
-    attackUiPath = "assets/sprites/ui/damage.png"
-    coinPath = "assets/sprites/ui/coin.png"
-  
-    constructor(private activeModal: NgbActiveModal, private equipmentService: EquipmentService, private errorService: ErrorService) {}
+  armorUiPath = "assets/sprites/ui/armor.png"
+  attackUiPath = "assets/sprites/ui/damage.png"
+  coinPath = "assets/sprites/ui/coin.png"
 
-    ngOnInit(): void {
-      this.initializeEquipments();
-    }
+  constructor(private activeModal: NgbActiveModal, private equipmentService: EquipmentService, private errorService: ErrorService) { }
 
-    initializeEquipments() {
-      this.equipmentService.listAllArmors().then((response) => {
-        const all = response.data.data
-        this.headArmors = all.filter((armor: any) => armor.equipment.slot === 'HEAD');
-        this.bodyArmors = all.filter((armor: any) => armor.equipment.slot === 'BODY');
+  ngOnInit(): void {
+    this.initializeEquipments();
+  }
 
+  initializeEquipments() {
+    this.equipmentService.listAllArmors().then((response) => {
+      const all = response.data.data
+      this.headArmors = all.filter((armor: any) => armor.equipment.slot === 'HEAD');
+      this.bodyArmors = all.filter((armor: any) => armor.equipment.slot === 'BODY');
+
+    }, (error) => {
+      this.errorService.handleError(error);
+    });
+
+    this.equipmentService.listAllWeapons().then((response) => {
+      this.allWeapons = response.data.data
+    }, (error) => {
+      this.errorService.handleError(error);
+    });
+  }
+
+  equipEquipment(gearId: any) {
+    if (!this.isItemEquipped(gearId)) {
+      this.equipmentService.equipGear(gearId, this.character.id).then((response) => {
+        this.character = response.data.data;
       }, (error) => {
         this.errorService.handleError(error);
       });
-
-      this.equipmentService.listAllWeapons().then((response) => {
-        this.allWeapons = response.data.data
-      }, (error) => {
-        this.errorService.handleError(error);
-      });
     }
-    equipEquipment(gearId: any) {
+  }
 
-      if(!this.isItemEquipped(gearId)) {
-        this.equipmentService.equipGear(gearId, this.character.id).then((response) => {
-          console.log(response.data.data)
-          this.character = response.data.data;
+  splitEquipmentSlots(array: any, slot: string) {
+    return array.find((element: any) => element.slot === slot);
+  }
 
-        }, (error) => {
-          this.errorService.handleError(error);
-        });
-      } 
-
-
-    }
-
-    splitEquipmentSlots(array: any, slot: string) {
-      return array.find((element: any) => element.slot === slot);
-    }
-
-    isItemEquipped(currentItemId: any) {
-      if(this.character.equippedItems.findIndex((element: any) => element.equipmentId == currentItemId) != -1) {
-        return true
+  isItemEquipped(currentItemId: any) {
+    let bool = false;
+    const otherChars = this.characters.filter((char: any) => char.id != this.character.id);
+    for(let char of otherChars) {
+      if (char.equippedItems.findIndex((element: any) => element.equipmentId == currentItemId) != -1) {
+        bool = true
       }
-      return false;
     }
 
-    isItemEquippedBySlot(array: any, slot: string) {
-      return array.findIndex((element: any) => element.slot === slot) != -1;
+    if (this.character.equippedItems.findIndex((element: any) => element.equipmentId == currentItemId) != -1) {
+      bool = true
     }
 
-    save() {
-      this.activeModal.close();
-    }
+    return bool;
+  }
+
+  isItemEquippedBySlot(array: any, slot: string) {
+    return array.findIndex((element: any) => element.slot === slot) != -1;
+  }
+
+  save() {
+    this.activeModal.close();
+  }
 }

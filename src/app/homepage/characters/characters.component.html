@@ -1,8 +1,8 @@
 <div [ngClass]="isCombatInstance ? '' : 'card bg-image'" style="border-radius: 0px;">
     <div class="card-body">
         <div class="row mx-1">
-            <div *ngFor="let char of characters" class="character-box">
-                <div class="image-box" (click)="openDialog(char)">
+            <div *ngFor="let char of characters" [ngClass]="isCombatInstance ? 'character-box' : 'col-auto character-box'">
+                <div class="image-box" [attr.clickable]="!isCombatInstance" (click)="isCombatInstance ? $event.stopPropagation() : openDialog(char)">
                     <img [src]="char.spritePath" alt="Main Character" class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'HEAD')" style="z-index: 2;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment"
@@ -18,15 +18,16 @@
                         class="rotated-image" />
                 </div>
                 <!-- Text beside the image -->
-                <div [ngClass]="isCombatInstance ? 'col-3' : 'col-3 strokeme'">
+                <div [ngClass]="isCombatInstance ? 'col-3' : 'col-auto strokeme'">
                     <div>{{char.name}} Lvl.{{char.level}}</div>
                     <div>Hp : {{char.hp}}/{{char.maxHp}}</div>
                     <div>Ar : {{char.armor}}/{{char.maxArmor}}</div>
                     <div>Atk : {{char.atk}}</div>
                 </div>
                 <div *ngIf="isCombatInstance" class="col-3" style="display: flex; align-items: flex-end; justify-content: flex-end;">
-                    <button class="btn btn-xs btn-info" (click)="openDialog(char)"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-xs btn-success" (click)="characterPicked.emit(char.id)"><i class="fa fa-hand-point-right"></i></button>
+                    <button class="btn btn-xs btn-warning" (click)="openDialog(char)"><i class="fa fa-edit"></i></button>
+                    <button *ngIf="!combatInstanceCharactersPresentIds.includes(char.id)"  class="btn btn-xs btn-success" (click)="characterPicked.emit(char.id)"><i class="fa fa-hand-point-right"></i></button>
+                    <button *ngIf="combatInstanceCharactersPresentIds.includes(char.id)" class="btn btn-xs btn-danger" (click)="characterPicked.emit(char.id)">X</button>
                 </div>
             </div>
         </div>
