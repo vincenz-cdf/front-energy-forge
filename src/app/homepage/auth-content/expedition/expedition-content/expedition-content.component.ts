@@ -25,8 +25,8 @@ export class ExpeditionContentComponent implements OnInit {
     this.choosenContent = content;
   }
 
-  openCombatInstance(scenario: string) {
-    const modalRef = this.expeditionService.combatInstanceDialog(scenario);
+  openCombatInstance(scenario: string, levelName: string) {
+    const modalRef = this.expeditionService.combatInstanceDialog(scenario, levelName);
 
     modalRef.result.then(
       (result) => {

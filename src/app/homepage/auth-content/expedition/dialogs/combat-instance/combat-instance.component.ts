@@ -10,6 +10,7 @@ import { ErrorService } from 'src/app/error.service';
 export class CombatInstanceComponent implements OnInit {
 
   @Input() scenario: any;
+  @Input() levelName: string = "";
 
   combatInstance: any;
 
@@ -24,7 +25,7 @@ export class CombatInstanceComponent implements OnInit {
 
   loadDataCombatInstance() {
     this.expeditionService.createOrRetrieveCombatInstance({"string" : this.scenario}).then((response) => {
-      this.combatInstance = response.data;
+      this.combatInstance = response.data.data;
       this.loadDataCharacters(response.data.data.id);
     }, (error) => {
       this.errorService.handleError(error);
@@ -47,5 +48,17 @@ export class CombatInstanceComponent implements OnInit {
 
   isItemEquippedBySlot(array: any, slot: string) {
     return array.findIndex((element: any) => element.slot === slot) != -1;
+  }
+
+  openListOfCharacters() {
+    const modalRef = this.expeditionService.openListOfCharactersDialog(this.combatInstance.id);
+
+    modalRef.result.then(
+      (result) => {
+        //faire qqchose
+      },
+      (reason) => {
+      }
+    );
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
 
@@ -9,16 +10,32 @@ import { ErrorService } from 'src/app/error.service';
 })
 export class CharactersComponent implements OnInit {
 
+  @Input() isCombatInstance: boolean = false;
+
+  @Output() characterPicked = new EventEmitter<number>();
+
   characters: any = null;
 
   constructor(
     private playerService: PlayerService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private expeditionService: ExpeditionService
   ) {
 
   }
   ngOnInit(): void {
+    if(this.isCombatInstance) {
+
+    }
     this.listCharacters();
+  }
+
+  loadAllYourCharacter() {
+    this.expeditionService.listAllCharactersByUserId().then((response) => {
+      this.characters = response.data.data;
+    }, (error) => {
+      this.errorService.handleError(error);
+    })
   }
 
   listCharacters() {

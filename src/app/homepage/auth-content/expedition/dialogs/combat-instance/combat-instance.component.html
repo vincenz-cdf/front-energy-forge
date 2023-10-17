@@ -1,12 +1,18 @@
 <div class="modal-header">
-    Level X
+    <h5>{{levelName}}</h5>
 </div>
 <div class="modal-body">
     <div class="row mx-1" *ngFor="let _ of [].constructor(4); let i = index">
         <div class="col-6">
             <div class="character-box">
-                <div class="image-box">
-                    <div *ngIf="heroCharacters && heroCharacters[i]">
+                <div class="image-box" (click)="openListOfCharacters()">
+                    <ng-template #charHeroInfoTooltip>
+                        <div style="display: flex; align-items: center;">{{heroCharacters[i].name}} Lvl.{{heroCharacters[i].level}}</div>
+                        <div style="display: flex; align-items: center;">Hp : {{heroCharacters[i].hp}}/{{heroCharacters[i].maxHp}}</div>
+                        <div style="display: flex; align-items: center;">Ar : {{heroCharacters[i].armor}}/{{heroCharacters[i].maxArmor}}</div>
+                        <div style="display: flex; align-items: center;">Atk : {{heroCharacters[i].atk}}</div>
+                    </ng-template>
+                    <div *ngIf="heroCharacters && heroCharacters[i]" [ngbTooltip]="charHeroInfoTooltip">
                         <img [src]="heroCharacters[i].spritePath" alt="Main Character" class="rotated-image" />
                         <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'HEAD')" style="z-index: 2;"
                             [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'HEAD').equipmentSpritePath"
@@ -23,15 +29,21 @@
                             [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'LEFTHAND').equipmentSpritePath"
                             class="rotated-image" />
                     </div>
-
                 </div>
             </div>
         </div>
         <div class="col-6">
             <div class="enemy-box">
                 <div class="image-box">
-                    <img *ngIf="npcCharacters && npcCharacters[i]" [src]="npcCharacters[i].imagePath"
-                        alt="NPC Character Image">
+                    <ng-template #charInfoTooltip>
+                        <div style="display: flex; align-items: center;">{{npcCharacters[i].name}} Lvl.{{npcCharacters[i].level}}</div>
+                        <div style="display: flex; align-items: center;">Hp : {{npcCharacters[i].hp}}/{{npcCharacters[i].maxHp}}</div>
+                        <div style="display: flex; align-items: center;">Ar : {{npcCharacters[i].armor}}/{{npcCharacters[i].maxArmor}}</div>
+                        <div style="display: flex; align-items: center;">Atk : {{npcCharacters[i].atk}}</div>
+                    </ng-template>
+
+                    <img *ngIf="npcCharacters && npcCharacters[i]" [ngbTooltip]="charInfoTooltip" class="rotated-image" [src]="npcCharacters[i].spritePath"
+                        alt="NPC Character Image" style="transform: scaleX(-1);">
                 </div>
             </div>
         </div>
@@ -39,6 +51,8 @@
 </div>
 <div class="modal-footer">
 </div>
+
+
 
 <!--
     (click)="openDialog(char)"

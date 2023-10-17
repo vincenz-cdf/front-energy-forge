@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CharacterEquipment } from './homepage/dialogs/character-equipment.component';
 import { ExpeditionContentComponent } from './homepage/auth-content/expedition/expedition-content/expedition-content.component';
 import { CombatInstanceComponent } from './homepage/auth-content/expedition/dialogs/combat-instance/combat-instance.component';
+import { CharacterCombatSelectComponent } from './homepage/auth-content/expedition/dialogs/character-combat-select/character-combat-select.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CombatInstanceComponent } from './homepage/auth-content/expedition/dial
     CharactersComponent,
     CharacterEquipment,
     ExpeditionContentComponent,
-    CombatInstanceComponent
+    CombatInstanceComponent,
+    CharacterCombatSelectComponent
   ],
   imports: [
     BrowserModule,
