@@ -12,7 +12,7 @@ export class ExpeditionService {
   constructor(private axiosService: AxiosService, private modalService: NgbModal) {}
 
   combatInstanceDialog(scenario: string, levelName: string) {
-    const modalRef = this.modalService.open(CombatInstanceComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(CombatInstanceComponent, { size: 'lg', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.scenario = scenario;
     modalRef.componentInstance.levelName = levelName;
 
@@ -40,5 +40,9 @@ export class ExpeditionService {
 
   pickCharacterForCombat(charId: any, ciId: any) {
     return this.axiosService.request("PUT", "/combatinstance/" + ciId + "/character/" + charId, {});
+  }
+
+  launchCombatInstance(ciId: any) {
+    return this.axiosService.request("POST", "/combatinstance/" + ciId + "/launch", {})
   }
 }

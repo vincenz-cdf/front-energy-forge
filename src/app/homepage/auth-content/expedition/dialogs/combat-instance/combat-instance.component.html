@@ -1,5 +1,6 @@
 <div class="modal-header">
     <h5>{{levelName}}</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
 <div class="modal-body">
     <div class="row mx-1" *ngFor="let _ of [].constructor(4); let i = index">
@@ -50,6 +51,8 @@
     </div>
 </div>
 <div class="modal-footer">
+    <button class="btn btn-xs btn-success" (click)="launchCombat()">Launch combat</button>
+    <button class="btn btn-xs btn-warning" (click)="close()">Not yet</button>
 </div>
 
 

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { ErrorService } from 'src/app/error.service';
 
@@ -17,7 +18,10 @@ export class CombatInstanceComponent implements OnInit {
   npcCharacters: any;
   heroCharacters: any;
 
-  constructor(private expeditionService: ExpeditionService, private errorService: ErrorService) {}
+  constructor(
+    private expeditionService: ExpeditionService, 
+    private errorService: ErrorService,
+    private activeModal: NgbActiveModal) {}
 
   ngOnInit(): void {
     this.loadDataCombatInstance();
@@ -60,5 +64,13 @@ export class CombatInstanceComponent implements OnInit {
       (reason) => {
       }
     );
+  }
+
+  close() {
+    this.activeModal.close();
+  }
+
+  launchCombat() {
+    this.expeditionService.launchCombatInstance(this.combatInstance.id);
   }
 }
