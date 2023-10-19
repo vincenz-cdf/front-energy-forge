@@ -10,10 +10,11 @@ import { ErrorService } from 'src/app/error.service';
 export class CharacterEquipment implements OnInit {
   @Input() character: any;
   @Input() characters: any;
-  allWeapons: any;
 
   headArmors: any;
   bodyArmors: any;
+  weapons: any;
+  shields: any
 
   armorUiPath = "assets/sprites/ui/armor.png"
   attackUiPath = "assets/sprites/ui/damage.png"
@@ -28,15 +29,17 @@ export class CharacterEquipment implements OnInit {
   initializeEquipments() {
     this.equipmentService.listAllArmors().then((response) => {
       const all = response.data.data
-      this.headArmors = all.filter((armor: any) => armor.equipment.slot === 'HEAD');
-      this.bodyArmors = all.filter((armor: any) => armor.equipment.slot === 'BODY');
+      this.headArmors = all.filter((armor: any) => armor.equipment.slot == 'HEAD');
+      this.bodyArmors = all.filter((armor: any) => armor.equipment.slot == 'BODY');
 
     }, (error) => {
       this.errorService.handleError(error);
     });
 
     this.equipmentService.listAllWeapons().then((response) => {
-      this.allWeapons = response.data.data
+      const all = response.data.data;
+      this.weapons = all.filter((weapon: any) => weapon.equipment.slot == 'LEFTHAND' || weapon.equipment.slot == 'ZWEIHAND');
+      this.shields = all.filter((weapon: any) => weapon.equipment.slot == 'RIGHTHAND');
     }, (error) => {
       this.errorService.handleError(error);
     });

@@ -13,10 +13,13 @@
                     <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'BODY')" style="z-index: 1;"
                         [src]="splitEquipmentSlots(character.equippedItems, 'BODY').equipmentSpritePath"
                         class="rotated-image" />
-                    <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'ZWEIHAND')" style="z-index: 3;"
+                    <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'RIGHTHAND')" style="z-index: 3;"
+                        [src]="splitEquipmentSlots(character.equippedItems, 'RIGHTHAND').equipmentSpritePath"
+                        class="rotated-image" />
+                    <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'ZWEIHAND')" style="z-index: 4;"
                         [src]="splitEquipmentSlots(character.equippedItems, 'ZWEIHAND').equipmentSpritePath"
                         class="rotated-image" />
-                    <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'LEFTHAND')" style="z-index: 3;"
+                    <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'LEFTHAND')" style="z-index: 4;"
                         [src]="splitEquipmentSlots(character.equippedItems, 'LEFTHAND').equipmentSpritePath"
                         class="rotated-image" />
                 </div>
@@ -79,7 +82,7 @@
             </div>
             <div class="row">
                 <h5 class="col-12">Weapons</h5>
-                <div *ngFor="let weapon of allWeapons" class="col-auto">
+                <div *ngFor="let weapon of weapons" class="col-auto">
                     <ng-template #weaponTooltip>
                         <div style="min-width: 200px; max-width: 450px; overflow-wrap: break-word;">
                             <div style="display: flex; align-items: center;">
@@ -102,6 +105,35 @@
                             'background-color': isItemEquipped(weapon.equipment.id) ? '#f0daa0' : ''
                         }" [ngbTooltip]="weaponTooltip">
                             <img [src]="weapon.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h5 class="col-12">Shields</h5>
+                <div *ngFor="let shield of shields" class="col-auto">
+                    <ng-template #weaponTooltip>
+                        <div style="min-width: 200px; max-width: 450px; overflow-wrap: break-word;">
+                            <div style="display: flex; align-items: center;">
+                                <strong>{{shield.equipment.name}}</strong>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span>{{shield.atkValue}}</span><img [src]="attackUiPath" />
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span>{{shield.equipment.value}}</span><img [src]="coinPath" />
+                            </div>
+                            <div *ngFor="let a of shield.weaponAbilities" style="display: flex; align-items: center;">
+                                <span>{{a.equipmentAbilityName}} : {{a.equipmentAbilityDescription}}</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <div class="card">
+                        <div class="card-body" (click)="equipEquipment(shield.equipment.id)" [ngStyle]="{
+                            'padding': '0',
+                            'background-color': isItemEquipped(shield.equipment.id) ? '#f0daa0' : ''
+                        }" [ngbTooltip]="weaponTooltip">
+                            <img [src]="shield.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
                         </div>
                     </div>
                 </div>

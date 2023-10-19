@@ -12,10 +12,13 @@
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'BODY')" style="z-index: 1;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'BODY').equipmentSpritePath" alt="Equipment"
                         class="rotated-image" />
-                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'ZWEIHAND')" style="z-index: 3;"
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'RIGHTHAND')" style="z-index: 3;"
+                        [src]="splitEquipmentSlots(char.equippedItems, 'RIGHTHAND').equipmentSpritePath"
+                        class="rotated-image" />
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'ZWEIHAND')" style="z-index: 4;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'ZWEIHAND').equipmentSpritePath"
                         class="rotated-image" />
-                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'LEFTHAND')" style="z-index: 3;"
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'LEFTHAND')" style="z-index: 4;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'LEFTHAND').equipmentSpritePath"
                         class="rotated-image" />
                 </div>
