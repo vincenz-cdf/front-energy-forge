@@ -37,4 +37,8 @@ export class PlayerService {
   listEquippedItemsByCharId(id: any) {
     return this.axiosService.request("GET", "/equippeditem/" + id, {});
   }
+
+  deleteHabit(habitId: any) {
+    return this.axiosService.request("DELETE", "/habits/" + habitId, {});
+  }
 }

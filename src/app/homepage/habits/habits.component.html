@@ -5,15 +5,15 @@
                 <div class="row">
                     <div class="col-2">
                         <input type="checkbox" [checked]="habit.checked" [disabled]="habit.checked"
-                        (change)="updateHabit(habit, { checked: true }, i)" />
+                            (change)="updateHabit(habit, { checked: true }, i)" />
 
 
                         <div *ngIf="habit.showImage" class="icon-container" @bounceFadeOutAnimation>
                             <img src="../../../assets/sprites/ui/energy.png" alt="Bouncing image" />
                         </div>
-                        
+
                     </div>
-                    <div class="col-10 title-edit">
+                    <div class="col-8 title-edit">
                         <input class="no-border" *ngIf="habit.editMode" [(ngModel)]="habit.title"
                             (blur)="updateHabit(habit, { title: habit.title }, i)"
                             (keyup.enter)="updateHabit(habit, { title: habit.title}, i)" />
@@ -21,6 +21,10 @@
                         <span *ngIf="!habit.editMode" (click)="enableEditMode(habit)">
                             {{ habit.title }}
                         </span>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-sm btn-danger active" (click)="deleteHabit(habit.id)"><i
+                                class="fa fa-trash"></i></button>
                     </div>
                 </div>
             </div>

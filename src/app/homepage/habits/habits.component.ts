@@ -19,7 +19,6 @@ export class HabitsComponent implements OnInit {
   @Output() onHabitChangeEvent = new EventEmitter();
 
   constructor(private playerService: PlayerService, private profileService: ProfileService, private errorService: ErrorService) {
-
   }
 
   habits: any = null;
@@ -52,7 +51,7 @@ export class HabitsComponent implements OnInit {
       this.errorService.handleError(error)
     })
   }
-  
+
 
   updateHabit(habit: any, changes: any, habitIndex: number) {
     // Apply changes directly to habit object
@@ -85,6 +84,18 @@ export class HabitsComponent implements OnInit {
     setTimeout(() => {
       this.habits[habitIndex].showImage = false;
     }, 2000);
+  }
+
+  deleteHabit(habitId: any) {
+    this.errorService.notifyBinaryChoice("Delete the task ?").then((result) => {
+      if (result.isConfirmed) {
+        this.playerService.deleteHabit(habitId).then(() => {
+          this.showHabits();
+        }, (error) => {
+          this.errorService.handleError(error);
+        });
+      }
+    });
   }
 
 }

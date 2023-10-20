@@ -58,5 +58,14 @@ export class ErrorService {
       timer: 1500,
     });
   }
+
+  notifyBinaryChoice(title: any) {
+    return Swal.fire({
+      title: title,
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    })
+  }
   
 }
