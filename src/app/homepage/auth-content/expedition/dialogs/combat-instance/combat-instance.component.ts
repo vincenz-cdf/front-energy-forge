@@ -18,6 +18,8 @@ export class CombatInstanceComponent implements OnInit {
   npcCharacters: any;
   heroCharacters: any;
 
+  awaitingStatus: any = false;
+
   constructor(
     private expeditionService: ExpeditionService, 
     private errorService: ErrorService,
@@ -31,6 +33,10 @@ export class CombatInstanceComponent implements OnInit {
     this.expeditionService.createOrRetrieveCombatInstance({"string" : this.scenario}).then((response) => {
       this.combatInstance = response.data.data;
       this.loadDataCharacters(response.data.data.id);
+
+      if(response.data.data.status == "WON_AWAIT" || response.data.data.status == "LOST_AWAIT") {
+        this.awaitingStatus = true;
+      }
     }, (error) => {
       this.errorService.handleError(error);
     });
@@ -71,6 +77,10 @@ export class CombatInstanceComponent implements OnInit {
   }
 
   launchCombat() {
-    this.expeditionService.launchCombatInstance(this.combatInstance.id);
+    this.expeditionService.launchCombatInstance(this.combatInstance.id).then((response) => {
+      this.loadDataCombatInstance();
+    }, (error) => {
+      this.errorService.notifyError(error);
+    });
   }
 }

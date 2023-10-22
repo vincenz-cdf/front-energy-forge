@@ -61,8 +61,14 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-xs btn-success" (click)="launchCombat()">Launch combat</button>
-    <button class="btn btn-xs btn-warning" (click)="close()">Not yet</button>
+    <div *ngIf="!awaitingStatus">
+        <button class="btn btn-xs btn-success" (click)="launchCombat()">Launch combat</button>
+        <button class="btn btn-xs btn-warning" (click)="close()">Not yet</button>
+    </div>
+    <div *ngIf="awaitingStatus">
+        Troops fighting...
+    </div>
+
 </div>
 
 
