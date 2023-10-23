@@ -17,12 +17,12 @@ export class CharacterCombatSelectComponent implements OnInit {
   fromHabitScreen: boolean = false;
 
   constructor(
-    private expeditionService: ExpeditionService, 
+    private expeditionService: ExpeditionService,
     private errorService: ErrorService,
     private activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
-    if(this.combatInstance != null) {
+    if (this.combatInstance != null) {
       this.combatInstanceCharactersPresentIds = this.combatInstance.characterIds;
     } else {
       this.fromHabitScreen = true;

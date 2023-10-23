@@ -61,14 +61,16 @@
     </div>
 </div>
 <div class="modal-footer">
-    <div *ngIf="!awaitingStatus">
+    <div *ngIf="combatInstance.status == 'AWAIT'">
         <button class="btn btn-xs btn-success" (click)="launchCombat()">Launch combat</button>
         <button class="btn btn-xs btn-warning" (click)="close()">Not yet</button>
     </div>
-    <div *ngIf="awaitingStatus">
+    <div *ngIf="combatInstance.status == 'WON_AWAIT' || combatInstance.status == 'LOST_AWAIT'">
         Troops fighting...
     </div>
-
+    <div *ngIf="combatInstance.status == 'WON_FINAL' || combatInstance.status == 'LOST_FINAL'">
+        <button class="btn btn-xs btn-success" (click)="seeCombatResult()">See battle result</button>
+    </div>
 </div>
 
 

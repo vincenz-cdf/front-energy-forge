@@ -68,4 +68,21 @@ export class ErrorService {
     })
   }
   
+  notifyCombatResult(combatInstance: any) {
+    if (combatInstance.status == "WON_FINAL") {
+      Swal.fire({
+        icon: 'info',
+        title: combatInstance.status == 'Victory',
+        text: combatInstance.combatReward.coins + "g" + combatInstance.combatReward.experiencePoints + "xp",
+        showConfirmButton: true,
+      });
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: combatInstance.status == 'Defeat',
+        showConfirmButton: true,
+      });
+    }
+
+  }
 }

@@ -9,7 +9,7 @@ import { CharacterCombatSelectComponent } from '../homepage/auth-content/expedit
 })
 export class ExpeditionService {
 
-  constructor(private axiosService: AxiosService, private modalService: NgbModal) {}
+  constructor(private axiosService: AxiosService, private modalService: NgbModal) { }
 
   combatInstanceDialog(scenario: string, levelName: string) {
     const modalRef = this.modalService.open(CombatInstanceComponent, { size: 'lg', backdrop: 'static', keyboard: false });
@@ -44,5 +44,13 @@ export class ExpeditionService {
 
   launchCombatInstance(ciId: any) {
     return this.axiosService.request("POST", "/combatinstance/" + ciId + "/launch", {})
+  }
+
+  getCombatInstanceById(ciId: any) {
+    return this.axiosService.request("GET", "/combatinstance/" + ciId, {});
+  }
+
+  getCombatInstanceResult(ciId: any) {
+    return this.axiosService.request("GET", "/combatinstance/" + ciId + "/result", {});
   }
 }

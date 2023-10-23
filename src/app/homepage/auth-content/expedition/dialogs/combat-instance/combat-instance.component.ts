@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { ErrorService } from 'src/app/error.service';
+import { ProfileService } from 'src/app/profile.service';
 
 @Component({
   selector: 'app-combat-instance',
@@ -18,28 +19,33 @@ export class CombatInstanceComponent implements OnInit {
   npcCharacters: any;
   heroCharacters: any;
 
-  awaitingStatus: any = false;
-
   constructor(
-    private expeditionService: ExpeditionService, 
+    private expeditionService: ExpeditionService,
     private errorService: ErrorService,
-    private activeModal: NgbActiveModal) {}
+    private activeModal: NgbActiveModal,
+    private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.loadDataCombatInstance();
   }
 
   loadDataCombatInstance() {
-    this.expeditionService.createOrRetrieveCombatInstance({"string" : this.scenario}).then((response) => {
+    this.expeditionService.createOrRetrieveCombatInstance({ "string": this.scenario }).then((response) => {
       this.combatInstance = response.data.data;
       this.loadDataCharacters(response.data.data.id);
 
-      if(response.data.data.status == "WON_AWAIT" || response.data.data.status == "LOST_AWAIT") {
-        this.awaitingStatus = true;
-      }
     }, (error) => {
       this.errorService.handleError(error);
     });
+  }
+
+  loadCombatInstanceById() {
+    this.expeditionService.getCombatInstanceById(this.combatInstance.id).then((response) => {
+      this.combatInstance = response.data.data;
+
+    }, (error) => {
+      this.errorService.handleError(error);
+    })
   }
 
   loadDataCharacters(ciId: any) {
@@ -77,8 +83,19 @@ export class CombatInstanceComponent implements OnInit {
   }
 
   launchCombat() {
-    this.expeditionService.launchCombatInstance(this.combatInstance.id).then((response) => {
-      this.loadDataCombatInstance();
+    this.expeditionService.launchCombatInstance(this.combatInstance.id).then(() => {
+      this.loadCombatInstanceById();
+    }, (error) => {
+      this.errorService.notifyError(error);
+    });
+  }
+
+  seeCombatResult() {
+    this.errorService.notifyCombatResult(this.combatInstance);
+
+    this.expeditionService.getCombatInstanceResult(this.combatInstance.id).then(() => {
+      this.loadCombatInstanceById();
+      this.profileService.notifyChildD();
     }, (error) => {
       this.errorService.notifyError(error);
     });
