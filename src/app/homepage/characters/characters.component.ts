@@ -35,9 +35,8 @@ export class CharactersComponent implements OnInit {
   }
 
   loadAllYourCharacter() {
-    this.expeditionService.listAllCharactersByUserId().then((response) => {
+    this.expeditionService.listAllCharactersByUserId(this.fromHabitScreen).then((response) => {
       this.characters = response.data.data;
-      //this.characters = this.characters.filter((char: any) => !this.combatInstanceCharactersPresentIds.includes(char.id))
     }, (error) => {
       this.errorService.handleError(error);
     })

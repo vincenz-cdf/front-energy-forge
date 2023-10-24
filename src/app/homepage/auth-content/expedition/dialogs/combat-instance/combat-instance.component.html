@@ -38,6 +38,7 @@
                             class="rotated-image" />
                     </div>
                 </div>
+                <button *ngIf="heroCharacters && heroCharacters[i]" (click)="pickCharacter(heroCharacters[i].id)" class="btn btn-sm btn-danger">X</button>
             </div>
         </div>
         <div class="col-6">
@@ -52,24 +53,43 @@
                             {{npcCharacters[i].armor}}/{{npcCharacters[i].maxArmor}}</div>
                         <div style="display: flex; align-items: center;">Atk : {{npcCharacters[i].atk}}</div>
                     </ng-template>
-
-                    <img *ngIf="npcCharacters && npcCharacters[i]" [ngbTooltip]="charInfoTooltip" class="rotated-image"
-                        [src]="npcCharacters[i].spritePath" alt="NPC Character Image" style="transform: scaleX(-1);">
+                    <div *ngIf="npcCharacters && npcCharacters[i]" [ngbTooltip]="charInfoTooltip">
+                        <img class="rotated-image" [src]="npcCharacters[i].spritePath" alt="NPC Character Image"
+                            style="transform: scaleX(-1);">
+                        <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'HEAD')" style="z-index: 2;"
+                            [src]="splitEquipmentSlots(npcCharacters[i].equippedItems, 'HEAD').equipmentSpritePath"
+                            alt="Equipment" class="rotated-image" style="transform: scaleX(-1);" />
+                        <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'BODY')" style="z-index: 1;"
+                            [src]="splitEquipmentSlots(npcCharacters[i].equippedItems, 'BODY').equipmentSpritePath"
+                            alt="Equipment" class="rotated-image" style="transform: scaleX(-1);" />
+                        <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'RIGHTHAND')"
+                            style="z-index: 3;"
+                            [src]="splitEquipmentSlots(npcCharacters[i].equippedItems, 'RIGHTHAND').equipmentSpritePath"
+                            class="rotated-image" style="transform: scaleX(-1);" />
+                        <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'ZWEIHAND')"
+                            style="z-index: 4;"
+                            [src]="splitEquipmentSlots(npcCharacters[i].equippedItems, 'ZWEIHAND').equipmentSpritePath"
+                            class="rotated-image" style="transform: scaleX(-1);" />
+                        <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'LEFTHAND')"
+                            style="z-index: 4;"
+                            [src]="splitEquipmentSlots(npcCharacters[i].equippedItems, 'LEFTHAND').equipmentSpritePath"
+                            class="rotated-image" style="transform: scaleX(-1);" />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer" *ngIf="combatInstance">
     <div *ngIf="combatInstance.status == 'AWAIT'">
-        <button class="btn btn-xs btn-success" (click)="launchCombat()">Launch combat</button>
-        <button class="btn btn-xs btn-warning" (click)="close()">Not yet</button>
+        <button class="btn btn-sm btn-success" (click)="launchCombat()">Launch combat</button>
+        <button class="btn btn-sm btn-warning" (click)="close()">Not yet</button>
     </div>
     <div *ngIf="combatInstance.status == 'WON_AWAIT' || combatInstance.status == 'LOST_AWAIT'">
         Troops fighting...
     </div>
     <div *ngIf="combatInstance.status == 'WON_FINAL' || combatInstance.status == 'LOST_FINAL'">
-        <button class="btn btn-xs btn-success" (click)="seeCombatResult()">See battle result</button>
+        <button class="btn btn-sm btn-success" (click)="seeCombatResult()">See battle result</button>
     </div>
 </div>
 

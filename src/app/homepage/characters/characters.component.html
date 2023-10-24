@@ -28,24 +28,22 @@
                     <div>Hp : {{char.hp}}/{{char.maxHp}}</div>
                     <div>Ar : {{char.armor}}/{{char.maxArmor}}</div>
                     <div>Atk : {{char.atk}}</div>
+                    <div>Morale : {{char.morale}}/{{char.maxMorale}}</div>
                 </div>
                 <div *ngIf="isCombatInstance" class="col-3"
                     style="display: flex; align-items: flex-end; justify-content: flex-end;">
-                    <button class="btn btn-xs btn-warning" (click)="openDialog(char)"><i
+                    <button class="btn btn-sm btn-warning" (click)="openDialog(char)"><i
                             class="fa fa-edit"></i></button>
                     <div *ngIf="!fromHabitScreen">
                         <button *ngIf="!combatInstanceCharactersPresentIds.includes(char.id)"
-                            class="btn btn-xs btn-success" (click)="characterPicked.emit(char.id)"><i
+                            class="btn btn-sm btn-success" (click)="characterPicked.emit(char.id)"><i
                                 class="fa fa-hand-point-right"></i></button>
-                        <button *ngIf="combatInstanceCharactersPresentIds.includes(char.id)"
-                            class="btn btn-xs btn-danger" (click)="characterPicked.emit(char.id)">X</button>
                     </div>
-
                 </div>
             </div>
             <div *ngIf="!isCombatInstance" class="character-box"
                 style="display: flex; align-items: flex-end; justify-content: flex-end;">
-                <button class="btn btn-xs btn-warning active" (click)="openAllCharactersDialog()">Show roaster</button>
+                <button class="btn btn-sm btn-warning active" (click)="openAllCharactersDialog()">Show roaster</button>
             </div>
         </div>
     </div>

@@ -100,4 +100,12 @@ export class CombatInstanceComponent implements OnInit {
       this.errorService.notifyError(error);
     });
   }
+
+  pickCharacter(charId: any) {
+    this.expeditionService.pickCharacterForCombat(charId, this.combatInstance.id).then((response) => {
+      this.loadDataCombatInstance();
+    }, (error) => {
+      this.errorService.handleError(error);
+    });
+  }
 }

@@ -34,8 +34,8 @@ export class ExpeditionService {
     return modalRef;
   }
 
-  listAllCharactersByUserId() {
-    return this.axiosService.request("GET", "/combatinstance/currentCharacters", {});
+  listAllCharactersByUserId(fromHabit: boolean) {
+    return this.axiosService.request("GET", "/combatinstance/currentCharacters/" + fromHabit, {});
   }
 
   pickCharacterForCombat(charId: any, ciId: any) {
