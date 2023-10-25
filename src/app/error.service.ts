@@ -73,7 +73,11 @@ export class ErrorService {
       Swal.fire({
         icon: 'info',
         title: combatInstance.status == 'Victory',
-        text: combatInstance.combatReward.coins + "g" + combatInstance.combatReward.experiencePoints + "xp",
+        html: `
+        ${combatInstance.combatReward.coins}
+        <img src="../assets/sprites/ui/coin.png" alt="gold" width="20"> 
+        ${combatInstance.combatReward.experiencePoints} xp
+      `,
         showConfirmButton: true,
       });
     } else {
@@ -83,6 +87,5 @@ export class ErrorService {
         showConfirmButton: true,
       });
     }
-
   }
 }

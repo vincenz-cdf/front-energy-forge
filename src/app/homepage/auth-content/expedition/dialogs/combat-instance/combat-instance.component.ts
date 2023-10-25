@@ -96,6 +96,7 @@ export class CombatInstanceComponent implements OnInit {
     this.expeditionService.getCombatInstanceResult(this.combatInstance.id).then(() => {
       this.loadCombatInstanceById();
       this.profileService.notifyChildD();
+      this.activeModal.close();
     }, (error) => {
       this.errorService.notifyError(error);
     });

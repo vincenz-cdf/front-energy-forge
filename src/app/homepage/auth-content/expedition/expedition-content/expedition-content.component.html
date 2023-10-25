@@ -38,22 +38,35 @@
             <div class="row">
                 <div class="col-6 mb-2">
                     <div class="row">
-                        <div class="clickable-card card" (click)='openCombatInstance("T_L1", "Tutorial 1-1")'>
-                            <div class="card-body strokeme" style="background-color: #993938;">
+                        <div [ngClass]="combatInstances[0]?.status == 'CLOSED' ? 'card' : 'clickable-card card'"
+                            (click)="combatInstances[0]?.status != 'CLOSED' ? openCombatInstance('T_L1', 'Tutorial 1-1') : null">
+                            <div class="card-body strokeme"
+                                [ngStyle]="{'background-color': combatInstances[0]?.status != 'CLOSED' ? '#993938' : '#38995a'}">
                                 <strong>Stage 1-1</strong> : Brand new adventure!
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="clickable-card card" (click)='openCombatInstance("T_L2", "Tutorial 1-2")'>
-                            <div class="card-body strokeme" style="background-color: #993938;">
+                    <div class="row" *ngIf="combatInstances[0]?.status == 'CLOSED'">
+                        <div [ngClass]="combatInstances[1]?.status != 'CLOSED' ? 'clickable-card card' : 'card'"
+                            (click)="combatInstances[1]?.status != 'CLOSED' ? openCombatInstance('T_L2', 'Tutorial 1-2') : null">
+                            <div class="card-body strokeme"
+                                [ngStyle]="{'background-color': combatInstances[1]?.status != 'CLOSED' ? '#993938' : '#38995a'}">
                                 <strong>Stage 1-2</strong> : Break the line!
                             </div>
                         </div>
                     </div>
+                    <!--
+                    <div class="row">
+                        <div class="clickable-card card"
+                            (click)="openCombatInstance('T_L2', 'Tutorial 1-2')">
+                            <div class="card-body strokeme">
+                                <strong>Stage 1-2</strong> : Break the line!
+                            </div>
+                        </div>
+                    </div>
+                    -->
                 </div>
             </div>
-
         </div>
     </div>
 </div>

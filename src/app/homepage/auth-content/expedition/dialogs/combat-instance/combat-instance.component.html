@@ -38,7 +38,12 @@
                             class="rotated-image" />
                     </div>
                 </div>
-                <button *ngIf="heroCharacters && heroCharacters[i]" (click)="pickCharacter(heroCharacters[i].id)" class="btn btn-sm btn-danger">X</button>
+                <div *ngIf="combatInstance">
+                    <div *ngIf="combatInstance.status == 'AWAIT'">
+                        <button *ngIf="heroCharacters && heroCharacters[i]"
+                            (click)="pickCharacter(heroCharacters[i].id)" class="btn btn-sm btn-danger">X</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-6">
@@ -80,16 +85,18 @@
         </div>
     </div>
 </div>
-<div class="modal-footer" *ngIf="combatInstance">
-    <div *ngIf="combatInstance.status == 'AWAIT'">
-        <button class="btn btn-sm btn-success" (click)="launchCombat()">Launch combat</button>
-        <button class="btn btn-sm btn-warning" (click)="close()">Not yet</button>
-    </div>
-    <div *ngIf="combatInstance.status == 'WON_AWAIT' || combatInstance.status == 'LOST_AWAIT'">
-        Troops fighting...
-    </div>
-    <div *ngIf="combatInstance.status == 'WON_FINAL' || combatInstance.status == 'LOST_FINAL'">
-        <button class="btn btn-sm btn-success" (click)="seeCombatResult()">See battle result</button>
+<div class="modal-footer">
+    <div *ngIf="combatInstance">
+        <div *ngIf="combatInstance.status == 'AWAIT'">
+            <button class="btn btn-sm btn-success" (click)="launchCombat()">Launch combat</button>
+            <button class="btn btn-sm btn-warning" (click)="close()">Not yet</button>
+        </div>
+        <div *ngIf="combatInstance.status == 'WON_AWAIT' || combatInstance.status == 'LOST_AWAIT'">
+            Troops fighting...
+        </div>
+        <div *ngIf="combatInstance.status == 'WON_FINAL' || combatInstance.status == 'LOST_FINAL'">
+            <button class="btn btn-sm btn-success" (click)="seeCombatResult()">See battle result</button>
+        </div>
     </div>
 </div>
 

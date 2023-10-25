@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
-import { PlayerService } from 'src/app/dbservice/player.service';
+import { ErrorService } from 'src/app/error.service';
 
 @Component({
   selector: 'app-expedition-content',
@@ -10,15 +10,29 @@ import { PlayerService } from 'src/app/dbservice/player.service';
 export class ExpeditionContentComponent implements OnInit {
 
   public choosenContent: any = 'mainmenu';
+  public combatInstances: any = [];
 
   ngOnInit(): void {
     this.choosenContent = 'mainmenu';
+
   }
 
-  constructor(private expeditionService: ExpeditionService) {}
+  constructor(private expeditionService: ExpeditionService, private errorService: ErrorService) { }
 
   switchContent(content: any) {
     this.choosenContent = content;
+
+    if (this.choosenContent == 'campaign') {
+      this.userCombatInstances();
+    }
+  }
+
+  userCombatInstances() {
+    this.expeditionService.getCombatInstanceOfUser().then((response) => {
+      this.combatInstances = response.data.data
+    }, (error) => {
+      this.errorService.handleError(error);
+    })
   }
 
   openCombatInstance(scenario: string, levelName: string) {
@@ -26,9 +40,10 @@ export class ExpeditionContentComponent implements OnInit {
 
     modalRef.result.then(
       (result) => {
-        //faire qqchose
+        this.userCombatInstances();
       },
       (reason) => {
+        this.errorService.handleError(reason);
       }
     );
   }

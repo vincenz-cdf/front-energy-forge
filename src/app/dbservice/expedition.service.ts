@@ -53,4 +53,8 @@ export class ExpeditionService {
   getCombatInstanceResult(ciId: any) {
     return this.axiosService.request("GET", "/combatinstance/" + ciId + "/result", {});
   }
+
+  getCombatInstanceOfUser() {
+    return this.axiosService.request("GET", "/combatinstance/user", {});
+  }
 }
