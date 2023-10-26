@@ -13,7 +13,7 @@ export class CharacterCombatSelectComponent implements OnInit {
   @Input() combatInstance: any;
 
   yourChars: any;
-  combatInstanceCharactersPresentIds: any;
+  combatInstanceCharactersPresents: any;
   fromHabitScreen: boolean = false;
 
   constructor(
@@ -23,16 +23,12 @@ export class CharacterCombatSelectComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.combatInstance != null) {
-      this.combatInstanceCharactersPresentIds = this.combatInstance.characterIds;
+      this.combatInstanceCharactersPresents = this.combatInstance.characters;
     } else {
       this.fromHabitScreen = true;
-      this.combatInstanceCharactersPresentIds = null;
+      this.combatInstanceCharactersPresents = null;
     }
 
-  }
-
-  close() {
-    this.activeModal.close();
   }
 
   pickCharacter(event: number) {
@@ -41,5 +37,9 @@ export class CharacterCombatSelectComponent implements OnInit {
     }, (error) => {
       this.errorService.handleError(error);
     });
+  }
+
+  close() {
+    this.activeModal.close();
   }
 }

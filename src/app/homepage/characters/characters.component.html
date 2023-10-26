@@ -35,13 +35,13 @@
                     <button class="btn btn-sm btn-warning" (click)="openDialog(char)"><i
                             class="fa fa-edit"></i></button>
                     <div *ngIf="!fromHabitScreen">
-                        <button *ngIf="!combatInstanceCharactersPresentIds.includes(char.id)"
+                        <button *ngIf="!combatInstanceCharactersPresents.includes(char)"
                             class="btn btn-sm btn-success" (click)="characterPicked.emit(char.id)"><i
                                 class="fa fa-hand-point-right"></i></button>
                     </div>
                 </div>
             </div>
-            <div *ngIf="!isCombatInstance" class="character-box"
+            <div *ngIf="!isCombatInstance"
                 style="display: flex; align-items: flex-end; justify-content: flex-end;">
                 <button class="btn btn-sm btn-warning active" (click)="openAllCharactersDialog()">Show roaster</button>
             </div>

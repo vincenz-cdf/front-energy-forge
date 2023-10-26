@@ -48,12 +48,12 @@ export class ErrorService {
     }
   }
 
-  notifyError(text: any) {
+  notifyError(error: any) {
     Swal.fire({
       position: 'top-end',
       icon: 'error',
       title: 'Erreur',
-      text: text,
+      text: error.message,
       showConfirmButton: false,
       timer: 1500,
     });
@@ -67,12 +67,12 @@ export class ErrorService {
       denyButtonText: `No`,
     })
   }
-  
+
   notifyCombatResult(combatInstance: any) {
     if (combatInstance.status == "WON_FINAL") {
-      Swal.fire({
+      return Swal.fire({
         icon: 'info',
-        title: combatInstance.status == 'Victory',
+        title: 'Victory',
         html: `
         ${combatInstance.combatReward.coins}
         <img src="../assets/sprites/ui/coin.png" alt="gold" width="20"> 
@@ -81,11 +81,23 @@ export class ErrorService {
         showConfirmButton: true,
       });
     } else {
-      Swal.fire({
+      return Swal.fire({
         icon: 'info',
-        title: combatInstance.status == 'Defeat',
+        title: 'Defeat',
         showConfirmButton: true,
       });
     }
   }
+
+  notifyNewEquipment(spritePath: any) {
+    return Swal.fire({
+      icon: 'info',
+      title: 'New item obtained !',
+      html: `
+        <img src="${spritePath}" alt="equipment"> 
+      `,
+      showConfirmButton: true,
+    });
+  }
+
 }

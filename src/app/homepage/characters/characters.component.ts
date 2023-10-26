@@ -11,7 +11,7 @@ import { ErrorService } from 'src/app/error.service';
 export class CharactersComponent implements OnInit {
 
   @Input() isCombatInstance: boolean = false;
-  @Input() combatInstanceCharactersPresentIds: any;
+  @Input() combatInstanceCharactersPresents: any;
   @Input() fromHabitScreen: boolean = false;
 
   @Output() characterPicked = new EventEmitter<number>();

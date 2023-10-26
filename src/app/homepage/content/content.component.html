@@ -1,8 +1,8 @@
 <div>
 
 	<app-header [pageTitle]="'EnergyForge'" [isAuth]="isAuth" [logoSrc]="'../assets/images/newlogo.png'"
-		(logoutEvent)="logout()" (loginEvent)="onLoginEvent()"
-		(homepageEvent)="homepageEvent()" (expeditionEvent)="expeditionEvent()"></app-header>
+		(logoutEvent)="logout()" (loginEvent)="onLoginEvent()" (homepageEvent)="homepageEvent()"
+		(expeditionEvent)="expeditionEvent()"></app-header>
 
 	<app-auth-content *ngIf="componentToShow == 'messages'" />
 	<app-expedition-content *ngIf="componentToShow == 'expedition'" />

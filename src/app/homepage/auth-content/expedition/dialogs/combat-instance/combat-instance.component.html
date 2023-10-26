@@ -1,7 +1,10 @@
-<div class="modal-header">
+<div class="modal-header custom-header">
     <h5>{{levelName}}</h5>
+    <button type="button" class="btn btn-sm btn-info" ngbTooltip="{{tipText}}" placement="bottom"><i
+            class="fa-solid fa-circle-question"></i></button>
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
+
 <div class="modal-body">
     <div class="row mx-1" *ngFor="let _ of [].constructor(4); let i = index">
         <div class="col-6">
@@ -88,7 +91,7 @@
 <div class="modal-footer">
     <div *ngIf="combatInstance">
         <div *ngIf="combatInstance.status == 'AWAIT'">
-            <button class="btn btn-sm btn-success" (click)="launchCombat()">Launch combat</button>
+            <button [disabled]="!heroCharacters || heroCharacters.length === 0" class="btn btn-sm btn-success" style="margin-right: 10px;" (click)="launchCombat()">Launch combat</button>
             <button class="btn btn-sm btn-warning" (click)="close()">Not yet</button>
         </div>
         <div *ngIf="combatInstance.status == 'WON_AWAIT' || combatInstance.status == 'LOST_AWAIT'">
@@ -99,9 +102,3 @@
         </div>
     </div>
 </div>
-
-
-
-<!--
-    (click)="openDialog(char)"
--->

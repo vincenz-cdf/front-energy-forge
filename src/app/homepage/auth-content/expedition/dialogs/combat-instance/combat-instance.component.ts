@@ -19,6 +19,8 @@ export class CombatInstanceComponent implements OnInit {
   npcCharacters: any;
   heroCharacters: any;
 
+  tipText: any;
+
   constructor(
     private expeditionService: ExpeditionService,
     private errorService: ErrorService,
@@ -27,6 +29,20 @@ export class CombatInstanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDataCombatInstance();
+    this.loadTip();
+  }
+
+  loadTip() {
+    switch (this.scenario) {
+      case "T_L1":
+        this.tipText = "Strength in Numbers: Deploy both of your starting characters into combat to overpower a lone unarmed enemy.";
+        break;
+      case "T_L2":
+        this.tipText = "Shield Breaker: Facing enemies with shields? Equip one of your characters with an axe. Shields are vulnerable to axe attacks!";
+        break;
+      default:
+        break;
+    }
   }
 
   loadDataCombatInstance() {
@@ -90,8 +106,11 @@ export class CombatInstanceComponent implements OnInit {
     });
   }
 
-  seeCombatResult() {
-    this.errorService.notifyCombatResult(this.combatInstance);
+  async seeCombatResult() {
+    await this.errorService.notifyCombatResult(this.combatInstance);
+    for (let s of this.combatInstance.combatReward.equipments) {
+      await this.errorService.notifyNewEquipment(s.spritePath);
+    }
 
     this.expeditionService.getCombatInstanceResult(this.combatInstance.id).then(() => {
       this.loadCombatInstanceById();
