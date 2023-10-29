@@ -21,6 +21,13 @@ export class CombatInstanceComponent implements OnInit {
 
   tipText: any = "";
 
+  hpUiPath = "assets/sprites/ui/heart.png"
+  armorUiPath = "assets/sprites/ui/armor.png"
+  attackUiPath = "assets/sprites/ui/damage.png"
+  moodHighUiPath = "assets/sprites/ui/mood2.png"
+  moodMidUiPath = "assets/sprites/ui/mood1.png"
+  moodLowUiPath = "assets/sprites/ui/mood0.png"
+
   constructor(
     private expeditionService: ExpeditionService,
     private errorService: ErrorService,

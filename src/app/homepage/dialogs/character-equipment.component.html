@@ -29,7 +29,7 @@
                             style="width: 35px; height: 35px; margin-left: -2px;" />
                         {{character.hp}}/{{character.maxHp}}</div>
                     <div class="reduced-margin"><img [src]="armorUiPath" style="width: 32px; height: 32px;" />
-                        {{character.armor}}/{{character.maxArmor}}</div>
+                        {{character.armor}}</div>
                     <div class="reduced-margin"><img [src]="attackUiPath" style="width: 35px; height: 35px;" />
                         {{isItemEquippedBySlot(character.equippedItems, 'RIGHTHAND') ? character.atk * 0.75 :
                         character.atk}}</div>

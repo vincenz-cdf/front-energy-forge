@@ -24,6 +24,7 @@ export class CharactersComponent implements OnInit {
   moodHighUiPath = "assets/sprites/ui/mood2.png"
   moodMidUiPath = "assets/sprites/ui/mood1.png"
   moodLowUiPath = "assets/sprites/ui/mood0.png"
+  recoverUiPath = "assets/sprites/ui/recover.png"
 
   constructor(
     private playerService: PlayerService,

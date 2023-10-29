@@ -26,6 +26,10 @@ export class PlayerService {
     return this.axiosService.request("GET", "/characters", {});
   }
 
+  listWoundedChars() {
+    return this.axiosService.request("GET", "/characters/wounded", {});
+  }
+
   manageCharacterStuff(char: any, characters: any) {
     const modalRef = this.modalService.open(CharacterEquipment, { size: 'xl', backdrop: 'static' });
     modalRef.componentInstance.character = char;
@@ -40,5 +44,9 @@ export class PlayerService {
 
   deleteHabit(habitId: any) {
     return this.axiosService.request("DELETE", "/habits/" + habitId, {});
+  }
+
+  healCharacter(charId: any) {
+    return this.axiosService.request("PUT", "/characters/" + charId + "/heal", {});
   }
 }

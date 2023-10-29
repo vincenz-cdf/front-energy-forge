@@ -84,6 +84,7 @@ export class ErrorService {
       return Swal.fire({
         icon: 'info',
         title: 'Defeat',
+        text: 'All equipped items have been lost and your heroes needs to be healed back at the Temple',
         showConfirmButton: true,
       });
     }

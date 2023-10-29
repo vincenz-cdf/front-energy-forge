@@ -52,3 +52,7 @@
     flex-grow: 1;
     margin-right: auto;  /* Pushes the buttons to the right */
 }
+
+.reduced-margin {
+    margin-bottom: -12px;
+}
