@@ -18,6 +18,10 @@ export class CharactersComponent implements OnInit {
 
   characters: any = null;
 
+  hpUiPath = "assets/sprites/ui/heart.png"
+  armorUiPath = "assets/sprites/ui/armor.png"
+  attackUiPath = "assets/sprites/ui/damage.png"
+
   constructor(
     private playerService: PlayerService,
     private errorService: ErrorService,

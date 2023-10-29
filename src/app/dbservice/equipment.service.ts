@@ -19,4 +19,8 @@ export class EquipmentService {
   equipGear(gearId: any, charId: any) {
     return this.axiosService.request("POST", "/equipments/" + charId, gearId);
   }
+
+  unequipAll(charId: any) {
+    return this.axiosService.request("DELETE", "equipments/character/" + charId, {});
+  }
 }

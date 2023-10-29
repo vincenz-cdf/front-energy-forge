@@ -37,3 +37,7 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+.reduced-margin {
+  margin-bottom: -10px;
+}

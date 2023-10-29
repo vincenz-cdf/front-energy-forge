@@ -1,0 +1,52 @@
+    .character-box {
+        text-align: center;
+        margin-bottom: 16px;
+        /* Optional: add some space between character boxes */
+    }
+
+    .image-box {
+        position: relative;
+        /* Make sure this is here */
+        border: none;
+        padding: 10px;
+        width: 110px;
+        height: 110px;
+        display: flex;
+        align-items: center;
+        margin-right: 16px;
+        /* Add space between the image box and the text */
+    }
+
+    .rotated-image {
+        position: absolute;
+        /* Make both images absolute */
+        top: 0;
+        /* Align to the top of the image-box */
+        left: 0;
+        /* Align to the left of the image-box */
+        width: 100px;
+        height: auto;
+    }
+
+    .strokeme {
+        color: white;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+
+    .bg-image {
+        background-image: url("../../../assets/images/bg.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .equipment-image {
+        width: 50px;
+        /* Or whatever width you desire */
+        height: auto;
+        /* Maintain the aspect ratio */
+    }
+
+    .reduced-margin {
+        margin-bottom: -10px;
+    }

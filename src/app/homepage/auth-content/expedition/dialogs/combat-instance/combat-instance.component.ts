@@ -112,7 +112,7 @@ export class CombatInstanceComponent implements OnInit {
       await this.errorService.notifyNewEquipment(s.spritePath);
     }
 
-    this.expeditionService.getCombatInstanceResult(this.combatInstance.id).then(() => {
+    this.expeditionService.gatherRewards(this.combatInstance.id).then(() => {
       this.loadCombatInstanceById();
       this.profileService.notifyChildD();
       this.activeModal.close();

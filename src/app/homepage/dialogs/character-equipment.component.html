@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
     <div class="row">
-        <div class="col-3">
+        <div class="col-4 col-sm-3">
             <div class="character-box">
                 <div class="image-box">
                     <img [src]="character.spritePath" alt="Main Character" class="rotated-image" />
@@ -25,14 +25,18 @@
                 </div>
                 <!-- Text under the image -->
                 <div class="mt-1" style="text-align: left;">
-                    <div>Hp : {{character.hp}}/{{character.maxHp}}</div>
-                    <div>Ar : {{character.armor}}/{{character.maxArmor}}</div>
-                    <div>Atk : {{isItemEquippedBySlot(character.equippedItems, 'RIGHTHAND') ? character.atk * 0.75 : character.atk}}</div>
+                    <div class="reduced-margin"><img [src]="hpUiPath" style="width: 35px; height: 35px; margin-left: -2px;" /> {{character.hp}}/{{character.maxHp}}</div>
+                    <div class="reduced-margin"><img [src]="armorUiPath" style="width: 32px; height: 32px;" /> {{character.armor}}/{{character.maxArmor}}</div>
+                    <div class="reduced-margin"><img [src]="attackUiPath" style="width: 35px; height: 35px;" /> {{isItemEquippedBySlot(character.equippedItems, 'RIGHTHAND') ? character.atk * 0.75 : character.atk}}</div>
+                    <div class="reduced-margin">Morale : {{character.morale}}/{{character.maxMorale}}</div>
                 </div>
             </div>
-        </div>
-        <div class="col-9">
             <div class="row">
+                <button class="btn btn-sm btn-warning" (click)="unequipCharacter()">Unequip all</button>
+            </div>
+        </div>
+        <div class="col-8 col-sm-9">
+            <div class="row" *ngIf="headArmors.length > 0">
                 <h5 class="col-12">Headgear</h5>
                 <div *ngFor="let armor of headArmors" class="col-auto">
                     <div *ngIf="armor.equipment.slot == 'HEAD'" class="card">
@@ -56,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="bodyArmors.length > 0">
                 <h5 class="col-12">Body Armor</h5>
                 <div *ngFor="let armor of bodyArmors" class="col-auto">
                     <div *ngIf="armor.equipment.slot == 'BODY'" class="card">
@@ -80,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="weapons.length > 0">
                 <h5 class="col-12">Weapons</h5>
                 <div *ngFor="let weapon of weapons" class="col-auto">
                     <ng-template #weaponTooltip>
@@ -112,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="shields.length > 0">
                 <h5 class="col-12">Shields</h5>
                 <div *ngFor="let shield of shields" class="col-auto">
                     <ng-template #weaponTooltip>
@@ -147,54 +151,3 @@
 <div class="modal-footer">
     <button class="btn btn-success" (click)="save()">Save</button>
 </div>
-
-<style>
-    .character-box {
-        text-align: center;
-        margin-bottom: 16px;
-        /* Optional: add some space between character boxes */
-    }
-
-    .image-box {
-        position: relative;
-        /* Make sure this is here */
-        border: none;
-        padding: 10px;
-        width: 110px;
-        height: 110px;
-        display: flex;
-        align-items: center;
-        margin-right: 16px;
-        /* Add space between the image box and the text */
-    }
-
-    .rotated-image {
-        position: absolute;
-        /* Make both images absolute */
-        top: 0;
-        /* Align to the top of the image-box */
-        left: 0;
-        /* Align to the left of the image-box */
-        width: 100px;
-        height: auto;
-    }
-
-    .strokeme {
-        color: white;
-        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    }
-
-    .bg-image {
-        background-image: url("../../../assets/images/bg.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-
-    .equipment-image {
-        width: 50px;
-        /* Or whatever width you desire */
-        height: auto;
-        /* Maintain the aspect ratio */
-    }
-</style>

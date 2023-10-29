@@ -6,6 +6,7 @@ import { ErrorService } from 'src/app/error.service';
 @Component({
   selector: 'app-character_equipment',
   templateUrl: './character-equipment.component.html',
+  styleUrls: ['./character-equipment.component.css']
 })
 export class CharacterEquipment implements OnInit {
   @Input() character: any;
@@ -16,6 +17,7 @@ export class CharacterEquipment implements OnInit {
   weapons: any;
   shields: any
 
+  hpUiPath = "assets/sprites/ui/heart.png"
   armorUiPath = "assets/sprites/ui/armor.png"
   attackUiPath = "assets/sprites/ui/damage.png"
   coinPath = "assets/sprites/ui/coin.png"
@@ -77,6 +79,14 @@ export class CharacterEquipment implements OnInit {
 
   isItemEquippedBySlot(array: any, slot: string) {
     return array.findIndex((element: any) => element.slot === slot) != -1;
+  }
+
+  unequipCharacter() {
+    this.equipmentService.unequipAll(this.character.id).then((response) => {
+      this.character = response.data.data;
+    }, (error) => {
+      this.errorService.notifyError(error);
+    });
   }
 
   save() {
