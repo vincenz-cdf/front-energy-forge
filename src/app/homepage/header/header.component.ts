@@ -15,6 +15,7 @@ export class HeaderComponent {
   @Output() loginEvent = new EventEmitter();
   @Output() homepageEvent = new EventEmitter();
   @Output() expeditionEvent = new EventEmitter();
+  @Output() buildingsEvent = new EventEmitter();
   
   constructor() {
   }

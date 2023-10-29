@@ -17,6 +17,7 @@ import { CharacterEquipment } from './homepage/dialogs/character-equipment.compo
 import { ExpeditionContentComponent } from './homepage/auth-content/expedition/expedition-content/expedition-content.component';
 import { CombatInstanceComponent } from './homepage/auth-content/expedition/dialogs/combat-instance/combat-instance.component';
 import { CharacterCombatSelectComponent } from './homepage/auth-content/expedition/dialogs/character-combat-select/character-combat-select.component';
+import { BuildingsComponent } from './homepage/auth-content/buildings/buildings.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CharacterCombatSelectComponent } from './homepage/auth-content/expediti
     CharacterEquipment,
     ExpeditionContentComponent,
     CombatInstanceComponent,
-    CharacterCombatSelectComponent
+    CharacterCombatSelectComponent,
+    BuildingsComponent
   ],
   imports: [
     BrowserModule,

@@ -27,7 +27,7 @@ export class PlayerService {
   }
 
   manageCharacterStuff(char: any, characters: any) {
-    const modalRef = this.modalService.open(CharacterEquipment, { size: 'xl' });
+    const modalRef = this.modalService.open(CharacterEquipment, { size: 'xl', backdrop: 'static' });
     modalRef.componentInstance.character = char;
     modalRef.componentInstance.characters = characters;
 

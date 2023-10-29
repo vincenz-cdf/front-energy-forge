@@ -81,4 +81,8 @@ export class ContentComponent implements OnInit {
 		this.componentToShow = "expedition";
 	}
 
+	buildingsEvent() {
+		this.componentToShow = "buildings";
+	}
+
 }

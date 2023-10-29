@@ -25,10 +25,28 @@
                 </div>
                 <!-- Text under the image -->
                 <div class="mt-1" style="text-align: left;">
-                    <div class="reduced-margin"><img [src]="hpUiPath" style="width: 35px; height: 35px; margin-left: -2px;" /> {{character.hp}}/{{character.maxHp}}</div>
-                    <div class="reduced-margin"><img [src]="armorUiPath" style="width: 32px; height: 32px;" /> {{character.armor}}/{{character.maxArmor}}</div>
-                    <div class="reduced-margin"><img [src]="attackUiPath" style="width: 35px; height: 35px;" /> {{isItemEquippedBySlot(character.equippedItems, 'RIGHTHAND') ? character.atk * 0.75 : character.atk}}</div>
-                    <div class="reduced-margin">Morale : {{character.morale}}/{{character.maxMorale}}</div>
+                    <div class="reduced-margin"><img [src]="hpUiPath"
+                            style="width: 35px; height: 35px; margin-left: -2px;" />
+                        {{character.hp}}/{{character.maxHp}}</div>
+                    <div class="reduced-margin"><img [src]="armorUiPath" style="width: 32px; height: 32px;" />
+                        {{character.armor}}/{{character.maxArmor}}</div>
+                    <div class="reduced-margin"><img [src]="attackUiPath" style="width: 35px; height: 35px;" />
+                        {{isItemEquippedBySlot(character.equippedItems, 'RIGHTHAND') ? character.atk * 0.75 :
+                        character.atk}}</div>
+                    <div class="reduced-margin">
+                        <!-- For High Mood -->
+                        <img *ngIf="character.morale > 0.65 * character.maxMorale" [src]="moodHighUiPath"
+                            style="width: 35px; height: 35px;" />
+
+                        <!-- For Mid Mood -->
+                        <img *ngIf="character.morale <= 0.65 * character.maxMorale && character.morale >= 0.35 * character.maxMorale"
+                            [src]="moodMidUiPath" style="width: 35px; height: 35px;" />
+
+                        <!-- For Low Mood -->
+                        <img *ngIf="character.morale < 0.35 * character.maxMorale" [src]="moodLowUiPath"
+                            style="width: 35px; height: 35px;" />
+                        {{character.morale}}/{{character.maxMorale}}
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -36,64 +54,74 @@
             </div>
         </div>
         <div class="col-8 col-sm-9">
+            <div class="row" *ngIf="headArmors.length == 0 && bodyArmors.length == 0 
+            && weapons.length == 0 && shields.length == 0">
+                <i>No available equipment</i>
+            </div>
             <div class="row" *ngIf="headArmors.length > 0">
                 <h5 class="col-12">Headgear</h5>
-                <div *ngFor="let armor of headArmors" class="col-auto">
-                    <div *ngIf="armor.equipment.slot == 'HEAD'" class="card">
-                        <ng-template #armorTooltip>
-                            <div style="display: flex; align-items: center;">
-                                <strong>{{armor.equipment.name}}</strong>
+                <ng-container *ngFor="let armor of headArmors">
+                    <div *ngIf="!isItemEquippedByAnother(armor.equipment.id)" class="col-auto">
+                        <div class="card">
+                            <ng-template #armorTooltip>
+                                <div style="display: flex; align-items: center;">
+                                    <strong>{{armor.equipment.name}}</strong>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <span>{{armor.armorValue}}</span><img [src]="armorUiPath" />
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <span>{{armor.equipment.value}}</span><img [src]="coinPath" />
+                                </div>
+                            </ng-template>
+                            <div class="card-body" (click)="equipEquipment(armor.equipment.id)" [ngStyle]="{
+                                'padding': '0',
+                                'background-color': isItemEquipped(armor.equipment.id) ? '#f0daa0' : ''
+                            }" [ngbTooltip]="armorTooltip">
+                                <img [src]="armor.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
                             </div>
-                            <div style="display: flex; align-items: center;">
-                                <span>{{armor.armorValue}}</span><img [src]="armorUiPath" />
-                            </div>
-                            <div style="display: flex; align-items: center;">
-                                <span>{{armor.equipment.value}}</span><img [src]="coinPath" />
-                            </div>
-                        </ng-template>
-                        <div class="card-body" (click)="equipEquipment(armor.equipment.id)" [ngStyle]="{
-                            'padding': '0',
-                            'background-color': isItemEquipped(armor.equipment.id) ? '#f0daa0' : ''
-                        }" [ngbTooltip]="armorTooltip">
-                            <img [src]="armor.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
+
             <div class="row" *ngIf="bodyArmors.length > 0">
                 <h5 class="col-12">Body Armor</h5>
-                <div *ngFor="let armor of bodyArmors" class="col-auto">
-                    <div *ngIf="armor.equipment.slot == 'BODY'" class="card">
-                        <ng-template #armorTooltip>
-                            <div style="display: flex; align-items: center;">
-                                <strong>{{armor.equipment.name}}</strong>
+                <ng-container *ngFor="let armor of bodyArmors">
+                    <div *ngIf="!isItemEquippedByAnother(armor.equipment.id)" class="col-auto">
+                        <div class="card">
+                            <ng-template #armorTooltip>
+                                <div style="display: flex; align-items: center;">
+                                    <strong>{{armor.equipment.name}}</strong>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <span>{{armor.armorValue}}</span><img [src]="armorUiPath" />
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <span>{{armor.equipment.value}}</span><img [src]="coinPath" />
+                                </div>
+                            </ng-template>
+                            <div class="card-body" (click)="equipEquipment(armor.equipment.id)" [ngStyle]="{
+                                'padding': '0',
+                                'background-color': isItemEquipped(armor.equipment.id) ? '#f0daa0' : ''
+                            }" [ngbTooltip]="armorTooltip">
+                                <img [src]="armor.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
                             </div>
-                            <div style="display: flex; align-items: center;">
-                                <span>{{armor.armorValue}}</span><img [src]="armorUiPath" />
-                            </div>
-                            <div style="display: flex; align-items: center;">
-                                <span>{{armor.equipment.value}}</span><img [src]="coinPath" />
-                            </div>
-                        </ng-template>
-                        <div class="card-body" (click)="equipEquipment(armor.equipment.id)" [ngStyle]="{
-                            'padding': '0',
-                            'background-color': isItemEquipped(armor.equipment.id) ? '#f0daa0' : ''
-                        }" [ngbTooltip]="armorTooltip">
-                            <img [src]="armor.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
+
             <div class="row" *ngIf="weapons.length > 0">
                 <h5 class="col-12">Weapons</h5>
-                <div *ngFor="let weapon of weapons" class="col-auto">
+                <ng-container *ngFor="let weapon of weapons">
                     <ng-template #weaponTooltip>
                         <div style="min-width: 200px; max-width: 450px; overflow-wrap: break-word;">
                             <div style="display: flex; align-items: center;">
                                 <strong>{{weapon.equipment.name}}</strong>
                             </div>
                             <div style="display: flex; align-items: center;">
-                                <strong>{{weapon.isMelee ? 'Melee' : 'Ranged'}}</strong>
+                                <i>{{weapon.isMelee ? 'Melee' : 'Ranged'}}</i>
                             </div>
                             <div style="display: flex; align-items: center;">
                                 <span>{{weapon.atkValue}}</span><img [src]="attackUiPath" />
@@ -106,20 +134,23 @@
                             </div>
                         </div>
                     </ng-template>
-                    <div class="card">
-                        <div class="card-body" (click)="equipEquipment(weapon.equipment.id)" [ngStyle]="{
-                            'padding': '0',
-                            'background-color': isItemEquipped(weapon.equipment.id) ? '#f0daa0' : ''
-                        }" [ngbTooltip]="weaponTooltip">
-                            <img [src]="weapon.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
+                    <div *ngIf="!isItemEquippedByAnother(weapon.equipment.id)" class="col-auto">
+                        <div class="card">
+                            <div class="card-body" (click)="equipEquipment(weapon.equipment.id)" [ngStyle]="{
+                                'padding': '0',
+                                'background-color': isItemEquipped(weapon.equipment.id) ? '#f0daa0' : ''
+                            }" [ngbTooltip]="weaponTooltip">
+                                <img [src]="weapon.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
+
             <div class="row" *ngIf="shields.length > 0">
                 <h5 class="col-12">Shields</h5>
-                <div *ngFor="let shield of shields" class="col-auto">
-                    <ng-template #weaponTooltip>
+                <ng-container *ngFor="let shield of shields">
+                    <ng-template #shieldTooltip>
                         <div style="min-width: 200px; max-width: 450px; overflow-wrap: break-word;">
                             <div style="display: flex; align-items: center;">
                                 <strong>{{shield.equipment.name}}</strong>
@@ -135,16 +166,19 @@
                             </div>
                         </div>
                     </ng-template>
-                    <div class="card">
-                        <div class="card-body" (click)="equipEquipment(shield.equipment.id)" [ngStyle]="{
-                            'padding': '0',
-                            'background-color': isItemEquipped(shield.equipment.id) ? '#f0daa0' : ''
-                        }" [ngbTooltip]="weaponTooltip">
-                            <img [src]="shield.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
+                    <div *ngIf="!isItemEquippedByAnother(shield.equipment.id)" class="col-auto">
+                        <div class="card">
+                            <div class="card-body" (click)="equipEquipment(shield.equipment.id)" [ngStyle]="{
+                                'padding': '0',
+                                'background-color': isItemEquipped(shield.equipment.id) ? '#f0daa0' : ''
+                            }" [ngbTooltip]="shieldTooltip">
+                                <img [src]="shield.equipment.spritePath" alt="X" class="img-fluid equipment-image" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
+
         </div>
     </div>
 </div>

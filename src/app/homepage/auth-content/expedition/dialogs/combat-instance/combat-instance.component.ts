@@ -19,7 +19,7 @@ export class CombatInstanceComponent implements OnInit {
   npcCharacters: any;
   heroCharacters: any;
 
-  tipText: any;
+  tipText: any = "";
 
   constructor(
     private expeditionService: ExpeditionService,
@@ -39,6 +39,9 @@ export class CombatInstanceComponent implements OnInit {
         break;
       case "T_L2":
         this.tipText = "Shield Breaker: Facing enemies with shields? Equip one of your characters with an axe. Shields are vulnerable to axe attacks!";
+        break;
+      case "T_L3":
+        this.tipText = "Ranged Supremacy : Characters equipped with ranged weapons reduce the enemy highest damage by 50% IF one of it's neighbour is equipped with a melee weapon";
         break;
       default:
         break;

@@ -1,6 +1,6 @@
 <div class="modal-header custom-header">
     <h5>{{levelName}}</h5>
-    <button type="button" class="btn btn-sm btn-info" ngbTooltip="{{tipText}}" placement="bottom"><i
+    <button *ngIf="tipText != ''" type="button" class="btn btn-sm btn-info" ngbTooltip="{{tipText}}" placement="bottom"><i
             class="fa-solid fa-circle-question"></i></button>
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>

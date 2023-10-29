@@ -21,6 +21,9 @@ export class CharacterEquipment implements OnInit {
   armorUiPath = "assets/sprites/ui/armor.png"
   attackUiPath = "assets/sprites/ui/damage.png"
   coinPath = "assets/sprites/ui/coin.png"
+  moodHighUiPath = "assets/sprites/ui/mood2.png"
+  moodMidUiPath = "assets/sprites/ui/mood1.png"
+  moodLowUiPath = "assets/sprites/ui/mood0.png"
 
   constructor(private activeModal: NgbActiveModal, private equipmentService: EquipmentService, private errorService: ErrorService) { }
 
@@ -62,19 +65,21 @@ export class CharacterEquipment implements OnInit {
   }
 
   isItemEquipped(currentItemId: any) {
-    let bool = false;
+    if (this.character.equippedItems.findIndex((element: any) => element.equipmentId == currentItemId) != -1) {
+      return true;
+    }
+
+    return false;
+  }
+
+  isItemEquippedByAnother(currentItemId: any) {
     const otherChars = this.characters.filter((char: any) => char.id != this.character.id);
     for(let char of otherChars) {
       if (char.equippedItems.findIndex((element: any) => element.equipmentId == currentItemId) != -1) {
-        bool = true
+        return true;
       }
     }
-
-    if (this.character.equippedItems.findIndex((element: any) => element.equipmentId == currentItemId) != -1) {
-      bool = true
-    }
-
-    return bool;
+    return false;
   }
 
   isItemEquippedBySlot(array: any, slot: string) {
