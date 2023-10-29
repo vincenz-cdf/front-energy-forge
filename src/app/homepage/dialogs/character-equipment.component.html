@@ -54,11 +54,13 @@
             </div>
         </div>
         <div class="col-8 col-sm-9">
-            <div class="row" *ngIf="headArmors.length == 0 && bodyArmors.length == 0 
-            && weapons.length == 0 && shields.length == 0">
-                <i>No available equipment</i>
+            <div *ngIf="headArmors && bodyArmors && weapons && shields">
+                <div class="row" *ngIf="headArmors.length == 0 && bodyArmors.length == 0 
+                && weapons.length == 0 && shields.length == 0">
+                    <i>No available equipment</i>
+                </div>
             </div>
-            <div class="row" *ngIf="headArmors.length > 0">
+            <div class="row" *ngIf="headArmors && headArmors.length > 0">
                 <h5 class="col-12">Headgear</h5>
                 <ng-container *ngFor="let armor of headArmors">
                     <div *ngIf="!isItemEquippedByAnother(armor.equipment.id)" class="col-auto">
@@ -85,7 +87,7 @@
                 </ng-container>
             </div>
 
-            <div class="row" *ngIf="bodyArmors.length > 0">
+            <div class="row" *ngIf="bodyArmors && bodyArmors.length > 0">
                 <h5 class="col-12">Body Armor</h5>
                 <ng-container *ngFor="let armor of bodyArmors">
                     <div *ngIf="!isItemEquippedByAnother(armor.equipment.id)" class="col-auto">
@@ -112,7 +114,7 @@
                 </ng-container>
             </div>
 
-            <div class="row" *ngIf="weapons.length > 0">
+            <div class="row" *ngIf="weapons && weapons.length > 0">
                 <h5 class="col-12">Weapons</h5>
                 <ng-container *ngFor="let weapon of weapons">
                     <ng-template #weaponTooltip>
@@ -147,7 +149,7 @@
                 </ng-container>
             </div>
 
-            <div class="row" *ngIf="shields.length > 0">
+            <div class="row" *ngIf="shields && shields.length > 0">
                 <h5 class="col-12">Shields</h5>
                 <ng-container *ngFor="let shield of shields">
                     <ng-template #shieldTooltip>
