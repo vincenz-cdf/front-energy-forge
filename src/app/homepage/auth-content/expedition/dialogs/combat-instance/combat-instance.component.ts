@@ -50,6 +50,9 @@ export class CombatInstanceComponent implements OnInit {
       case "T_L3":
         this.tipText = "Ranged Supremacy : Characters equipped with ranged weapons reduce the enemy highest damage by 50% IF one of it's neighbour is equipped with a melee weapon";
         break;
+      case "T_L4":
+        this.tipText = "Armor Problem : Equip your characters with the knife to have a chance to ignore and the pickake to break the armor";
+        break;
       default:
         break;
     }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
+import { ProfileService } from 'src/app/profile.service';
 
 @Component({
   selector: 'app-buildings',
@@ -21,7 +22,8 @@ export class BuildingsComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class BuildingsComponent implements OnInit {
   heal(charId: any) {
     this.playerService.healCharacter(charId).then(() => {
       this.loadWoundedCharacters();
+      this.profileService.notifyChildD();
     }, (error) => {
       this.errorService.handleError(error);
     });

@@ -15,7 +15,7 @@
                         </div>
                         <div>
                             <div *ngFor="let char of characters">
-                                <div *ngIf="!char.recovering" style="margin-top: -1px;">{{char.name}}
+                                <div style="margin-top: -1px;">{{char.name}}
                                     Lvl.{{char.level}},<img [src]="hpUiPath"
                                         style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" />{{char.hp}}/{{char.maxHp}}
                                     <button (click)="heal(char.id)" type="button" class="btn btn-secondary" style="padding: 1px 3px;

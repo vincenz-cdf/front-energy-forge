@@ -82,6 +82,14 @@ export class CharactersComponent implements OnInit {
   }
 
   openAllCharactersDialog() {
-    this.expeditionService.openListOfCharactersDialog(null);
+    const modalRef = this.expeditionService.openListOfCharactersDialog(null);
+
+    modalRef.result.then(
+      (result) => {
+        this.listCharacters();
+      },
+      (reason) => {
+      }
+    );
   }
 }
