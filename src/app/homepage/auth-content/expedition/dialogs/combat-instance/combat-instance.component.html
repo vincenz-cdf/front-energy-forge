@@ -62,8 +62,8 @@
                         <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="armorUiPath"
                                 style="width: 32px; height: 32px;" />
                             {{npcCharacters[i].armor}}</div>
-                        <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="attackUiPath"
-                                style="width: 35px; height: 35px;" />
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img
+                                [src]="attackUiPath" style="width: 35px; height: 35px;" />
                             {{npcCharacters[i].atk}}</div>
                         <div style="display: flex; align-items: center;" class="reduced-margin">
                             <img *ngIf="npcCharacters[i].morale > 0.65 * npcCharacters[i].maxMorale"
@@ -107,17 +107,19 @@
     </div>
 </div>
 <div class="modal-footer">
-    <div *ngIf="combatInstance">
+    <div *ngIf="combatInstance && heroCharacters && user">
         <div *ngIf="combatInstance.status == 'AWAIT'">
-            <button [disabled]="!heroCharacters || heroCharacters.length === 0" class="btn btn-sm btn-success"
-                style="margin-right: 10px;" (click)="launchCombat()">Launch combat</button>
-            <button class="btn btn-sm btn-warning" (click)="close()">Not yet</button>
+            <button [disabled]="heroCharacters.length * 2 > user.energy" class="btn btn-sm btn-danger active"
+                style="margin-right: 10px;" (click)="launchCombat()">Launch combat <img
+                class="mr-n1" [src]="energyUiPath" style="width: 24px; height: 24px; margin-left: -6px; margin-right: -6px;"
+                alt="logo" /> {{heroCharacters.length*2}}</button>
+            <button class="btn btn-sm btn-warning active" (click)="close()">Not yet</button>
         </div>
         <div *ngIf="combatInstance.status == 'WON_AWAIT' || combatInstance.status == 'LOST_AWAIT'">
             Troops fighting...
         </div>
         <div *ngIf="combatInstance.status == 'WON_FINAL' || combatInstance.status == 'LOST_FINAL'">
-            <button class="btn btn-sm btn-success" (click)="seeCombatResult()">See battle result</button>
+            <button class="btn btn-sm btn-danger active" (click)="seeCombatResult()">See battle result</button>
         </div>
     </div>
 </div>

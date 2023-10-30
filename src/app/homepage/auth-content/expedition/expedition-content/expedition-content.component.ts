@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { ErrorService } from 'src/app/error.service';
+import { ProfileService } from 'src/app/profile.service';
 
 @Component({
   selector: 'app-expedition-content',
@@ -17,7 +18,10 @@ export class ExpeditionContentComponent implements OnInit {
 
   }
 
-  constructor(private expeditionService: ExpeditionService, private errorService: ErrorService) { }
+  constructor(
+    private expeditionService: ExpeditionService, 
+    private errorService: ErrorService,
+    private profileService: ProfileService) {}
 
   switchContent(content: any) {
     this.choosenContent = content;
@@ -41,6 +45,7 @@ export class ExpeditionContentComponent implements OnInit {
     modalRef.result.then(
       (result) => {
         this.userCombatInstances();
+        this.profileService.notifyChildD();
       },
       (reason) => {
         this.errorService.handleError(reason);

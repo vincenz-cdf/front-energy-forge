@@ -14,6 +14,8 @@ export class CombatInstanceComponent implements OnInit {
   @Input() scenario: any;
   @Input() levelName: string = "";
 
+  user: any;
+
   combatInstance: any;
 
   npcCharacters: any;
@@ -27,6 +29,7 @@ export class CombatInstanceComponent implements OnInit {
   moodHighUiPath = "assets/sprites/ui/mood2.png"
   moodMidUiPath = "assets/sprites/ui/mood1.png"
   moodLowUiPath = "assets/sprites/ui/mood0.png"
+  energyUiPath = "assets/sprites/ui/energy.png"
 
   constructor(
     private expeditionService: ExpeditionService,
@@ -35,6 +38,7 @@ export class CombatInstanceComponent implements OnInit {
     private profileService: ProfileService) { }
 
   ngOnInit(): void {
+    this.loadProfile();
     this.loadDataCombatInstance();
     this.loadTip();
   }
@@ -140,5 +144,13 @@ export class CombatInstanceComponent implements OnInit {
     }, (error) => {
       this.errorService.handleError(error);
     });
+  }
+
+  loadProfile() {
+    this.profileService.getUserInfo().then((response) => {
+      this.user = response.data;
+    }, (error) => {
+      this.errorService.handleError(error);
+    })
   }
 }
