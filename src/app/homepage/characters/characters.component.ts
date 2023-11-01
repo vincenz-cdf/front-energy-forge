@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { UIPATHS } from 'src/app/consts/ui-paths.constants';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
@@ -14,27 +16,21 @@ export class CharactersComponent implements OnInit {
   @Input() combatInstanceCharactersPresents: any;
   @Input() fromHabitScreen: boolean = false;
 
-  @Output() characterPicked = new EventEmitter<number>();
+  @Output() characterPicked = new EventEmitter<any>();
 
   characters: any = null;
 
-  hpUiPath = "assets/sprites/ui/heart.png"
-  armorUiPath = "assets/sprites/ui/armor.png"
-  attackUiPath = "assets/sprites/ui/damage.png"
-  moodHighUiPath = "assets/sprites/ui/mood2.png"
-  moodMidUiPath = "assets/sprites/ui/mood1.png"
-  moodLowUiPath = "assets/sprites/ui/mood0.png"
-  recoverUiPath = "assets/sprites/ui/recover.png"
+  uiPaths = UIPATHS;
 
   constructor(
     private playerService: PlayerService,
     private errorService: ErrorService,
-    private expeditionService: ExpeditionService
+    private expeditionService: ExpeditionService,
+    private toastr: ToastrService
   ) {
 
   }
   ngOnInit(): void {
-
     if(this.isCombatInstance || this.fromHabitScreen) {
       this.loadAllYourCharacter();
     } else {
@@ -62,15 +58,20 @@ export class CharactersComponent implements OnInit {
   }
 
   openDialog(char: any) {
-    const modalRef = this.playerService.manageCharacterStuff(char, this.characters);
 
-    modalRef.result.then(
-      (result) => {
-        this.listCharacters();
-      },
-      (reason) => {
-      }
-    );
+    if(char.inCombat) {
+      this.toastr.warning('This character is in battle','')
+    } else {
+      const modalRef = this.playerService.manageCharacterStuff(char, this.characters);
+
+      modalRef.result.then(
+        (result) => {
+          this.listCharacters();
+        },
+        (reason) => {
+        }
+      );
+    }
   }
 
   splitEquipmentSlots(array: any, slot: string) {

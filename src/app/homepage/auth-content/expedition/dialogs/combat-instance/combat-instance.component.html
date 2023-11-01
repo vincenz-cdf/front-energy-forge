@@ -9,11 +9,12 @@
     <div class="row mx-1" *ngFor="let _ of [].constructor(4); let i = index">
         <div class="col-6">
             <div class="character-box">
-                <div class="image-box" (click)="openListOfCharacters()">
+                <div class="image-box"
+                    (click)="heroCharacters && heroCharacters[i] ? $event.stopPropagation() : openListOfCharacters()">
                     <ng-template #charHeroInfoTooltip>
                         <div style="display: flex; align-items: center;">{{heroCharacters[i].name}}
                             Lvl.{{heroCharacters[i].level}}</div>
-                        <div style="display: flex; align-items: center;"><img [src]="hpUiPath"
+                        <div style="display: flex; align-items: center;"><img [src]="uiPaths.hp"
                                 style="width: 35px; height: 35px; margin-left: -2px;" />
                             {{heroCharacters[i].hp}}/{{heroCharacters[i].maxHp}}</div>
                         <div style="display: flex; align-items: center;">Ar :
@@ -56,28 +57,28 @@
                     <ng-template #charInfoTooltip>
                         <div style="display: flex; align-items: center;">{{npcCharacters[i].name}}
                             Lvl.{{npcCharacters[i].level}}</div>
-                        <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="hpUiPath"
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="uiPaths.hp"
                                 style="width: 35px; height: 35px; margin-left: -2px;" />
                             {{npcCharacters[i].hp}}/{{npcCharacters[i].maxHp}}</div>
-                        <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="armorUiPath"
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="uiPaths.armor"
                                 style="width: 32px; height: 32px;" />
                             {{npcCharacters[i].armor}}</div>
                         <div style="display: flex; align-items: center;" class="reduced-margin"><img
-                                [src]="attackUiPath" style="width: 35px; height: 35px;" />
+                                [src]="uiPaths.attack" style="width: 35px; height: 35px;" />
                             {{isItemEquippedBySlot(npcCharacters[i].equippedItems, 'RIGHTHAND') ?
                             roundCeil(npcCharacters[i].atk * 0.75) :
                             npcCharacters[i].atk}}</div>
                         <div style="display: flex; align-items: center;" class="reduced-margin">
                             <img *ngIf="npcCharacters[i].morale > 0.65 * npcCharacters[i].maxMorale"
-                                [src]="moodHighUiPath" style="width: 35px; height: 35px;" />
+                                [src]="uiPaths.moodHigh" style="width: 35px; height: 35px;" />
 
                             <!-- For Mid Mood -->
                             <img *ngIf="npcCharacters[i].morale <= 0.65 * npcCharacters[i].maxMorale && npcCharacters[i].morale >= 0.35 * npcCharacters[i].maxMorale"
-                                [src]="moodMidUiPath" style="width: 35px; height: 35px;" />
+                                [src]="uiPaths.moodMid" style="width: 35px; height: 35px;" />
 
                             <!-- For Low Mood -->
                             <img *ngIf="npcCharacters[i].morale < 0.35 * npcCharacters[i].maxMorale"
-                                [src]="moodLowUiPath" style="width: 35px; height: 35px;" />
+                                [src]="uiPaths.moodLow" style="width: 35px; height: 35px;" />
                             {{npcCharacters[i].morale}}/{{npcCharacters[i].maxMorale}}
                         </div>
                     </ng-template>
@@ -113,7 +114,7 @@
         <div *ngIf="combatInstance.status == 'AWAIT'">
             <button [disabled]="heroCharacters.length * 2 > user.energy" class="btn btn-sm btn-danger active"
                 style="margin-right: 10px;" (click)="launchCombat()">Launch combat <img class="mr-n1"
-                    [src]="energyUiPath" style="width: 24px; height: 24px; margin-left: -6px; margin-right: -6px;"
+                    [src]="uiPaths.energy" style="width: 24px; height: 24px; margin-left: -6px; margin-right: -6px;"
                     alt="logo" /> {{heroCharacters.length*2}}</button>
             <button class="btn btn-sm btn-warning active" (click)="close()">Not yet</button>
         </div>

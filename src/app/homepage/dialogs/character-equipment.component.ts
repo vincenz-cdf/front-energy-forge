@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { UIPATHS } from 'src/app/consts/ui-paths.constants';
 import { EquipmentService } from 'src/app/dbservice/equipment.service';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
@@ -23,14 +24,7 @@ export class CharacterEquipment implements OnInit {
 
   displayedItems: any;
 
-  hpUiPath = "assets/sprites/ui/heart.png"
-  armorUiPath = "assets/sprites/ui/armor.png"
-  attackUiPath = "assets/sprites/ui/damage.png"
-  coinPath = "assets/sprites/ui/coin.png"
-  moodHighUiPath = "assets/sprites/ui/mood2.png"
-  moodMidUiPath = "assets/sprites/ui/mood1.png"
-  moodLowUiPath = "assets/sprites/ui/mood0.png"
-  recoverUiPath = "assets/sprites/ui/recover.png"
+  uiPaths = UIPATHS;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -130,7 +124,7 @@ export class CharacterEquipment implements OnInit {
       this.initializeEquipments();
       this.initializeConsumables();
     }, (error) => {
-      this.toastr.error(error.response.data.message, 'Action impossible');
+      this.toastr.error(error.response.data.message, 'Forbidden action');
     });
   }
 

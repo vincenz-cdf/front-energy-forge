@@ -5,8 +5,10 @@
                 [ngClass]="isCombatInstance ? 'character-box' : 'col-auto character-box'">
                 <div class="image-box" [attr.clickable]="!isCombatInstance"
                     (click)="isCombatInstance ? $event.stopPropagation() : openDialog(char)">
-                    <img *ngIf="char.recovering" style="z-index: 2;" [src]="recoverUiPath" style="width: 36px; height: 36px;"
-                    class="rotated-image" />
+                    <img *ngIf="char.recovering" style="z-index: 2;" [src]="uiPaths.recover"
+                        style="width: 36px; height: 36px;" class="rotated-image text-end" />
+                    <img *ngIf="char.inCombat" style="z-index: 2;" [src]="uiPaths.battle"
+                        style="width: 36px; height: 36px;" class="rotated-image" />
                     <img [src]="char.spritePath" alt="Main Character" class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'HEAD')" style="z-index: 2;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment"
@@ -27,23 +29,24 @@
                 <!-- Text beside the image -->
                 <div [ngClass]="isCombatInstance ? 'col-3' : 'col-auto strokeme'">
                     <div>{{char.name}} Lvl.{{char.level}}</div>
-                    <div class="reduced-margin"><img [src]="hpUiPath"
+                    <div class="reduced-margin"><img [src]="uiPaths.hp"
                             style="width: 35px; height: 35px; margin-left: -2px;" /> {{char.hp}}/{{char.maxHp}}</div>
-                    <div class="reduced-margin"><img [src]="armorUiPath" style="width: 32px; height: 32px;" />
+                    <div class="reduced-margin"><img [src]="uiPaths.armor" style="width: 32px; height: 32px;" />
                         {{char.armor}}</div>
-                    <div class="reduced-margin"><img [src]="attackUiPath" style="width: 35px; height: 35px;" />
-                        {{isItemEquippedBySlot(char.equippedItems, 'RIGHTHAND') ? roundCeil(char.atk * 0.75) : char.atk}}</div>
+                    <div class="reduced-margin"><img [src]="uiPaths.attack" style="width: 35px; height: 35px;" />
+                        {{isItemEquippedBySlot(char.equippedItems, 'RIGHTHAND') ? roundCeil(char.atk * 0.75) :
+                        char.atk}}</div>
                     <div class="reduced-margin">
                         <!-- For High Mood -->
-                        <img *ngIf="char.morale > 0.65 * char.maxMorale" [src]="moodHighUiPath"
+                        <img *ngIf="char.morale > 0.65 * char.maxMorale" [src]="uiPaths.moodHigh"
                             style="width: 35px; height: 35px;" />
 
                         <!-- For Mid Mood -->
                         <img *ngIf="char.morale <= 0.65 * char.maxMorale && char.morale >= 0.35 * char.maxMorale"
-                            [src]="moodMidUiPath" style="width: 35px; height: 35px;" />
+                            [src]="uiPaths.moodMid" style="width: 35px; height: 35px;" />
 
                         <!-- For Low Mood -->
-                        <img *ngIf="char.morale < 0.35 * char.maxMorale" [src]="moodLowUiPath"
+                        <img *ngIf="char.morale < 0.35 * char.maxMorale" [src]="uiPaths.moodLow"
                             style="width: 35px; height: 35px;" />
 
                         {{char.morale}}/{{char.maxMorale}}
@@ -51,11 +54,11 @@
                 </div>
                 <div *ngIf="isCombatInstance" class="col-3"
                     style="display: flex; align-items: flex-end; justify-content: flex-end;">
-                    <button class="btn btn-sm btn-warning" (click)="openDialog(char)"><i
+                    <button *ngIf="!char.inCombat" class="btn btn-sm btn-warning" (click)="openDialog(char)"><i
                             class="fa fa-edit"></i></button>
                     <div *ngIf="!fromHabitScreen">
                         <button *ngIf="!combatInstanceCharactersPresents.includes(char)" class="btn btn-sm btn-success"
-                            (click)="characterPicked.emit(char.id)"><i class="fa fa-hand-point-right"></i></button>
+                            (click)="characterPicked.emit(char)"><i class="fa fa-hand-point-right"></i></button>
                     </div>
                 </div>
             </div>

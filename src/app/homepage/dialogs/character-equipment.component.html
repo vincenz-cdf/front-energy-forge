@@ -6,7 +6,7 @@
         <div class="col-4 col-sm-3">
             <div class="character-box">
                 <div class="image-box">
-                    <img *ngIf="character.recovering" style="z-index: 2;" [src]="recoverUiPath" style="width: 36px; height: 36px;"
+                    <img *ngIf="character.recovering" style="z-index: 2;" [src]="uiPaths.recover" style="width: 36px; height: 36px;"
                     class="rotated-image" />
                     <img [src]="character.spritePath" alt="Main Character" class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'HEAD')" style="z-index: 2;"
@@ -27,25 +27,25 @@
                 </div>
                 <!-- Text under the image -->
                 <div class="mt-1" style="text-align: left;">
-                    <div class="reduced-margin"><img [src]="hpUiPath"
+                    <div class="reduced-margin"><img [src]="uiPaths.hp"
                             style="width: 35px; height: 35px; margin-left: -2px;" />
                         {{character.hp}}/{{character.maxHp}}</div>
-                    <div class="reduced-margin"><img [src]="armorUiPath" style="width: 32px; height: 32px;" />
+                    <div class="reduced-margin"><img [src]="uiPaths.armor" style="width: 32px; height: 32px;" />
                         {{character.armor}}</div>
-                    <div class="reduced-margin"><img [src]="attackUiPath" style="width: 35px; height: 35px;" />
+                    <div class="reduced-margin"><img [src]="uiPaths.attack" style="width: 35px; height: 35px;" />
                         {{isItemEquippedBySlot(character.equippedItems, 'RIGHTHAND') ? roundCeil(character.atk * 0.75) :
                         character.atk}}</div>
                     <div class="reduced-margin">
                         <!-- For High Mood -->
-                        <img *ngIf="character.morale > 0.65 * character.maxMorale" [src]="moodHighUiPath"
+                        <img *ngIf="character.morale > 0.65 * character.maxMorale" [src]="uiPaths.moodHigh"
                             style="width: 35px; height: 35px;" />
 
                         <!-- For Mid Mood -->
                         <img *ngIf="character.morale <= 0.65 * character.maxMorale && character.morale >= 0.35 * character.maxMorale"
-                            [src]="moodMidUiPath" style="width: 35px; height: 35px;" />
+                            [src]="uiPaths.moodMid" style="width: 35px; height: 35px;" />
 
                         <!-- For Low Mood -->
-                        <img *ngIf="character.morale < 0.35 * character.maxMorale" [src]="moodLowUiPath"
+                        <img *ngIf="character.morale < 0.35 * character.maxMorale" [src]="uiPaths.moodLow"
                             style="width: 35px; height: 35px;" />
                         {{character.morale}}/{{character.maxMorale}}
                     </div>
@@ -81,10 +81,10 @@
                                         <strong>{{armor.equipment.name}}</strong>
                                     </div>
                                     <div style="display: flex; align-items: center;">
-                                        <span>{{armor.armorValue}}</span><img [src]="armorUiPath" />
+                                        <span>{{armor.armorValue}}</span><img [src]="uiPaths.armor" />
                                     </div>
                                     <div style="display: flex; align-items: center;">
-                                        <span>{{armor.equipment.value}}</span><img [src]="coinPath" />
+                                        <span>{{armor.equipment.value}}</span><img [src]="uiPaths.coin" />
                                     </div>
                                 </ng-template>
                                 <div class="card-body" (click)="equipEquipment(armor.equipment.id)" [ngStyle]="{
@@ -108,10 +108,10 @@
                                         <strong>{{armor.equipment.name}}</strong>
                                     </div>
                                     <div style="display: flex; align-items: center;">
-                                        <span>{{armor.armorValue}}</span><img [src]="armorUiPath" />
+                                        <span>{{armor.armorValue}}</span><img [src]="uiPaths.armor" />
                                     </div>
                                     <div style="display: flex; align-items: center;">
-                                        <span>{{armor.equipment.value}}</span><img [src]="coinPath" />
+                                        <span>{{armor.equipment.value}}</span><img [src]="uiPaths.coin" />
                                     </div>
                                 </ng-template>
                                 <div class="card-body" (click)="equipEquipment(armor.equipment.id)" [ngStyle]="{
@@ -137,10 +137,10 @@
                                     <i>{{weapon.isMelee ? 'Melee' : 'Ranged'}}</i>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <span>{{weapon.atkValue}}</span><img [src]="attackUiPath" />
+                                    <span>{{weapon.atkValue}}</span><img [src]="uiPaths.attack" />
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <span>{{weapon.equipment.value}}</span><img [src]="coinPath" />
+                                    <span>{{weapon.equipment.value}}</span><img [src]="uiPaths.coin" />
                                 </div>
                                 <div *ngFor="let a of weapon.weaponAbilities"
                                     style="display: flex; align-items: center;">
@@ -171,10 +171,10 @@
                                     <strong>{{shield.equipment.name}}</strong>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <span>{{shield.atkValue}}</span><img [src]="attackUiPath" />
+                                    <span>{{shield.atkValue}}</span><img [src]="uiPaths.attack" />
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <span>{{shield.equipment.value}}</span><img [src]="coinPath" />
+                                    <span>{{shield.equipment.value}}</span><img [src]="uiPaths.coin" />
                                 </div>
                                 <div *ngFor="let a of shield.weaponAbilities"
                                     style="display: flex; align-items: center;">

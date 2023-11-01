@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { UIPATHS } from 'src/app/consts/ui-paths.constants';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { ErrorService } from 'src/app/error.service';
 import { ProfileService } from 'src/app/profile.service';
@@ -23,13 +24,7 @@ export class CombatInstanceComponent implements OnInit {
 
   tipText: any = "";
 
-  hpUiPath = "assets/sprites/ui/heart.png"
-  armorUiPath = "assets/sprites/ui/armor.png"
-  attackUiPath = "assets/sprites/ui/damage.png"
-  moodHighUiPath = "assets/sprites/ui/mood2.png"
-  moodMidUiPath = "assets/sprites/ui/mood1.png"
-  moodLowUiPath = "assets/sprites/ui/mood0.png"
-  energyUiPath = "assets/sprites/ui/energy.png"
+  uiPaths = UIPATHS;
 
   constructor(
     private expeditionService: ExpeditionService,
@@ -100,15 +95,21 @@ export class CombatInstanceComponent implements OnInit {
   }
 
   openListOfCharacters() {
-    const modalRef = this.expeditionService.openListOfCharactersDialog(this.combatInstance);
 
-    modalRef.result.then(
-      (result) => {
-        this.loadDataCombatInstance();
-      },
-      (reason) => {
-      }
-    );
+
+    if (this.combatInstance.status == 'WON_AWAIT' || this.combatInstance.status == 'LOST_AWAIT') {
+      return;
+    } else {
+      const modalRef = this.expeditionService.openListOfCharactersDialog(this.combatInstance);
+      modalRef.result.then(
+        (result) => {
+          this.loadDataCombatInstance();
+        },
+        (reason) => {
+        }
+      );
+    }
+
   }
 
   close() {
@@ -162,11 +163,13 @@ export class CombatInstanceComponent implements OnInit {
 }
 
   pickCharacter(charId: any) {
-    this.expeditionService.pickCharacterForCombat(charId, this.combatInstance.id).then((response) => {
-      this.loadDataCombatInstance();
-    }, (error) => {
-      this.errorService.handleError(error);
-    });
+
+      this.expeditionService.pickCharacterForCombat(charId, this.combatInstance.id).then((response) => {
+        this.loadDataCombatInstance();
+      }, (error) => {
+        this.errorService.handleError(error);
+      });
+
   }
 
   loadProfile() {

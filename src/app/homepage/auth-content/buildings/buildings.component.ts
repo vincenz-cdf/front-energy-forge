@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UIPATHS } from 'src/app/consts/ui-paths.constants';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
 import { ProfileService } from 'src/app/profile.service';
@@ -13,12 +14,9 @@ export class BuildingsComponent implements OnInit {
   templeSpritePath = "assets/sprites/buildings/temple.png";
   tavernSpritePath = "assets/sprites/buildings/tavern.png";
 
-  hpUiPath = "assets/sprites/ui/heart.png";
-  recoverUiPath = "assets/sprites/ui/recover.png";
-  energyUiPath = "assets/sprites/ui/energy.png";
-  coinUiPath = "assets/sprites/ui/coin.png";
-
   characters: any = null;
+
+  uiPaths = UIPATHS;
 
   constructor(
     private playerService: PlayerService,

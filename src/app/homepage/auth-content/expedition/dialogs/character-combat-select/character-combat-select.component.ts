@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { ErrorService } from 'src/app/error.service';
 
@@ -19,7 +20,8 @@ export class CharacterCombatSelectComponent implements OnInit {
   constructor(
     private expeditionService: ExpeditionService,
     private errorService: ErrorService,
-    private activeModal: NgbActiveModal) { }
+    private activeModal: NgbActiveModal,
+    private toastr: ToastrService ) { }
 
   ngOnInit(): void {
     if (this.combatInstance != null) {
@@ -31,12 +33,17 @@ export class CharacterCombatSelectComponent implements OnInit {
 
   }
 
-  pickCharacter(event: number) {
-    this.expeditionService.pickCharacterForCombat(event, this.combatInstance.id).then((response) => {
+  pickCharacter(event: any) {
+    console.log(event)
+    if(event.recovering) {
+      this.toastr.warning('This character is recovering, hp will not recover during battle', '');
+    }
+    this.expeditionService.pickCharacterForCombat(event.id, this.combatInstance.id).then((response) => {
       this.activeModal.close()
     }, (error) => {
       this.errorService.handleError(error);
     });
+
   }
 
   close() {
