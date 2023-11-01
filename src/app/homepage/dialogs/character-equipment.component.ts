@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { EquipmentService } from 'src/app/dbservice/equipment.service';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
@@ -32,10 +33,11 @@ export class CharacterEquipment implements OnInit {
   recoverUiPath = "assets/sprites/ui/recover.png"
 
   constructor(
-    private activeModal: NgbActiveModal, 
-    private equipmentService: EquipmentService, 
+    private activeModal: NgbActiveModal,
+    private equipmentService: EquipmentService,
     private errorService: ErrorService,
-    private playerService: PlayerService) { }
+    private playerService: PlayerService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.displayedItems = "E";
@@ -94,7 +96,7 @@ export class CharacterEquipment implements OnInit {
 
   isItemEquippedByAnother(currentItemId: any) {
     const otherChars = this.characters.filter((char: any) => char.id != this.character.id);
-    for(let char of otherChars) {
+    for (let char of otherChars) {
       if (char.equippedItems.findIndex((element: any) => element.equipmentId == currentItemId) != -1) {
         return true;
       }
@@ -128,7 +130,7 @@ export class CharacterEquipment implements OnInit {
       this.initializeEquipments();
       this.initializeConsumables();
     }, (error) => {
-      this.errorService.handleError(error);
+      this.toastr.error(error.response.data.message, 'Action impossible');
     });
   }
 

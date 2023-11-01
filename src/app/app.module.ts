@@ -19,6 +19,7 @@ import { CombatInstanceComponent } from './homepage/auth-content/expedition/dial
 import { CharacterCombatSelectComponent } from './homepage/auth-content/expedition/dialogs/character-combat-select/character-combat-select.component';
 import { BuildingsComponent } from './homepage/auth-content/buildings/buildings.component';
 import { GroupConsumablesPipe } from './pipes/group-consumables.pipe';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GroupConsumablesPipe } from './pipes/group-consumables.pipe';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
