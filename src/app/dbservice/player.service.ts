@@ -46,7 +46,11 @@ export class PlayerService {
     return this.axiosService.request("DELETE", "/habits/" + habitId, {});
   }
 
-  healCharacter(charId: any) {
+  healCharacterFromTemple(charId: any) {
     return this.axiosService.request("PUT", "/characters/" + charId + "/heal", {});
+  }
+
+  setCharacterForRecovering(id: any, charId: any) {
+    return this.axiosService.request("PUT", "/characters/" + charId + "/consume/" + id, {});
   }
 }

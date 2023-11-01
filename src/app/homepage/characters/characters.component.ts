@@ -92,4 +92,8 @@ export class CharactersComponent implements OnInit {
       }
     );
   }
+
+  roundCeil(long: any) {
+    return Math.ceil(long);
+  }
 }

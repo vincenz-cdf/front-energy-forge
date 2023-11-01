@@ -39,7 +39,7 @@ export class BuildingsComponent implements OnInit {
   }
 
   heal(charId: any) {
-    this.playerService.healCharacter(charId).then(() => {
+    this.playerService.healCharacterFromTemple(charId).then(() => {
       this.loadWoundedCharacters();
       this.profileService.notifyChildD();
     }, (error) => {

@@ -176,4 +176,8 @@ export class CombatInstanceComponent implements OnInit {
       this.errorService.handleError(error);
     })
   }
+
+  roundCeil(long: any) {
+    return Math.ceil(long);
+  }
 }

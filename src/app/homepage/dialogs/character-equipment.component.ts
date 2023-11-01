@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EquipmentService } from 'src/app/dbservice/equipment.service';
+import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
 
 @Component({
@@ -28,8 +29,13 @@ export class CharacterEquipment implements OnInit {
   moodHighUiPath = "assets/sprites/ui/mood2.png"
   moodMidUiPath = "assets/sprites/ui/mood1.png"
   moodLowUiPath = "assets/sprites/ui/mood0.png"
+  recoverUiPath = "assets/sprites/ui/recover.png"
 
-  constructor(private activeModal: NgbActiveModal, private equipmentService: EquipmentService, private errorService: ErrorService) { }
+  constructor(
+    private activeModal: NgbActiveModal, 
+    private equipmentService: EquipmentService, 
+    private errorService: ErrorService,
+    private playerService: PlayerService) { }
 
   ngOnInit(): void {
     this.displayedItems = "E";
@@ -110,6 +116,20 @@ export class CharacterEquipment implements OnInit {
 
   switchDisplayingItems(type: string) {
     this.displayedItems = type;
+  }
+
+  roundCeil(long: any) {
+    return Math.ceil(long);
+  }
+
+  consumeConsumable(id: any) {
+    this.playerService.setCharacterForRecovering(id, this.character.id).then((response) => {
+      this.character = response.data.data;
+      this.initializeEquipments();
+      this.initializeConsumables();
+    }, (error) => {
+      this.errorService.handleError(error);
+    });
   }
 
   save() {

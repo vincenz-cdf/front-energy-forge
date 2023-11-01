@@ -21,7 +21,7 @@
                                     <button (click)="heal(char.id)" type="button" class="btn btn-secondary" style="padding: 1px 3px;
                                         font-size: 9px;
                                         line-height: 0.7;">
-                                        <span style="color: rgb(255, 255, 255);">{{(char.maxHp) - (char.hp)}}<img
+                                        <span style="color: rgb(255, 255, 255);">{{(char.maxHp - char.hp) * 2}}<img
                                                 class="mr-n1" [src]="coinUiPath" style="width: 20px; height: 20px; margin-left: -6px; margin-right: -6px;"
                                                 alt="logo" /></span>
                                     </button>
