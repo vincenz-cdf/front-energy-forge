@@ -15,6 +15,9 @@ export class EquipmentService {
   listAllWeapons() {
     return this.axiosService.request("GET", "/weapons", {});
   }
+  listAllConsumables() {
+    return this.axiosService.request("GET", "/consumables", {});
+  }
 
   equipGear(gearId: any, charId: any) {
     return this.axiosService.request("POST", "/equipments/" + charId, gearId);

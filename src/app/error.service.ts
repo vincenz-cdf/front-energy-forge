@@ -90,15 +90,15 @@ export class ErrorService {
     }
   }
 
-  notifyNewEquipment(spritePath: any) {
+  notifyNewItem(spritePath: any, count: number = 1) {
     return Swal.fire({
-      icon: 'info',
-      title: 'New item obtained !',
-      html: `
-        <img src="${spritePath}" alt="equipment"> 
-      `,
-      showConfirmButton: true,
+        icon: 'info',
+        title: count > 1 ? `New items obtained (x${count})!` : 'New item obtained!',
+        html: `
+            <img src="${spritePath}" alt="equipment">
+        `,
+        showConfirmButton: true,
     });
-  }
+}
 
 }

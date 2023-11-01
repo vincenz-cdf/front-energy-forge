@@ -17,6 +17,10 @@ export class CharacterEquipment implements OnInit {
   weapons: any;
   shields: any
 
+  consumables: any;
+
+  displayedItems: any;
+
   hpUiPath = "assets/sprites/ui/heart.png"
   armorUiPath = "assets/sprites/ui/armor.png"
   attackUiPath = "assets/sprites/ui/damage.png"
@@ -28,7 +32,9 @@ export class CharacterEquipment implements OnInit {
   constructor(private activeModal: NgbActiveModal, private equipmentService: EquipmentService, private errorService: ErrorService) { }
 
   ngOnInit(): void {
+    this.displayedItems = "E";
     this.initializeEquipments();
+    this.initializeConsumables();
   }
 
   initializeEquipments() {
@@ -48,6 +54,14 @@ export class CharacterEquipment implements OnInit {
     }, (error) => {
       this.errorService.handleError(error);
     });
+  }
+
+  initializeConsumables() {
+    this.equipmentService.listAllConsumables().then((response) => {
+      this.consumables = response.data.data;
+    }, (error) => {
+      this.errorService.handleError(error);
+    })
   }
 
   equipEquipment(gearId: any) {
@@ -92,6 +106,10 @@ export class CharacterEquipment implements OnInit {
     }, (error) => {
       this.errorService.notifyError(error);
     });
+  }
+
+  switchDisplayingItems(type: string) {
+    this.displayedItems = type;
   }
 
   save() {

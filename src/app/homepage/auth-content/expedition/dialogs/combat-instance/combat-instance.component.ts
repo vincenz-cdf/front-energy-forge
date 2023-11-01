@@ -125,18 +125,41 @@ export class CombatInstanceComponent implements OnInit {
 
   async seeCombatResult() {
     await this.errorService.notifyCombatResult(this.combatInstance);
+
+    const equipmentCount: { [key: string]: number } = {};
     for (let s of this.combatInstance.combatReward.equipments) {
-      await this.errorService.notifyNewEquipment(s.spritePath);
+        if (!equipmentCount[s.spritePath]) {
+            equipmentCount[s.spritePath] = 0;
+        }
+        equipmentCount[s.spritePath]++;
+    }
+
+    const consumableCount: { [key: string]: number } = {};
+    for (let c of this.combatInstance.combatReward.consumables) {
+        if (!consumableCount[c.spritePath]) {
+            consumableCount[c.spritePath] = 0;
+        }
+        consumableCount[c.spritePath]++;
+    }
+
+    for (let spritePath in equipmentCount) {
+        const count = equipmentCount[spritePath];
+        await this.errorService.notifyNewItem(spritePath, count);
+    }
+
+    for (let spritePath in consumableCount) {
+        const count = consumableCount[spritePath];
+        await this.errorService.notifyNewItem(spritePath, count);
     }
 
     this.expeditionService.gatherRewards(this.combatInstance.id).then(() => {
-      this.loadCombatInstanceById();
-      this.profileService.notifyChildD();
-      this.activeModal.close();
+        this.loadCombatInstanceById();
+        this.profileService.notifyChildD();
+        this.activeModal.close();
     }, (error) => {
-      this.errorService.notifyError(error);
+        this.errorService.notifyError(error);
     });
-  }
+}
 
   pickCharacter(charId: any) {
     this.expeditionService.pickCharacterForCombat(charId, this.combatInstance.id).then((response) => {

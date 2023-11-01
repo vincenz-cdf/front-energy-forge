@@ -18,6 +18,7 @@ import { ExpeditionContentComponent } from './homepage/auth-content/expedition/e
 import { CombatInstanceComponent } from './homepage/auth-content/expedition/dialogs/combat-instance/combat-instance.component';
 import { CharacterCombatSelectComponent } from './homepage/auth-content/expedition/dialogs/character-combat-select/character-combat-select.component';
 import { BuildingsComponent } from './homepage/auth-content/buildings/buildings.component';
+import { GroupConsumablesPipe } from './pipes/group-consumables.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BuildingsComponent } from './homepage/auth-content/buildings/buildings.
     ExpeditionContentComponent,
     CombatInstanceComponent,
     CharacterCombatSelectComponent,
-    BuildingsComponent
+    BuildingsComponent,
+    GroupConsumablesPipe
   ],
   imports: [
     BrowserModule,
