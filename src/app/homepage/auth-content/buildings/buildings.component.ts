@@ -10,7 +10,7 @@ import { ProfileService } from 'src/app/profile.service';
 })
 export class BuildingsComponent implements OnInit {
 
-  templeSpritePath = "assets/sprites/buildings/temple2.png";
+  templeSpritePath = "assets/sprites/buildings/temple.png";
   tavernSpritePath = "assets/sprites/buildings/tavern.png";
 
   hpUiPath = "assets/sprites/ui/heart.png";

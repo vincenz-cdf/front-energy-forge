@@ -1,9 +1,9 @@
-<div class="d-flex flex-column min-vh-100">
-  <app-characters [isCombatInstance]="false"/>
+<div class="background d-flex flex-column min-vh-100">
+  <app-characters [isCombatInstance]="false" />
 
   <div class="card no-border flex-grow-1 overflow-auto">
-      <div class="card-body">
-          <app-habits (onHabitChangeEvent)="fetchProfile()" />
-      </div>
+    <div class="card-body">
+      <app-habits (onHabitChangeEvent)="fetchProfile()" />
+    </div>
   </div>
 </div>
