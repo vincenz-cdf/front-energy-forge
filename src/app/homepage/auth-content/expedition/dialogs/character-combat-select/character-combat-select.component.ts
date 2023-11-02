@@ -31,7 +31,6 @@ export class CharacterCombatSelectComponent implements OnInit {
   }
 
   pickCharacter(event: any) {
-    console.log(event)
     if(event.recovering) {
       this.toastr.warning('This character is recovering, hp will not recover during battle', '');
     }
