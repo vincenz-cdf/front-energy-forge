@@ -1,11 +1,13 @@
 <div class="expedition-background">
 
 </div>
+<button *ngIf="choosenContent != 'mainmenu'" class="btn btn-sm btn-secondary" (click)="switchContent('mainmenu')"><i
+        class="fas fa-arrow-left"></i></button>
 <div style="z-index: 1000;">
     <div class="container mt-2">
         <div *ngIf="choosenContent == 'mainmenu'">
             <div class="row">
-                <div class="col-6 mb-2" (click)="switchContent('campaign')">
+                <div class="col-12 mb-2" (click)="switchContent('campaign')">
                     <div class="clickable-card card">
                         <div class="card-body strokeme" style="background-color: #993938;">
                             <strong>Campaign</strong> : Single Player Campaign are battles against pregenerated NPC.
@@ -15,7 +17,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 mb-2" (click)="switchContent('contracts')">
+                <div class="col-12 mb-2" (click)="switchContent('contracts')">
                     <div class="clickable-card card">
                         <div class="card-body strokeme" style="background-color: #993938;">
                             <strong>Open contracts</strong> : Contracts are missions facing you with random generated
@@ -25,7 +27,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body strokeme" style="background-color: #383838;">
                             <strong>PvP</strong> : Coming soon
@@ -36,10 +38,10 @@
         </div>
         <div *ngIf="choosenContent == 'campaign'">
             <div class="row">
-                <div class="col-6 mb-2">
+                <div class="col-12 mb-2">
                     <div class="row">
                         <div [ngClass]="combatInstances[0]?.status == 'CLOSED' ? 'card' : 'clickable-card card'"
-                            (click)="combatInstances[0]?.status != 'CLOSED' ? openCombatInstance('T_L1', 'Tutorial 1-1') : null">
+                            (click)="combatInstances[0]?.status != 'CLOSED' ? openCombatInstance('T_L1', 'Tutorial 1-1', null) : null">
                             <div class="card-body strokeme"
                                 [ngStyle]="{'background-color': combatInstances[0]?.status != 'CLOSED' ? '#993938' : '#38995a'}">
                                 <strong>Stage 1-1</strong> Basic Counting
@@ -48,7 +50,7 @@
                     </div>
                     <div class="row" *ngIf="combatInstances[0]?.status == 'CLOSED'">
                         <div [ngClass]="combatInstances[1]?.status != 'CLOSED' ? 'clickable-card card' : 'card'"
-                            (click)="combatInstances[1]?.status != 'CLOSED' ? openCombatInstance('T_L2', 'Tutorial 1-2') : null">
+                            (click)="combatInstances[1]?.status != 'CLOSED' ? openCombatInstance('T_L2', 'Tutorial 1-2', null) : null">
                             <div class="card-body strokeme"
                                 [ngStyle]="{'background-color': combatInstances[1]?.status != 'CLOSED' ? '#993938' : '#38995a'}">
                                 <strong>Stage 1-2</strong> Break the line!
@@ -57,7 +59,7 @@
                     </div>
                     <div class="row" *ngIf="combatInstances[1]?.status == 'CLOSED'">
                         <div [ngClass]="combatInstances[2]?.status != 'CLOSED' ? 'clickable-card card' : 'card'"
-                            (click)="combatInstances[2]?.status != 'CLOSED' ? openCombatInstance('T_L3', 'Tutorial 1-3') : null">
+                            (click)="combatInstances[2]?.status != 'CLOSED' ? openCombatInstance('T_L3', 'Tutorial 1-3', null) : null">
                             <div class="card-body strokeme"
                                 [ngStyle]="{'background-color': combatInstances[2]?.status != 'CLOSED' ? '#993938' : '#38995a'}">
                                 <strong>Stage 1-3</strong> Ranged Supremacy
@@ -66,7 +68,7 @@
                     </div>
                     <div class="row" *ngIf="combatInstances[2]?.status == 'CLOSED'">
                         <div [ngClass]="combatInstances[3]?.status != 'CLOSED' ? 'clickable-card card' : 'card'"
-                            (click)="combatInstances[3]?.status != 'CLOSED' ? openCombatInstance('T_L4', 'Tutorial 1-4') : null">
+                            (click)="combatInstances[3]?.status != 'CLOSED' ? openCombatInstance('T_L4', 'Tutorial 1-4', null) : null">
                             <div class="card-body strokeme"
                                 [ngStyle]="{'background-color': combatInstances[3]?.status != 'CLOSED' ? '#993938' : '#38995a'}">
                                 <strong>Stage 1-4</strong> Bypass the Juggernaut
@@ -82,13 +84,30 @@
                             </div>
                         </div>
                     </div>
-
-                                                        <div class="col-sm-2 col-5">
-                                        <img class="mr-n1" src="../../../../assets/sprites/ui/energy.png"
-                                            style="width: 32px; height: 32px;" alt="logo" />
-                                        <span>3</span>
-                                    </div>
                     -->
+                </div>
+            </div>
+        </div>
+        <div *ngIf="choosenContent == 'contracts'">
+            <div class="row">
+                <div class="col-12 mb-2">
+                    <div *ngFor="let c of combatInstances" class="row">
+                        <div class="clickable-card card" (click)="openCombatInstance('CONTRACT', 'Contract : Kill brigands', c)">
+                            <div class="card-body strokeme" style="background-color: #993938">
+                                <div>
+                                    <img *ngIf="c.status != 'AWAIT' && c.status != 'CLOSED'" [src]="uiPaths.battle"
+                                        style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" />
+                                    <strong class="mr-2">Kill brigands</strong>
+                                    <img [src]="uiPaths.skull"
+                                        style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" />
+                                </div>
+                                <div style="display: flex; align-items: flex-end; justify-content: flex-end;">
+                                    <img [src]="uiPaths.coin"
+                                        style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" /> {{calculateReward(c)}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

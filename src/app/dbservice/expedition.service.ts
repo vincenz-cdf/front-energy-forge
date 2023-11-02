@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AxiosService } from '../axios.service';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CombatInstanceComponent } from '../homepage/auth-content/expedition/dialogs/combat-instance/combat-instance.component';
 import { CharacterCombatSelectComponent } from '../homepage/auth-content/expedition/dialogs/character-combat-select/character-combat-select.component';
 
@@ -11,10 +11,11 @@ export class ExpeditionService {
 
   constructor(private axiosService: AxiosService, private modalService: NgbModal) { }
 
-  combatInstanceDialog(scenario: string, levelName: string) {
+  combatInstanceDialog(scenario: string, levelName: string, contract: any) {
     const modalRef = this.modalService.open(CombatInstanceComponent, { size: 'lg', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.scenario = scenario;
     modalRef.componentInstance.levelName = levelName;
+    modalRef.componentInstance.contract = contract;
 
     return modalRef;
   }
@@ -54,7 +55,7 @@ export class ExpeditionService {
     return this.axiosService.request("PUT", "/combatinstance/" + ciId + "/reward", {});
   }
 
-  getCombatInstanceOfUser() {
-    return this.axiosService.request("GET", "/combatinstance/user", {});
+  getCombatInstanceOfUser(content: any) {
+    return this.axiosService.request("GET", "/combatinstance/user/" + content, {});
   }
 }

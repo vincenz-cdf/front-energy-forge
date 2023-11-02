@@ -13,7 +13,6 @@ import { ErrorService } from 'src/app/error.service';
 export class CharactersComponent implements OnInit {
 
   @Input() isCombatInstance: boolean = false;
-  @Input() combatInstanceCharactersPresents: any;
   @Input() fromHabitScreen: boolean = false;
 
   @Output() characterPicked = new EventEmitter<any>();

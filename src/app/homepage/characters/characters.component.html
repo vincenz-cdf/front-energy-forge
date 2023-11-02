@@ -10,11 +10,11 @@
                     <img *ngIf="char.inCombat" style="z-index: 2;" [src]="uiPaths.battle"
                         style="width: 36px; height: 36px;" class="rotated-image" />
                     <img [src]="char.spritePath" alt="Main Character" class="rotated-image" />
-                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'HEAD')" style="z-index: 2;"
-                        [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment"
-                        class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'BODY')" style="z-index: 1;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'BODY').equipmentSpritePath" alt="Equipment"
+                        class="rotated-image" />
+                    <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'HEAD')" style="z-index: 2;"
+                        [src]="splitEquipmentSlots(char.equippedItems, 'HEAD').equipmentSpritePath" alt="Equipment"
                         class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(char.equippedItems, 'RIGHTHAND')" style="z-index: 3;"
                         [src]="splitEquipmentSlots(char.equippedItems, 'RIGHTHAND').equipmentSpritePath"
@@ -57,7 +57,7 @@
                     <button *ngIf="!char.inCombat" class="btn btn-sm btn-warning" (click)="openDialog(char)"><i
                             class="fa fa-edit"></i></button>
                     <div *ngIf="!fromHabitScreen">
-                        <button *ngIf="!combatInstanceCharactersPresents.includes(char)" class="btn btn-sm btn-success"
+                        <button *ngIf="!char.awaiting" class="btn btn-sm btn-success"
                             (click)="characterPicked.emit(char)"><i class="fa fa-hand-point-right"></i></button>
                     </div>
                 </div>

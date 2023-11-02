@@ -14,6 +14,7 @@ export class CombatInstanceComponent implements OnInit {
 
   @Input() scenario: any;
   @Input() levelName: string = "";
+  @Input() contract: any;
 
   user: any;
 
@@ -34,7 +35,15 @@ export class CombatInstanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProfile();
-    this.loadDataCombatInstance();
+    if (this.contract != null) {
+      this.combatInstance = this.contract;
+      const all = this.contract.characters;
+      this.heroCharacters = all.filter((char: any) => char.characterType == 'HERO');
+      this.npcCharacters = all.filter((char: any) => char.characterType != 'HERO');
+    } else {
+      this.loadDataCombatInstance();
+    }
+
     this.loadTip();
   }
 
@@ -58,13 +67,31 @@ export class CombatInstanceComponent implements OnInit {
   }
 
   loadDataCombatInstance() {
-    this.expeditionService.createOrRetrieveCombatInstance({ "string": this.scenario }).then((response) => {
-      this.combatInstance = response.data.data;
-      this.loadDataCharacters(response.data.data.id);
 
-    }, (error) => {
-      this.errorService.handleError(error);
-    });
+    if (this.contract == null) {
+      this.expeditionService.createOrRetrieveCombatInstance({ "string": this.scenario }).then((response) => {
+        this.combatInstance = response.data.data;
+        const all = this.combatInstance.characters;
+        this.heroCharacters = all.filter((char: any) => char.characterType == 'HERO');
+        this.npcCharacters = all.filter((char: any) => char.characterType != 'HERO');
+
+      }, (error) => {
+        this.errorService.handleError(error);
+      });
+    } else {
+      this.expeditionService.getCombatInstanceById(this.contract.id).then((response) => {
+        this.combatInstance = response.data.data;
+        const all = this.combatInstance.characters;
+        this.heroCharacters = all.filter((char: any) => char.characterType == 'HERO');
+        this.npcCharacters = all.filter((char: any) => char.characterType != 'HERO');
+
+      }, (error) => {
+        this.errorService.handleError(error);
+      });
+    }
+
+
+
   }
 
   loadCombatInstanceById() {
@@ -76,16 +103,6 @@ export class CombatInstanceComponent implements OnInit {
     })
   }
 
-  loadDataCharacters(ciId: any) {
-    this.expeditionService.listAllCharactersByCI(ciId).then((response) => {
-      const all = response.data.data;
-      this.heroCharacters = all.filter((char: any) => char.characterType == 'HERO');
-      this.npcCharacters = all.filter((char: any) => char.characterType != 'HERO');
-    }, (error) => {
-      this.errorService.handleError(error);
-    });
-  }
-
   splitEquipmentSlots(array: any, slot: string) {
     return array.find((element: any) => element.slot === slot);
   }
@@ -95,8 +112,6 @@ export class CombatInstanceComponent implements OnInit {
   }
 
   openListOfCharacters() {
-
-
     if (this.combatInstance.status == 'WON_AWAIT' || this.combatInstance.status == 'LOST_AWAIT') {
       return;
     } else {
@@ -109,7 +124,6 @@ export class CombatInstanceComponent implements OnInit {
         }
       );
     }
-
   }
 
   close() {
@@ -129,46 +143,46 @@ export class CombatInstanceComponent implements OnInit {
 
     const equipmentCount: { [key: string]: number } = {};
     for (let s of this.combatInstance.combatReward.equipments) {
-        if (!equipmentCount[s.spritePath]) {
-            equipmentCount[s.spritePath] = 0;
-        }
-        equipmentCount[s.spritePath]++;
+      if (!equipmentCount[s.spritePath]) {
+        equipmentCount[s.spritePath] = 0;
+      }
+      equipmentCount[s.spritePath]++;
     }
 
     const consumableCount: { [key: string]: number } = {};
     for (let c of this.combatInstance.combatReward.consumables) {
-        if (!consumableCount[c.spritePath]) {
-            consumableCount[c.spritePath] = 0;
-        }
-        consumableCount[c.spritePath]++;
+      if (!consumableCount[c.spritePath]) {
+        consumableCount[c.spritePath] = 0;
+      }
+      consumableCount[c.spritePath]++;
     }
 
     for (let spritePath in equipmentCount) {
-        const count = equipmentCount[spritePath];
-        await this.errorService.notifyNewItem(spritePath, count);
+      const count = equipmentCount[spritePath];
+      await this.errorService.notifyNewItem(spritePath, count);
     }
 
     for (let spritePath in consumableCount) {
-        const count = consumableCount[spritePath];
-        await this.errorService.notifyNewItem(spritePath, count);
+      const count = consumableCount[spritePath];
+      await this.errorService.notifyNewItem(spritePath, count);
     }
 
     this.expeditionService.gatherRewards(this.combatInstance.id).then(() => {
-        this.loadCombatInstanceById();
-        this.profileService.notifyChildD();
-        this.activeModal.close();
+      this.loadCombatInstanceById();
+      this.profileService.notifyChildD();
+      this.activeModal.close();
     }, (error) => {
-        this.errorService.notifyError(error);
+      this.errorService.notifyError(error);
     });
-}
+  }
 
   pickCharacter(charId: any) {
 
-      this.expeditionService.pickCharacterForCombat(charId, this.combatInstance.id).then((response) => {
-        this.loadDataCombatInstance();
-      }, (error) => {
-        this.errorService.handleError(error);
-      });
+    this.expeditionService.pickCharacterForCombat(charId, this.combatInstance.id).then((response) => {
+      this.loadDataCombatInstance();
+    }, (error) => {
+      this.errorService.handleError(error);
+    });
 
   }
 
@@ -182,5 +196,60 @@ export class CombatInstanceComponent implements OnInit {
 
   roundCeil(long: any) {
     return Math.ceil(long);
+  }
+
+  isIndexedBySlot(index: any, slot: string) {
+    const combatIndex = this.contract.indexes.filter((item: any) => item.characterIndex == index)[0];
+
+    if (slot == 'HEAD') {
+      return combatIndex.headArmor != null;
+    }
+
+    if (slot == 'BODY') {
+      return combatIndex.bodyArmor != null;
+    }
+
+    if (slot == 'WEAPON') {
+      return combatIndex.weapon != null;
+    }
+
+    if (slot == 'RIGHTHAND') {
+      return combatIndex.shield != null;
+    }
+
+    return false;
+  }
+
+  calulateIndexItem(index: any, slot: any, tooltip: any) {
+    const combatIndex = this.contract.indexes.filter((item: any) => item.characterIndex == index)[0];
+
+    if (tooltip) {
+      if (slot == 'ARMOR') {
+        return combatIndex.headArmor != null ? combatIndex.headArmor.armorValue : 0 + combatIndex.bodyArmor.armorValue;
+      }
+
+      if (slot == 'WEAPON') {
+        return combatIndex.shield == null ? combatIndex.weapon.atkValue : this.roundCeil(combatIndex.weapon.atkValue*0.75);
+      }
+    } else {
+      if (slot == 'HEAD') {
+        return combatIndex.headArmor;
+      }
+  
+      if (slot == 'BODY') {
+        return combatIndex.bodyArmor;
+      }
+  
+      if (slot == 'WEAPON') {
+        return combatIndex.weapon;
+      }
+  
+      if (slot == 'RIGHTHAND') {
+        return combatIndex.shield;
+      }
+  
+      return null;
+    }
+
   }
 }

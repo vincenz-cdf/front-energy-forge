@@ -14,7 +14,6 @@ export class CharacterCombatSelectComponent implements OnInit {
   @Input() combatInstance: any;
 
   yourChars: any;
-  combatInstanceCharactersPresents: any;
   fromHabitScreen: boolean = false;
 
   constructor(
@@ -25,10 +24,8 @@ export class CharacterCombatSelectComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.combatInstance != null) {
-      this.combatInstanceCharactersPresents = this.combatInstance.characters;
     } else {
       this.fromHabitScreen = true;
-      this.combatInstanceCharactersPresents = null;
     }
 
   }

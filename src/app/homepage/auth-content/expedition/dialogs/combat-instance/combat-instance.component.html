@@ -20,14 +20,23 @@
                         <div style="display: flex; align-items: center;">Ar :
                             {{heroCharacters[i].armor}}/{{heroCharacters[i].maxArmor}}</div>
                         <div style="display: flex; align-items: center;">Atk : {{heroCharacters[i].atk}}</div>
+                        <img *ngIf="heroCharacters[i].morale > 0.65 * heroCharacters[i].maxMorale"
+                            [src]="uiPaths.moodHigh" style="width: 35px; height: 35px;" />
+                        <!-- For Mid Mood -->
+                        <img *ngIf="heroCharacters[i].morale <= 0.65 * heroCharacters[i].maxMorale && heroCharacters[i].morale >= 0.35 * npcCharacters[i].maxMorale"
+                            [src]="uiPaths.moodMid" style="width: 35px; height: 35px;" />
+                        <!-- For Low Mood -->
+                        <img *ngIf="heroCharacters[i].morale < 0.35 * heroCharacters[i].maxMorale"
+                            [src]="uiPaths.moodLow" style="width: 35px; height: 35px;" />
+                        {{heroCharacters[i].morale}}/{{heroCharacters[i].maxMorale}}
                     </ng-template>
                     <div *ngIf="heroCharacters && heroCharacters[i]" [ngbTooltip]="charHeroInfoTooltip">
                         <img [src]="heroCharacters[i].spritePath" alt="Main Character" class="rotated-image" />
-                        <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'HEAD')" style="z-index: 2;"
-                            [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'HEAD').equipmentSpritePath"
-                            alt="Equipment" class="rotated-image" />
                         <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'BODY')" style="z-index: 1;"
                             [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'BODY').equipmentSpritePath"
+                            alt="Equipment" class="rotated-image" />
+                        <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'HEAD')" style="z-index: 2;"
+                            [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'HEAD').equipmentSpritePath"
                             alt="Equipment" class="rotated-image" />
                         <img *ngIf="isItemEquippedBySlot(heroCharacters[i].equippedItems, 'RIGHTHAND')"
                             style="z-index: 3;"
@@ -51,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div *ngIf="this.contract == null" class="col-6">
             <div class="enemy-box">
                 <div class="image-box">
                     <ng-template #charInfoTooltip>
@@ -60,8 +69,8 @@
                         <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="uiPaths.hp"
                                 style="width: 35px; height: 35px; margin-left: -2px;" />
                             {{npcCharacters[i].hp}}/{{npcCharacters[i].maxHp}}</div>
-                        <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="uiPaths.armor"
-                                style="width: 32px; height: 32px;" />
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img
+                                [src]="uiPaths.armor" style="width: 32px; height: 32px;" />
                             {{npcCharacters[i].armor}}</div>
                         <div style="display: flex; align-items: center;" class="reduced-margin"><img
                                 [src]="uiPaths.attack" style="width: 35px; height: 35px;" />
@@ -69,27 +78,18 @@
                             roundCeil(npcCharacters[i].atk * 0.75) :
                             npcCharacters[i].atk}}</div>
                         <div style="display: flex; align-items: center;" class="reduced-margin">
-                            <img *ngIf="npcCharacters[i].morale > 0.65 * npcCharacters[i].maxMorale"
-                                [src]="uiPaths.moodHigh" style="width: 35px; height: 35px;" />
-
-                            <!-- For Mid Mood -->
-                            <img *ngIf="npcCharacters[i].morale <= 0.65 * npcCharacters[i].maxMorale && npcCharacters[i].morale >= 0.35 * npcCharacters[i].maxMorale"
-                                [src]="uiPaths.moodMid" style="width: 35px; height: 35px;" />
-
-                            <!-- For Low Mood -->
-                            <img *ngIf="npcCharacters[i].morale < 0.35 * npcCharacters[i].maxMorale"
-                                [src]="uiPaths.moodLow" style="width: 35px; height: 35px;" />
-                            {{npcCharacters[i].morale}}/{{npcCharacters[i].maxMorale}}
+                            <img [src]="uiPaths.moodHigh" style="width: 35px; height: 35px;" />
+                            {{npcCharacters[i].maxMorale}}
                         </div>
                     </ng-template>
                     <div *ngIf="npcCharacters && npcCharacters[i]" [ngbTooltip]="charInfoTooltip">
                         <img class="rotated-image" [src]="npcCharacters[i].spritePath" alt="NPC Character Image"
                             style="transform: scaleX(-1);">
-                        <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'HEAD')" style="z-index: 2;"
-                            [src]="splitEquipmentSlots(npcCharacters[i].equippedItems, 'HEAD').equipmentSpritePath"
-                            alt="Equipment" class="rotated-image" style="transform: scaleX(-1);" />
                         <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'BODY')" style="z-index: 1;"
                             [src]="splitEquipmentSlots(npcCharacters[i].equippedItems, 'BODY').equipmentSpritePath"
+                            alt="Equipment" class="rotated-image" style="transform: scaleX(-1);" />
+                        <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'HEAD')" style="z-index: 2;"
+                            [src]="splitEquipmentSlots(npcCharacters[i].equippedItems, 'HEAD').equipmentSpritePath"
                             alt="Equipment" class="rotated-image" style="transform: scaleX(-1);" />
                         <img *ngIf="isItemEquippedBySlot(npcCharacters[i].equippedItems, 'RIGHTHAND')"
                             style="z-index: 3;"
@@ -107,15 +107,55 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="this.contract != null" class="col-6">
+            <div class="enemy-box">
+                <div class="image-box">
+                    <ng-template #contractEnemyTooltip>
+                        <div style="display: flex; align-items: center;">{{npcCharacters[i].name}}
+                            Lvl.{{npcCharacters[i].level}}</div>
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="uiPaths.hp"
+                                style="width: 35px; height: 35px; margin-left: -2px;" />
+                            {{npcCharacters[i].hp}}/{{npcCharacters[i].maxHp}}</div>
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img
+                                [src]="uiPaths.armor" style="width: 32px; height: 32px;" />
+                            {{calulateIndexItem(i, 'ARMOR', true)}}</div>
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img
+                                [src]="uiPaths.attack" style="width: 35px; height: 35px;" />
+                            {{calulateIndexItem(i, 'WEAPON', true)}}</div>
+                        <div style="display: flex; align-items: center;" class="reduced-margin">
+                            <img [src]="uiPaths.moodHigh" style="width: 35px; height: 35px;" />
+                            {{npcCharacters[i].maxMorale}}
+                        </div>
+                    </ng-template>
+                    <div *ngIf="npcCharacters && npcCharacters[i]" [ngbTooltip]="contractEnemyTooltip">
+                        <img class="rotated-image" [src]="npcCharacters[i].spritePath" alt="NPC Character Image"
+                            style="transform: scaleX(-1);">
+                        <img *ngIf="isIndexedBySlot(i,'BODY')" style="z-index: 1;"
+                            [src]="calulateIndexItem(i, 'BODY', false).spritePath" class="rotated-image"
+                            style="transform: scaleX(-1);" />
+                        <img *ngIf="isIndexedBySlot(i, 'HEAD')" style="z-index: 2;"
+                            [src]="calulateIndexItem(i, 'HEAD', false).spritePath" class="rotated-image"
+                            style="transform: scaleX(-1);" />
+                        <img *ngIf="isIndexedBySlot(i,'RIGHTHAND')" style="z-index: 3;"
+                            [src]="calulateIndexItem(i, 'RIGHTHAND', false).spritePath" class="rotated-image"
+                            style="transform: scaleX(-1);" />
+                        <img *ngIf="isIndexedBySlot(i,'WEAPON')" style="z-index: 4;"
+                            [src]="calulateIndexItem(i, 'WEAPON', false).spritePath" class="rotated-image"
+                            style="transform: scaleX(-1);" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
     <div *ngIf="combatInstance && heroCharacters && user">
         <div *ngIf="combatInstance.status == 'AWAIT'">
-            <button [disabled]="heroCharacters.length * 2 > user.energy" class="btn btn-sm btn-danger active"
-                style="margin-right: 10px;" (click)="launchCombat()">Launch combat <img class="mr-n1"
-                    [src]="uiPaths.energy" style="width: 24px; height: 24px; margin-left: -6px; margin-right: -6px;"
-                    alt="logo" /> {{heroCharacters.length*2}}</button>
+            <button [disabled]="heroCharacters.length * 2 > user.energy || heroCharacters.length == 0"
+                class="btn btn-sm btn-danger active" style="margin-right: 10px;" (click)="launchCombat()">Launch combat
+                <img class="mr-n1" [src]="uiPaths.energy"
+                    style="width: 24px; height: 24px; margin-left: -6px; margin-right: -6px;" alt="logo" />
+                {{heroCharacters.length*2}}</button>
             <button class="btn btn-sm btn-warning active" (click)="close()">Not yet</button>
         </div>
         <div *ngIf="combatInstance.status == 'WON_AWAIT' || combatInstance.status == 'LOST_AWAIT'">
