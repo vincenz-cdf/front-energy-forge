@@ -25,10 +25,10 @@
                                     {{char.name}},<img [src]="uiPaths.hp"
                                         style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" />{{char.hp}}/{{char.maxHp}}
                                     <button (click)="heal(char.id)" type="button" class="btn btn-secondary" style="padding: 1px 3px;
-                                        font-size: 9px;
-                                        line-height: 0.7;">
-                                        <span style="color: rgb(255, 255, 255);">{{(char.maxHp - char.hp) * 2}}<img
-                                                class="mr-n1" [src]="uiPaths.coin"
+                                      font-size: 9px;
+                                      line-height: 0.7;">
+                                        <span *ngIf="char.hp != 0" style="color: rgb(255, 255, 255);">{{(char.maxHp -
+                                            char.hp) * 2}}<img class="mr-n1" [src]="uiPaths.coin"
                                                 style="width: 20px; height: 20px; margin-left: -6px; margin-right: -6px;"
                                                 alt="logo" /></span>
                                         <span *ngIf="char.hp == 0" style="color: rgb(255, 255, 255);">8<img class="mr-n1" [src]="uiPaths.energy"
