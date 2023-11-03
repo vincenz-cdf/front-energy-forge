@@ -57,7 +57,7 @@
                     <button *ngIf="!char.inCombat" class="btn btn-sm btn-warning" (click)="openDialog(char)"><i
                             class="fa fa-edit"></i></button>
                     <div *ngIf="!fromHabitScreen">
-                        <button *ngIf="!char.awaiting" class="btn btn-sm btn-success"
+                        <button [disabled]="char.hp == 0" *ngIf="!char.awaiting" class="btn btn-sm btn-success"
                             (click)="characterPicked.emit(char)"><i class="fa fa-hand-point-right"></i></button>
                     </div>
                 </div>

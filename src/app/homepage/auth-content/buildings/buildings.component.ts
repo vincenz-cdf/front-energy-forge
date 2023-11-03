@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UIPATHS } from 'src/app/consts/ui-paths.constants';
+import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
 import { ProfileService } from 'src/app/profile.service';
@@ -21,15 +22,25 @@ export class BuildingsComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private errorService: ErrorService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private expeditionService: ExpeditionService
   ) {}
 
   ngOnInit(): void {
-    this.loadWoundedCharacters();
+    this.loadBuildings();
+    this.loadCharacters();
   }
 
-  loadWoundedCharacters() {
-    this.playerService.listWoundedChars().then((response) => {
+  loadBuildings() {
+    this.playerService.listAllBuildings().then((response) => {
+      console.log(response.data.data);
+    }, (error) => {
+      this.errorService.handleError(error);
+    })
+  }
+
+  loadCharacters() {
+    this.expeditionService.listAllCharactersByUserId(false).then((response) => {
       this.characters = response.data.data;
     }, (error) => {
       this.errorService.handleError(error);
@@ -38,7 +49,16 @@ export class BuildingsComponent implements OnInit {
 
   heal(charId: any) {
     this.playerService.healCharacterFromTemple(charId).then(() => {
-      this.loadWoundedCharacters();
+      this.loadCharacters();
+      this.profileService.notifyChildD();
+    }, (error) => {
+      this.errorService.handleError(error);
+    });
+  }
+
+  drink(charId: any) {
+    this.playerService.dringCharacterFromTavern(charId).then(() => {
+      this.loadCharacters();
       this.profileService.notifyChildD();
     }, (error) => {
       this.errorService.handleError(error);

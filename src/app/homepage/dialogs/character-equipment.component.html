@@ -208,11 +208,13 @@
                         <div class="col-auto">
                             <div class="card">
                                 <ng-template #consumableTooltip>
-                                    <div style="display: flex; align-items: center;">
-                                        <strong>{{c.name}}</strong>
-                                    </div>
-                                    <div style="display: flex; align-items: center;">
-                                        <span>{{c.description}}</span>
+                                    <div style="min-width: 200px; max-width: 450px; overflow-wrap: break-word;">
+                                        <div style="display: flex; align-items: center;">
+                                            <strong>{{c.name}}</strong>
+                                        </div>
+                                        <div style="display: flex; align-items: center;">
+                                            <span>{{c.description}}</span>
+                                        </div>
                                     </div>
                                 </ng-template>
                                 <div class="card-body" (click)="consumeConsumable(c.id)" [ngStyle]="{

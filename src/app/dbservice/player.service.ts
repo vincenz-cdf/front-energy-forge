@@ -50,7 +50,15 @@ export class PlayerService {
     return this.axiosService.request("PUT", "/characters/" + charId + "/heal", {});
   }
 
+  dringCharacterFromTavern(charId: any) {
+    return this.axiosService.request("PUT", "/characters/" + charId + "/drink", {});
+  }
+
   setCharacterForRecovering(id: any, charId: any) {
     return this.axiosService.request("PUT", "/characters/" + charId + "/consume/" + id, {});
+  }
+
+  listAllBuildings() {
+    return this.axiosService.request("GET", "/buildings", {});
   }
 }

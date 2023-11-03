@@ -15,14 +15,15 @@
                         </div>
                         <div>
                             <div *ngFor="let char of characters">
-                                <div style="margin-top: -1px;">{{char.name}}
-                                    Lvl.{{char.level}},<img [src]="uiPaths.hp"
+                                <div *ngIf="!char.recovering && char.hp != char.maxHp" style="margin-top: -1px;">
+                                    {{char.name}},<img [src]="uiPaths.hp"
                                         style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" />{{char.hp}}/{{char.maxHp}}
                                     <button (click)="heal(char.id)" type="button" class="btn btn-secondary" style="padding: 1px 3px;
                                         font-size: 9px;
                                         line-height: 0.7;">
                                         <span style="color: rgb(255, 255, 255);">{{(char.maxHp - char.hp) * 2}}<img
-                                                class="mr-n1" [src]="uiPaths.coin" style="width: 20px; height: 20px; margin-left: -6px; margin-right: -6px;"
+                                                class="mr-n1" [src]="uiPaths.coin"
+                                                style="width: 20px; height: 20px; margin-left: -6px; margin-right: -6px;"
                                                 alt="logo" /></span>
                                     </button>
                                 </div>
@@ -39,8 +40,38 @@
                         <img [src]="tavernSpritePath" class="img-fluid" style="border-radius: 2px;">
                     </div>
                     <div class="col-sm-10 col-7">
-                        <h5>Tavern</h5>
+                        <div>
+                            <h5>Tavern</h5>
+                        </div>
+                        <div>
+                            <div *ngFor="let char of characters">
+                                <div *ngIf="char.morale != char.maxMorale" style="margin-top: -1px;">{{char.name}},
+                                    <!-- For High Mood -->
+                                    <img *ngIf="char.morale > 0.65 * char.maxMorale" [src]="uiPaths.moodHigh"
+                                        style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" />
+
+                                    <!-- For Mid Mood -->
+                                    <img *ngIf="char.morale <= 0.65 * char.maxMorale && char.morale >= 0.35 * char.maxMorale"
+                                        [src]="uiPaths.moodMid"
+                                        style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" />
+
+                                    <!-- For Low Mood -->
+                                    <img *ngIf="char.morale < 0.35 * char.maxMorale" [src]="uiPaths.moodLow"
+                                        style="width: 32px; height: 32px; margin-left: -6px; margin-right: -6px;" />
+                                    {{char.morale}}/{{char.maxMorale}}
+                                    <button (click)="drink(char.id)" type="button" class="btn btn-secondary" style="padding: 1px 3px;
+                                        font-size: 9px;
+                                        line-height: 0.7;">
+                                        <span style="color: rgb(255, 255, 255);">{{char.level + 3 * 2}}<img
+                                                class="mr-n1" [src]="uiPaths.coin"
+                                                style="width: 20px; height: 20px; margin-left: -6px; margin-right: -6px;"
+                                                alt="logo" /></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
