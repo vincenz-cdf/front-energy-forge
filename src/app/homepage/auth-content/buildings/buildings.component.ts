@@ -79,6 +79,16 @@ export class BuildingsComponent implements OnInit {
     ];
   }
 
+  allCharactersHealthy(): boolean {
+    // This function checks if all characters are healthy
+    return !this.characters.some((char:any) => !char.recovering && char.hp !== char.maxHp);
+  }
+
+  allCharactersHappy(): boolean {
+    // This function checks if all characters have full morale
+    return this.characters.every((char: any) => char.morale === char.maxMorale);
+  }
+
   buyItem(item: any, type: any, name: any) {
 
     let itemId: any = null;

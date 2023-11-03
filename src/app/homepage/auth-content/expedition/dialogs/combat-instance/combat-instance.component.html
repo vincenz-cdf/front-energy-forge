@@ -159,7 +159,7 @@
             <button class="btn btn-sm btn-warning active" (click)="close()">Not yet</button>
         </div>
         <div *ngIf="combatInstance.status == 'WON_AWAIT' || combatInstance.status == 'LOST_AWAIT'">
-            Troops fighting...
+            Troops fighting... <app-midnight-countdown></app-midnight-countdown>
         </div>
         <div *ngIf="combatInstance.status == 'WON_FINAL' || combatInstance.status == 'LOST_FINAL'">
             <button class="btn btn-sm btn-danger active" (click)="seeCombatResult()">See battle result</button>

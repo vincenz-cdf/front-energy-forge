@@ -17,6 +17,9 @@
                                     class="fas fa-info"></i></button>
                         </div>
                         <div>
+                            <div *ngIf="allCharactersHealthy()">
+                                <i>All characters are healthy!</i>
+                            </div>
                             <div *ngFor="let char of characters">
                                 <div *ngIf="!char.recovering && char.hp != char.maxHp" style="margin-top: -1px;">
                                     {{char.name}},<img [src]="uiPaths.hp"
@@ -26,6 +29,9 @@
                                         line-height: 0.7;">
                                         <span style="color: rgb(255, 255, 255);">{{(char.maxHp - char.hp) * 2}}<img
                                                 class="mr-n1" [src]="uiPaths.coin"
+                                                style="width: 20px; height: 20px; margin-left: -6px; margin-right: -6px;"
+                                                alt="logo" /></span>
+                                        <span *ngIf="char.hp == 0" style="color: rgb(255, 255, 255);">8<img class="mr-n1" [src]="uiPaths.energy"
                                                 style="width: 20px; height: 20px; margin-left: -6px; margin-right: -6px;"
                                                 alt="logo" /></span>
                                     </button>
@@ -50,6 +56,9 @@
                                     class="fas fa-info"></i></button>
                         </div>
                         <div>
+                            <div *ngIf="allCharactersHappy()">
+                                <i>All characters are happy!</i>
+                            </div>
                             <div *ngFor="let char of characters">
                                 <div *ngIf="char.morale != char.maxMorale" style="margin-top: -1px;">{{char.name}},
                                     <!-- For High Mood -->
@@ -130,7 +139,9 @@
                                                 </div>
                                             </div>
                                         </ng-template>
-                                        <div class="card-body" (click)="buyItem(item, item.type, item.name == null ? item.equipment.name : item.name)" [ngStyle]="{'padding': '0'}" [ngbTooltip]="itemTooltip">
+                                        <div class="card-body"
+                                            (click)="buyItem(item, item.type, item.name == null ? item.equipment.name : item.name)"
+                                            [ngStyle]="{'padding': '0'}" [ngbTooltip]="itemTooltip">
                                             <img [src]="item.spritePath == null ? item.equipment.spritePath : item.spritePath"
                                                 alt="Item Image" class="img-fluid equipment-image" />
                                         </div>

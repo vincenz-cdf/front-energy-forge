@@ -20,6 +20,7 @@ import { CharacterCombatSelectComponent } from './homepage/auth-content/expediti
 import { BuildingsComponent } from './homepage/auth-content/buildings/buildings.component';
 import { GroupConsumablesPipe } from './pipes/group-consumables.pipe';
 import { ToastrModule } from 'ngx-toastr';
+import { MidnightCountdownComponent } from './utils/midnight-countdown/midnight-countdown.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ToastrModule } from 'ngx-toastr';
     CombatInstanceComponent,
     CharacterCombatSelectComponent,
     BuildingsComponent,
-    GroupConsumablesPipe
+    GroupConsumablesPipe,
+    MidnightCountdownComponent
   ],
   imports: [
     BrowserModule,
