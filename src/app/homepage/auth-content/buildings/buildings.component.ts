@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { UIPATHS } from 'src/app/consts/ui-paths.constants';
 import { ExpeditionService } from 'src/app/dbservice/expedition.service';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
 import { ProfileService } from 'src/app/profile.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-buildings',
@@ -12,19 +14,20 @@ import { ProfileService } from 'src/app/profile.service';
 })
 export class BuildingsComponent implements OnInit {
 
-  templeSpritePath = "assets/sprites/buildings/temple.png";
-  tavernSpritePath = "assets/sprites/buildings/tavern.png";
-
   characters: any = null;
+  buildings: any = null;
 
   uiPaths = UIPATHS;
+
+  combinedItems: any;
 
   constructor(
     private playerService: PlayerService,
     private errorService: ErrorService,
     private profileService: ProfileService,
-    private expeditionService: ExpeditionService
-  ) {}
+    private expeditionService: ExpeditionService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.loadBuildings();
@@ -33,7 +36,8 @@ export class BuildingsComponent implements OnInit {
 
   loadBuildings() {
     this.playerService.listAllBuildings().then((response) => {
-      console.log(response.data.data);
+      this.buildings = response.data.data;
+      this.combineMarketItems();
     }, (error) => {
       this.errorService.handleError(error);
     })
@@ -64,4 +68,45 @@ export class BuildingsComponent implements OnInit {
       this.errorService.handleError(error);
     });
   }
+
+  combineMarketItems() {
+    // Assuming buildings is already defined and populated
+    const marketItemPool = this.buildings[2].marketItemPool;
+    this.combinedItems = [
+      ...marketItemPool.weapons.map((w: any) => ({ ...w, type: 'weapon' })),
+      ...marketItemPool.armors.map((a: any) => ({ ...a, type: 'armor' })),
+      ...marketItemPool.consumables.map((c: any) => ({ ...c, type: 'consumable' }))
+    ];
+  }
+
+  buyItem(item: any, type: any, name: any) {
+
+    let itemId: any = null;
+
+    if (type == "weapon" || type == "armor") {
+      itemId = item.equipment.id;
+    } else {
+      itemId = item.id;
+    }
+
+    Swal.fire({
+      title: 'Do you want to buy ' + name + ' ?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.playerService.buyItem(itemId, type).then(() => {
+          this.loadBuildings();
+          this.profileService.notifyChildD();
+        }, (error) => {
+          this.toastr.error(error.response.data.message, '')
+        });
+      } else if (result.isDenied) {
+        return;
+      }
+    })
+  }
+
 }

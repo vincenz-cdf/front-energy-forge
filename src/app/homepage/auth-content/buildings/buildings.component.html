@@ -3,15 +3,18 @@
 
 <div style="z-index: 1000;">
     <div class="container mt-2">
-        <div class="card">
+        <div class="card" *ngIf="buildings">
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-2 col-5">
-                        <img [src]="templeSpritePath" class="img-fluid" style="border-radius: 2px;">
+                        <img [src]="buildings[0].spritePath" class="img-fluid" style="border-radius: 2px;">
                     </div>
                     <div class="col-sm-10 col-7">
-                        <div>
-                            <h5>Temple</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5>{{buildings[0].name}}</h5>
+                            <button type="button" class="btn btn-sm btn-primary"
+                                ngbTooltip="{{buildings[0].description}}" placement="bottom"><i
+                                    class="fas fa-info"></i></button>
                         </div>
                         <div>
                             <div *ngFor="let char of characters">
@@ -33,15 +36,18 @@
                 </div>
             </div>
         </div>
-        <div class="card mt-1">
+        <div class="card mt-1" *ngIf="buildings">
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-2 col-5">
-                        <img [src]="tavernSpritePath" class="img-fluid" style="border-radius: 2px;">
+                        <img [src]="buildings[1].spritePath" class="img-fluid" style="border-radius: 2px;">
                     </div>
                     <div class="col-sm-10 col-7">
-                        <div>
-                            <h5>Tavern</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5>{{buildings[1].name}}</h5>
+                            <button type="button" class="btn btn-sm btn-primary"
+                                ngbTooltip="{{buildings[1].description}}" placement="bottom"><i
+                                    class="fas fa-info"></i></button>
                         </div>
                         <div>
                             <div *ngFor="let char of characters">
@@ -75,5 +81,68 @@
                 </div>
             </div>
         </div>
+        <div class="card mt-1" *ngIf="buildings">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-2 col-5">
+                        <img [src]="buildings[2].spritePath" class="img-fluid" style="border-radius: 2px;">
+                    </div>
+                    <div class="col-sm-10 col-7">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5>{{buildings[2].name}}</h5>
+                            <button type="button" class="btn btn-sm btn-primary"
+                                ngbTooltip="{{buildings[2].description}}" placement="bottom"><i
+                                    class="fas fa-info"></i></button>
+                        </div>
+                        <div class="row">
+                            <ng-container *ngFor="let item of combinedItems">
+                                <div class="col-auto">
+                                    <div class="card">
+                                        <ng-template #itemTooltip>
+                                            <!-- Adjust the template to differentiate between equipment and consumable if needed -->
+                                            <div style="min-width: 200px; max-width: 450px; overflow-wrap: break-word;">
+                                                <div style="display: flex; align-items: center;">
+                                                    <strong>{{item.name == null ? item.equipment.name : item.name
+                                                        }}</strong>
+                                                </div>
+                                                <div style="display: flex; align-items: center;">
+                                                    <span>{{item.description}}</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center;">
+                                                    <span>{{item.armorValue}}</span><img *ngIf="item.armorValue"
+                                                        [src]="uiPaths.armor" />
+                                                </div>
+                                                <div style="display: flex; align-items: center;">
+                                                    <span>{{item.atkValue}}</span><img *ngIf="item.atkValue"
+                                                        [src]="uiPaths.attack" />
+                                                </div>
+                                                <div *ngFor="let a of item.weaponAbilities"
+                                                    style="display: flex; align-items: center;">
+                                                    <span>{{a.equipmentAbilityName}} :
+                                                        {{a.equipmentAbilityDescription}}</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center;">
+                                                    <span>{{item.value == null ? item.equipment.value : item.value}}<img
+                                                            class="mr-n1" [src]="uiPaths.coin"
+                                                            style="width: 20px; height: 20px; margin-left: -6px; margin-right: -6px;"
+                                                            alt="logo" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <div class="card-body" (click)="buyItem(item, item.type, item.name == null ? item.equipment.name : item.name)" [ngStyle]="{'padding': '0'}" [ngbTooltip]="itemTooltip">
+                                            <img [src]="item.spritePath == null ? item.equipment.spritePath : item.spritePath"
+                                                alt="Item Image" class="img-fluid equipment-image" />
+                                        </div>
+                                    </div>
+                                    <span *ngIf="item.count > 1" style="margin-left: 5px;">(x{{item.count}})</span>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

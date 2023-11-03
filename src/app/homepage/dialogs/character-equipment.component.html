@@ -6,8 +6,8 @@
         <div class="col-4 col-sm-3">
             <div class="character-box">
                 <div class="image-box">
-                    <img *ngIf="character.recovering" style="z-index: 2;" [src]="uiPaths.recover" style="width: 36px; height: 36px;"
-                    class="rotated-image" />
+                    <img *ngIf="character.recovering" style="z-index: 2;" [src]="uiPaths.recover"
+                        style="width: 36px; height: 36px;" class="rotated-image" />
                     <img [src]="character.spritePath" alt="Main Character" class="rotated-image" />
                     <img *ngIf="isItemEquippedBySlot(character.equippedItems, 'HEAD')" style="z-index: 2;"
                         [src]="splitEquipmentSlots(character.equippedItems, 'HEAD').equipmentSpritePath"

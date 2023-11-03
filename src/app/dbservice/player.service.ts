@@ -61,4 +61,8 @@ export class PlayerService {
   listAllBuildings() {
     return this.axiosService.request("GET", "/buildings", {});
   }
+
+  buyItem(id: any, type: any) {
+    return this.axiosService.request("POST", "/buy/" + id + "/" + type , {});
+  }
 }

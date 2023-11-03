@@ -16,3 +16,10 @@
     /* Center the text vertically */
     pointer-events: none;
 }
+
+.equipment-image {
+    width: 50px;
+    /* Or whatever width you desire */
+    height: auto;
+    /* Maintain the aspect ratio */
+}
