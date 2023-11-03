@@ -56,7 +56,7 @@ export class BuildingsComponent implements OnInit {
       this.loadCharacters();
       this.profileService.notifyChildD();
     }, (error) => {
-      this.errorService.handleError(error);
+      this.toastr.error(error.response.data.message, '')
     });
   }
 
@@ -65,7 +65,7 @@ export class BuildingsComponent implements OnInit {
       this.loadCharacters();
       this.profileService.notifyChildD();
     }, (error) => {
-      this.errorService.handleError(error);
+      this.toastr.error(error.response.data.message, '')
     });
   }
 
