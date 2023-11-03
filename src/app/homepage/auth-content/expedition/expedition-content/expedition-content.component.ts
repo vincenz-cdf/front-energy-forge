@@ -62,9 +62,9 @@ export class ExpeditionContentComponent implements OnInit {
   calculateReward(combatInstance: any) {
     const npcCharacters = combatInstance.characters.filter((char: any) => char.characterType != 'HERO');
 
-    const minInt = 10;
+    const minInt = 40;
     const minMult = 1;
-    const maxInt = 19;
+    const maxInt = 55;
     const maxMult = 3;
     let minResult = 0;
     let maxResult = 0;
