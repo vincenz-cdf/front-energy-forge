@@ -34,7 +34,7 @@
     }
 
     .bg-image {
-        background-image: url("../../../assets/images/bg.png");
+        background-image: url("../../../assets/images/bg.jpeg");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
