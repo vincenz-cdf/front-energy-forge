@@ -4,9 +4,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
-                        <input type="checkbox" [checked]="habit.checked" [disabled]="habit.checked"
-                            (change)="updateHabit(habit, { checked: true }, i)" />
-
+                        <div class="checkbox-wrapper-1 mt-1">
+                            <input id="example-{{i}}" class="substituted" [checked]="habit.checked" type="checkbox"
+                                aria-hidden="true" [disabled]="habit.checked"
+                                (change)="updateHabit(habit, { checked: true }, i)" />
+                            <label for="example-{{i}}"></label>
+                        </div>
 
                         <div *ngIf="habit.showImage" class="icon-container" @bounceFadeOutAnimation>
                             <img src="../../../assets/sprites/ui/energy.png" alt="Bouncing image" />
@@ -36,7 +39,7 @@
                 <div class="row">
                     <div class="col-12">
                         <span class="strokeme">
-                            <i class="fa fa-plus"></i> Ajouter une tâche
+                            <i class="fa fa-plus"></i> New Habit
                         </span>
                     </div>
                 </div>
