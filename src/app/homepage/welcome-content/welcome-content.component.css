@@ -36,7 +36,8 @@
     background-color: #5C2D0D;
     /* Dark brown background */
     color: white;
-    border: none; /* Removes the border */
+    border: none;
+    /* Removes the border */
 }
 
 /* CSS for changing the placeholder color to white */
@@ -59,11 +60,11 @@
 
 .container-top-space {
     margin-top: 125px;
-  }
-  
-  /* Use a media query to remove the margin-top for screens smaller than 576px */
-  @media (max-width: 575.98px) {
+}
+
+/* Use a media query to remove the margin-top for screens smaller than 576px */
+@media (max-width: 575.98px) {
     .container-top-space {
-      margin-top: 30px;
+        margin-top: 30px;
     }
-  }
+}

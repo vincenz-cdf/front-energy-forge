@@ -27,7 +27,7 @@
         <strong>Sign up for free</strong>
       </div>
 
-      <form #registerForm="ngForm">
+      <form (ngSubmit)="onSubmitRegister()" #registerForm="ngForm">
 
         <div class="form-outline mb-4">
           <input type="text" id="login" name="login" class="form-control custom-input" [(ngModel)]="login" placeholder="Username" />

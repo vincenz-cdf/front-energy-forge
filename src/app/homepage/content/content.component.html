@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!goToLoginPage">
 
 	<app-header [pageTitle]="'HabitQuest'" [isAuth]="isAuth" [logoSrc]="'../assets/images/newlogo.png'"
 		(logoutEvent)="logout()" (loginEvent)="onLoginEvent()" (homepageEvent)="homepageEvent()"
@@ -9,8 +9,11 @@
 	<app-buildings *ngIf="componentToShow == 'buildings'"></app-buildings>
 	<app-help *ngIf="componentToShow == 'help'"></app-help>
 
-	<app-welcome-content *ngIf="componentToShow == 'welcome'" />
-	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)"
-		(onSubmitRegisterEvent)="onRegister($event)" />
+	<app-welcome-content *ngIf="componentToShow == 'welcome'" (onSubmitRegisterEvent)="onRegister($event)" />
 
+
+</div>
+
+<div *ngIf="goToLoginPage">
+	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)" />
 </div>

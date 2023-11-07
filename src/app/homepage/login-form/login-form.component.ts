@@ -9,9 +9,7 @@ import { ErrorService } from 'src/app/error.service';
 export class LoginFormComponent {
 
   @Output() onSubmitLoginEvent = new EventEmitter();
-  @Output() onSubmitRegisterEvent = new EventEmitter();
 
-	active: any = "login";
   email: any = "";
   login: any = "";
   password: any = "";
@@ -23,25 +21,8 @@ export class LoginFormComponent {
 
   }
 
-	onLoginTab(): void {
-		this.active = "login";
-	}
-
-	onRegisterTab(): void {
-		this.active = "register";
-	}
-
   onSubmitLogin(): void {
     this.onSubmitLoginEvent.emit({"login": this.login, "password": this.password});
-  }
-
-  onSubmitRegister(): void {
-    if(this.confirmPassword !== this.password) {
-      this.errorService.notifyError("Passwords does not match")
-    } else {
-      this.onSubmitRegisterEvent.emit({"email": this.email, "login": this.login, "password": this.password});
-    }
-
   }
 
 }

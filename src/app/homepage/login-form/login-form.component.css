@@ -1,0 +1,70 @@
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../assets/images/bg.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    /* Center the text horizontally */
+    align-items: center;
+    /* Center the text vertically */
+    pointer-events: none;
+}
+
+
+.expedition-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    /* Adjust size as needed */
+    color: white;
+    /* Adjust color as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Optional: Adds shadow to make text more readable against backgrounds */
+    z-index: 1;
+    /* Makes sure the text appears above the background */
+}
+
+.expedition-sm-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    /* Adjust size as needed */
+    color: white;
+    /* Adjust color as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Optional: Adds shadow to make text more readable against backgrounds */
+    z-index: 1;
+    /* Makes sure the text appears above the background */
+}
+
+/* Custom CSS for changing input background color and placeholder color */
+.form-control.custom-input {
+    background-color: #5C2D0D;
+    /* Dark brown background */
+    color: white;
+    border: none;
+    /* Removes the border */
+}
+
+/* CSS for changing the placeholder color to white */
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: white;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: white;
+}

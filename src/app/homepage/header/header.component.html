@@ -1,4 +1,4 @@
-<header class="p-3" style="background-color: #fed000">
+<header style="background-color: #fed000">
 	<div class="container">
 		<nav class="navbar navbar-expand-sm navbar-light py-0">
 			<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -34,12 +34,12 @@
 				</ul>
 			</div>
 			<!-- Resources and Logout/Login Buttons omitted for brevity -->
-			<div class="text-end">
+			<div class="ms-auto">
 				<div class="row">
-					<div *ngIf="isAuth" class="col-sm-6 col-12 mt-3">
+					<div *ngIf="isAuth" class="col-6 mt-2">
 						<app-resouces />
 					</div>
-					<div class="col-sm-6 col-12 text-end">
+					<div class="col-6">
 						<button *ngIf="!isAuth" class="btn btn-danger active" style="margin: 10px"
 							(click)="loginEvent.emit()">
 							Login

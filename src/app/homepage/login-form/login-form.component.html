@@ -1,63 +1,49 @@
-<div class="d-flex justify-content-center">
-	<div class="col-4">
-		<ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-			<li class="nav-item" role="presentation">
-				<button [ngClass]="active == 'login' ? 'nav-link active' : 'nav-link'" id="tab-login"
-					(click)="onLoginTab()">Login</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button [ngClass]="active == 'register' ? 'nav-link active' : 'nav-link'" id="tab-register"
-					(click)="onRegisterTab()">Register</button>
-			</li>
-		</ul>
-	
-		<div class="tab-content">
-			<div [ngClass]="active == 'login' ? 'tab-pane fade show active' : 'tab-pane fade'">
-				<form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
-	
-					<div class="form-outline mb-4">
-						<input type="login" id="loginName" name="login" class="form-control" [(ngModel)]="login" />
-						<label class="form-label" for="loginName">Username</label>
-					</div>
-	
-					<div class="form-outline mb-4">
-						<input type="password" id="loginPassword" name="password" class="form-control"
-							[(ngModel)]="password" />
-						<label class="form-label" for="loginPassword">Password</label>
-					</div>
-	
-					<button type="submit" class="btn btn-danger active btn-block mb-4">Sign in</button>
-	
-				</form>
-			</div>
-			<div [ngClass]="active == 'register' ? 'tab-pane fade show active' : 'tab-pane fade'">
-				<form (ngSubmit)="onSubmitRegister()" #registerForm="ngForm">
-	
-					<div class="form-outline mb-4">
-						<input type="text" id="login" name="login" class="form-control" [(ngModel)]="login" />
-						<label class="form-label" for="login">Username</label>
-					</div>
-	
-					<div class="form-outline mb-4">
-						<input type="text" id="email" name="email" class="form-control" [(ngModel)]="email" />
-						<label class="form-label" for="email">Email</label>
-					</div>
-	
-					<div class="form-outline mb-4">
-						<input type="password" id="registerPassword" name="password" class="form-control"
-							[(ngModel)]="password" />
-						<label class="form-label" for="registerPassword">Password</label>
-					</div>
+<div class="background"></div>
 
-					<div class="form-outline mb-4">
-						<input type="password" id="confirmPassword" name="password" class="form-control"
-							[(ngModel)]="confirmPassword" />
-						<label class="form-label" for="confirmPassword">Confirm Password</label>
-					</div>
-	
-					<button type="submit" class="btn btn-danger active btn-block mb-3">Sign up</button>
-				</form>
+
+<div class="container" style="margin-top: 125px;">
+	<div class="row mb-2">
+		<div class="d-flex justify-content-center">
+			<img [src]="'assets/images/newlogo.png'" style="width: 100px; height: auto;" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="d-flex justify-content-center">
+			<div class="expedition-text">
+				HabitQuest
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="d-flex justify-content-center">
+
+			<form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
+
+				<div class="form-outline mb-4">
+					<input type="login" id="loginName" name="login" class="form-control custom-input"
+						[(ngModel)]="login" placeholder="Username" />
+				</div>
+				<div class="form-outline mb-4">
+					<input type="password" id="loginPassword" name="password" class="form-control custom-input"
+						[(ngModel)]="password" placeholder="Password" />
+				</div>
+
+				<div class="col-12">
+					<button type="submit" style="background-color: #983939;" class="btn w-100"><span
+							class="text-white">Sign in</span></button>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+
+	<div class="row mt-4">
+		<div class="d-flex justify-content-center">
+			<div class="expedition-sm-text">
+				Don't have a HabitQuest account? <strong>Sign up.</strong>
+			</div>
+		</div>
+
 	</div>
 </div>

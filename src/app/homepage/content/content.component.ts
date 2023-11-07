@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/auth.service';
 export class ContentComponent implements OnInit {
 	componentToShow: string = "welcome";
 	isAuth = false;
+	goToLoginPage = false;
 
 	constructor(private axiosService: AxiosService, private profileService: ProfileService, private authService: AuthService) { }
 
@@ -51,11 +52,13 @@ export class ContentComponent implements OnInit {
 			this.profileService.setUserId(null);
 			this.isAuth = false;
 			this.componentToShow = "welcome";
-		})
+		});
+		this.goToLoginPage =false
 	}
 
 	onLoginEvent() {
 		this.showComponent('login');
+		this.goToLoginPage = true;
 	}
 
 	onRegister(input: any): void {
@@ -71,6 +74,8 @@ export class ContentComponent implements OnInit {
 			this.isAuth = false;
 			this.componentToShow = "welcome";
 		});
+
+		this.goToLoginPage = false;
 	}
 
 	homepageEvent() {
