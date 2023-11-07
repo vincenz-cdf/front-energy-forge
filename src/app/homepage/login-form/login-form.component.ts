@@ -9,6 +9,7 @@ import { ErrorService } from 'src/app/error.service';
 export class LoginFormComponent {
 
   @Output() onSubmitLoginEvent = new EventEmitter();
+  @Output() goToRegister = new EventEmitter();
 
   email: any = "";
   login: any = "";

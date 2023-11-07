@@ -17,6 +17,9 @@ export class ContentComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.handleRedirect();
+		if(this.isAuth) {
+			this.goToLoginPage = false;
+		}
 	}
 
 	handleRedirect(): void {
@@ -47,17 +50,18 @@ export class ContentComponent implements OnInit {
 			this.profileService.setUserId(response.data);
 			this.isAuth = true;
 			this.componentToShow = "messages";
+			this.goToLoginPage = false
 		}, (error) => {
 			this.axiosService.setAuthToken(null);
 			this.profileService.setUserId(null);
 			this.isAuth = false;
 			this.componentToShow = "welcome";
 		});
-		this.goToLoginPage =false
+		
 	}
 
 	onLoginEvent() {
-		this.showComponent('login');
+		this.showComponent('welcome');
 		this.goToLoginPage = true;
 	}
 
@@ -75,6 +79,10 @@ export class ContentComponent implements OnInit {
 			this.componentToShow = "welcome";
 		});
 
+		this.goToLoginPage = false;
+	}
+
+	goToRegister() {
 		this.goToLoginPage = false;
 	}
 

@@ -15,5 +15,5 @@
 </div>
 
 <div *ngIf="goToLoginPage">
-	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)" />
+	<app-login-form *ngIf="componentToShow == 'welcome'" (goToRegister)="goToRegister()" (onSubmitLoginEvent)="onLogin($event)" />
 </div>

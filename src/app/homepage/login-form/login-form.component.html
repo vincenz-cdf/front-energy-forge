@@ -4,7 +4,7 @@
 <div class="container" style="margin-top: 125px;">
 	<div class="row mb-2">
 		<div class="d-flex justify-content-center">
-			<img [src]="'assets/images/newlogo.png'" style="width: 100px; height: auto;" />
+			<img [src]="'assets/images/newlogo.png'" style="width: 100px; height: auto; border-radius: 10px;" />
 		</div>
 	</div>
 	<div class="row">
@@ -41,7 +41,7 @@
 	<div class="row mt-4">
 		<div class="d-flex justify-content-center">
 			<div class="expedition-sm-text">
-				Don't have a HabitQuest account? <strong>Sign up.</strong>
+				Don't have a HabitQuest account? <strong (click)="goToRegister.emit()" style="cursor: pointer;">Sign up.</strong>
 			</div>
 		</div>
 
