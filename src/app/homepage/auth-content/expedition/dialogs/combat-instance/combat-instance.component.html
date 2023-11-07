@@ -51,6 +51,9 @@
                             [src]="splitEquipmentSlots(heroCharacters[i].equippedItems, 'LEFTHAND').equipmentSpritePath"
                             class="rotated-image" />
                     </div>
+                    <div *ngIf="!heroCharacters || !heroCharacters[i]">
+                        <span class="strokeme">Select character</span>
+                    </div>
                 </div>
                 <div *ngIf="combatInstance">
                     <div *ngIf="combatInstance.status == 'AWAIT'">

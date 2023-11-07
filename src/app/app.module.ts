@@ -21,6 +21,7 @@ import { BuildingsComponent } from './homepage/auth-content/buildings/buildings.
 import { GroupConsumablesPipe } from './pipes/group-consumables.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { MidnightCountdownComponent } from './utils/midnight-countdown/midnight-countdown.component';
+import { HelpComponent } from './homepage/auth-content/help/help.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MidnightCountdownComponent } from './utils/midnight-countdown/midnight-
     CharacterCombatSelectComponent,
     BuildingsComponent,
     GroupConsumablesPipe,
-    MidnightCountdownComponent
+    MidnightCountdownComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,7 @@ import { MidnightCountdownComponent } from './utils/midnight-countdown/midnight-
     FormsModule,
     NgbModule,
     ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

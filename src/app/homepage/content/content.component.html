@@ -2,11 +2,12 @@
 
 	<app-header [pageTitle]="'HabitQuest'" [isAuth]="isAuth" [logoSrc]="'../assets/images/newlogo.png'"
 		(logoutEvent)="logout()" (loginEvent)="onLoginEvent()" (homepageEvent)="homepageEvent()"
-		(expeditionEvent)="expeditionEvent()" (buildingsEvent)="buildingsEvent()"></app-header>
+		(expeditionEvent)="expeditionEvent()" (buildingsEvent)="buildingsEvent()" (helpEvent)="helpEvent()"></app-header>
 
 	<app-auth-content *ngIf="componentToShow == 'messages'" />
 	<app-expedition-content *ngIf="componentToShow == 'expedition'" />
 	<app-buildings *ngIf="componentToShow == 'buildings'"></app-buildings>
+	<app-help *ngIf="componentToShow == 'help'"></app-help>
 
 	<app-welcome-content *ngIf="componentToShow == 'welcome'" />
 	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)"

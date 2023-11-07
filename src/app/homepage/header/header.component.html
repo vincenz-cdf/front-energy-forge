@@ -1,22 +1,45 @@
 <header class="p-3" style="background-color: #fed000">
 	<div class="container">
-		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+		<nav class="navbar navbar-expand-sm navbar-light py-0">
 			<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-				<img src={{logoSrc}} class="app-logo" alt="logo" />
+				<img src="{{logoSrc}}" class="app-logo" alt="logo" />
 			</a>
-
-			<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-				<li><a class="app-title strokeme px-2" href="/">{{pageTitle}}</a></li>
-				<li *ngIf="isAuth"><a href="#" (click)="homepageEvent.emit()" class="nav-link px-2 text-secondary" style="text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);">Tasks</a></li>
-				<li *ngIf="isAuth"><a href="#" (click)="expeditionEvent.emit()" class="nav-link px-2 text-secondary" style="text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);">Expedition</a></li>
-				<li *ngIf="isAuth"><a href="#" (click)="buildingsEvent.emit()" class="nav-link px-2 text-secondary" style="text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);">Town</a></li>
-			</ul>
+			<!-- This will only show on sm screens and above -->
+			<li class="nav-item d-none d-sm-block">
+				<a class="app-title strokeme px-2" href="/">{{pageTitle}}</a>
+			</li>
+			<!-- Toggler/collapsible Button -->
+			<button *ngIf="isAuth" class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+				[attr.aria-expanded]="!isNavbarCollapsed" aria-controls="navbarToggler">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div *ngIf="isAuth" [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a href="#" (click)="emitEvent('homepage')" class="nav-link"
+							[ngClass]="{'text-color: #000000': currentPage == 'homepage', 'text-secondary': currentPage != 'homepage'}">Tasks</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" (click)="emitEvent('expedition')" class="nav-link"
+							[ngClass]="{'text-color: #000000': currentPage == 'expedition', 'text-secondary': currentPage != 'expedition'}">Expedition</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" (click)="emitEvent('buildings')" class="nav-link"
+							[ngClass]="{'text-color: #000000': currentPage == 'buildings', 'text-secondary': currentPage != 'buildings'}">Town</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" (click)="emitEvent('help')" class="nav-link"
+							[ngClass]="{'text-color: #000000': currentPage == 'help', 'text-secondary': currentPage != 'help'}">Help</a>
+					</li>
+				</ul>
+			</div>
+			<!-- Resources and Logout/Login Buttons omitted for brevity -->
 			<div class="text-end">
 				<div class="row">
-					<div class="col-6 mt-3">
-						<app-resouces *ngIf="isAuth" />
+					<div *ngIf="isAuth" class="col-sm-6 col-12 mt-3">
+						<app-resouces />
 					</div>
-					<div class="col-6">
+					<div class="col-sm-6 col-12 text-end">
 						<button *ngIf="!isAuth" class="btn btn-danger active" style="margin: 10px"
 							(click)="loginEvent.emit()">
 							Login
@@ -26,8 +49,7 @@
 						</button>
 					</div>
 				</div>
-
 			</div>
-		</div>
+		</nav>
 	</div>
 </header>

@@ -1,5 +1,56 @@
 <div class="expedition-background">
-  <div class="expedition-text">
-    Montez vos personnages en faisant vos objectifs !
+
+</div>
+<div class="container container-top-space">
+  <div class="row">
+    <div class="col-sm-6 col-12">
+      <div class="row">
+        <div class="row">
+          <img [src]="'assets/images/glowup.png'" />
+        </div>
+        <div class="row">
+          <div class="expedition-text">
+            <strong>Level up your characters by achieving your goals!</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="expedition-text">
+          It's time to have fun while accomplishing things! Upgrade your equipment, village while completing your IRL
+          tasks!
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-12">
+
+      <div class="expedition-text mb-3" style="text-align: center;">
+        <strong>Sign up for free</strong>
+      </div>
+
+      <form #registerForm="ngForm">
+
+        <div class="form-outline mb-4">
+          <input type="text" id="login" name="login" class="form-control custom-input" [(ngModel)]="login" placeholder="Username" />
+        </div>
+      
+        <div class="form-outline mb-4">
+          <input type="text" id="email" name="email" class="form-control custom-input" [(ngModel)]="email" placeholder="Email" />
+        </div>
+      
+        <div class="form-outline mb-4">
+          <input type="password" id="registerPassword" name="password" class="form-control custom-input" [(ngModel)]="password" placeholder="Password" />
+        </div>
+      
+        <div class="form-outline mb-4">
+          <input type="password" id="confirmPassword" name="password" class="form-control custom-input" placeholder="Confirm Password" [(ngModel)]="confirmPassword" />
+        </div>
+
+        <div class="col-12">
+          <button type="submit" style="background-color: #983939;" class="btn w-100"><span class="text-white">Sign
+              up</span></button>
+        </div>
+      </form>
+    </div>
   </div>
+
 </div>
