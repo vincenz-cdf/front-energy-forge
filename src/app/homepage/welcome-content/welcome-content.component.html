@@ -34,20 +34,36 @@
         </div>
       
         <div class="form-outline mb-4">
-          <input type="text" id="email" name="email" class="form-control custom-input" [(ngModel)]="email" placeholder="Email" />
+          <input type="email" id="email" name="email" class="form-control custom-input"
+                 [(ngModel)]="email" placeholder="Email"
+                 #emailField="ngModel" required email />
+          <div *ngIf="emailField.errors?.['required'] && emailField.touched" class="alert alert-danger">
+            Email is required.
+          </div>
+          <div *ngIf="emailField.errors?.['email'] && emailField.touched" class="alert alert-danger">
+            Please enter a valid email.
+          </div>
+        </div>
+        
+        <div class="form-outline mb-4">
+          <input type="password" id="registerPassword" name="password" class="form-control custom-input"
+                 [(ngModel)]="password" placeholder="Password"
+                 #passwordField="ngModel" required minlength="12" />
+          <div *ngIf="passwordField.errors?.['required'] && passwordField.touched" class="alert alert-danger">
+            Password is required.
+          </div>
+          <div *ngIf="passwordField.errors?.['minlength'] && passwordField.touched" class="alert alert-danger">
+            Password must be at least 12 characters long.
+          </div>
         </div>
       
         <div class="form-outline mb-4">
-          <input type="password" id="registerPassword" name="password" class="form-control custom-input" [(ngModel)]="password" placeholder="Password" />
-        </div>
-      
-        <div class="form-outline mb-4">
-          <input type="password" id="confirmPassword" name="password" class="form-control custom-input" placeholder="Confirm Password" [(ngModel)]="confirmPassword" />
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control custom-input" placeholder="Confirm Password" [(ngModel)]="confirmPassword" />
         </div>
 
         <div class="col-12">
-          <button type="submit" style="background-color: #983939;" class="btn w-100"><span class="text-white">Sign
-              up</span></button>
+          <button type="submit" style="background-color: #983939;" class="btn w-100"
+                  [disabled]="!registerForm.valid"><span class="text-white">Sign up</span></button>
         </div>
       </form>
     </div>

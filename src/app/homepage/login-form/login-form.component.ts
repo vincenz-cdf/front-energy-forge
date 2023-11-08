@@ -11,15 +11,11 @@ export class LoginFormComponent {
   @Output() onSubmitLoginEvent = new EventEmitter();
   @Output() goToRegister = new EventEmitter();
 
-  email: any = "";
   login: any = "";
   password: any = "";
-  confirmPassword: any = "";
 
   constructor(
-    private errorService: ErrorService
   ) {
-
   }
 
   onSubmitLogin(): void {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AxiosService } from '../../axios.service';
 import { ProfileService } from '../../profile.service';
 import { AuthService } from 'src/app/auth.service';
+import { ErrorService } from 'src/app/error.service';
 
 @Component({
 	selector: 'app-content',
@@ -13,7 +14,12 @@ export class ContentComponent implements OnInit {
 	isAuth = false;
 	goToLoginPage = false;
 
-	constructor(private axiosService: AxiosService, private profileService: ProfileService, private authService: AuthService) { }
+	constructor(
+		private axiosService: AxiosService, 
+		private profileService: ProfileService, 
+		private authService: AuthService,
+		private errorService: ErrorService) 
+		{ }
 
 	ngOnInit(): void {
 		this.handleRedirect();
@@ -56,6 +62,7 @@ export class ContentComponent implements OnInit {
 			this.profileService.setUserId(null);
 			this.isAuth = false;
 			this.componentToShow = "welcome";
+			this.errorService.handleError(error);
 		});
 		
 	}
@@ -77,6 +84,7 @@ export class ContentComponent implements OnInit {
 			this.profileService.setUserId(null);
 			this.isAuth = false;
 			this.componentToShow = "welcome";
+			this.errorService.handleError(error);
 		});
 
 		this.goToLoginPage = false;

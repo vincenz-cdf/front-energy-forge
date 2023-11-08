@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ErrorService } from 'src/app/error.service';
 
 @Component({
@@ -17,14 +18,15 @@ export class WelcomeContentComponent {
   confirmPassword: any = "";
 
   constructor(
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private toastr: ToastrService
   ) {}
   
 
 
   onSubmitRegister(): void {
     if(this.confirmPassword !== this.password) {
-      this.errorService.notifyError("Passwords does not match")
+      this.toastr.error("Passwords does not match")
     } else {
       this.onSubmitRegisterEvent.emit({"email": this.email, "login": this.login, "password": this.password});
     }

@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AxiosService } from './axios.service';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorService {
 
-  constructor(private axiosService: AxiosService) { }
+  constructor(
+    private axiosService: AxiosService,
+    private toastr: ToastrService
+    ) { }
 
   handleProfileError(error: any): void {
-    Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      title: 'Profile Error',
-      text: error,
-      showConfirmButton: false,
-      timer: 1500,
-      backdrop: false
-    });
+    this.toastr.error(error.response.data.message, 'Profile Error')
     this.axiosService.setAuthToken(null);
     // Ensure that the user is navigated to the 'welcome' page.
     window.location.reload();  // Force reload to ensure clean slate and apply route guards if any.
@@ -26,37 +22,14 @@ export class ErrorService {
 
   handleError(error: any) {
     if (error.response && error.response.data) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'Erreur',
-        text: error.response.data.message,
-        showConfirmButton: false,
-        timer: 1500,
-        backdrop: false
-      });
+      this.toastr.error(error.response.data.message, 'Error')
     } else {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'Erreur',
-        text: "An unknown error occurred.",
-        showConfirmButton: false,
-        timer: 1500,
-        backdrop: false
-      });
+      this.toastr.error(error.response.data.message, 'An Unknown Error Has Occured')
     }
   }
 
   notifyError(error: any) {
-    Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      title: 'Erreur',
-      text: error.message,
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    this.toastr.error(error.message, 'Error')
   }
 
   notifyBinaryChoice(title: any) {
