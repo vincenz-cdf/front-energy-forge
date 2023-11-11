@@ -1,70 +1,122 @@
-<div class="expedition-background"></div>
-
-<div class="container container-top-space">
-  <div class="row">
-    <div class="col-sm-6 col-12">
+<div class="page-container">
+  <div class="expedition-background">
+    <div class="container">
       <div class="row">
-        <div class="row">
-          <img [src]="'assets/images/glowup.png'" />
-        </div>
-        <div class="row">
-          <div class="expedition-text">
-            <strong>Level up your characters by achieving your goals!</strong>
+        <div class="col-sm-6 col-12">
+          <div class="row">
+            <div class="row">
+              <img [src]="'assets/images/glowup.png'" />
+            </div>
+            <div class="row">
+              <div class="expedition-text">
+                <strong>Level up your characters by achieving your goals!</strong>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="expedition-text">
+              <h4> It's time to have fun while accomplishing things! Upgrade your equipment, village while completing
+                your
+                IRL
+                tasks!</h4>
+
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="expedition-text">
-          It's time to have fun while accomplishing things! Upgrade your equipment, village while completing your IRL
-          tasks!
+        <div class="col-sm-6 col-12">
+
+          <div class="expedition-text mb-3" style="text-align: center;">
+            <h4> <strong>
+                Sign up for free
+              </strong></h4>
+
+          </div>
+
+          <form (ngSubmit)="onSubmitRegister()" #registerForm="ngForm">
+
+            <div class="form-outline mb-4">
+              <input type="text" id="login" name="login" class="form-control custom-input" [(ngModel)]="login"
+                placeholder="Username" />
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="email" id="email" name="email" class="form-control custom-input" [(ngModel)]="email"
+                placeholder="Email" #emailField="ngModel" required email />
+              <div *ngIf="emailField.errors?.['required'] && emailField.touched" class="alert alert-danger">
+                Email is required.
+              </div>
+              <div *ngIf="emailField.errors?.['email'] && emailField.touched" class="alert alert-danger">
+                Please enter a valid email.
+              </div>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="registerPassword" name="password" class="form-control custom-input"
+                [(ngModel)]="password" placeholder="Password" #passwordField="ngModel" required minlength="12" />
+              <div *ngIf="passwordField.errors?.['required'] && passwordField.touched" class="alert alert-danger">
+                Password is required.
+              </div>
+              <div *ngIf="passwordField.errors?.['minlength'] && passwordField.touched" class="alert alert-danger">
+                Password must be at least 12 characters long.
+              </div>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="confirmPassword" name="confirmPassword" class="form-control custom-input"
+                placeholder="Confirm Password" [(ngModel)]="confirmPassword" />
+            </div>
+
+            <div class="col-12">
+              <button type="submit" style="background-color: #983939;" class="btn w-100"
+                [disabled]="!registerForm.valid"><span class="text-white">Sign up</span></button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    <div class="col-sm-6 col-12">
-
-      <div class="expedition-text mb-3" style="text-align: center;">
-        <strong>Sign up for free</strong>
-      </div>
-
-      <form (ngSubmit)="onSubmitRegister()" #registerForm="ngForm">
-
-        <div class="form-outline mb-4">
-          <input type="text" id="login" name="login" class="form-control custom-input" [(ngModel)]="login" placeholder="Username" />
-        </div>
-      
-        <div class="form-outline mb-4">
-          <input type="email" id="email" name="email" class="form-control custom-input"
-                 [(ngModel)]="email" placeholder="Email"
-                 #emailField="ngModel" required email />
-          <div *ngIf="emailField.errors?.['required'] && emailField.touched" class="alert alert-danger">
-            Email is required.
-          </div>
-          <div *ngIf="emailField.errors?.['email'] && emailField.touched" class="alert alert-danger">
-            Please enter a valid email.
-          </div>
-        </div>
-        
-        <div class="form-outline mb-4">
-          <input type="password" id="registerPassword" name="password" class="form-control custom-input"
-                 [(ngModel)]="password" placeholder="Password"
-                 #passwordField="ngModel" required minlength="12" />
-          <div *ngIf="passwordField.errors?.['required'] && passwordField.touched" class="alert alert-danger">
-            Password is required.
-          </div>
-          <div *ngIf="passwordField.errors?.['minlength'] && passwordField.touched" class="alert alert-danger">
-            Password must be at least 12 characters long.
-          </div>
-        </div>
-      
-        <div class="form-outline mb-4">
-          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control custom-input" placeholder="Confirm Password" [(ngModel)]="confirmPassword" />
-        </div>
-
+  </div>
+  <div class="second-form-background">
+    <div class="container">
+      <div class="row" style="text-align: center;">
         <div class="col-12">
-          <button type="submit" style="background-color: #983939;" class="btn w-100"
-                  [disabled]="!registerForm.valid"><span class="text-white">Sign up</span></button>
+          <div class="expedition-text">
+            <strong>Turn Your Everyday into an Exciting Adventure</strong>
+          </div>
+
         </div>
-      </form>
+        <div class="col-12">
+          <div class="expedition-text">
+            <h5> Dive into the world of HabitQuest, a fun and free app that transforms your daily
+              habits and boosts your efficiency by turning your everyday life into an exhilarating game journey.
+              Navigate
+              through quests and rewards, driven by an intrinsic game system.
+              HabitQuest is your ideal ally for achieving peaks of well-being, professional efficiency, and happiness.
+            </h5>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-6">
+          <div class="expedition-text">
+            <h4><strong>Chart the Path to Your Aspirations</strong></h4>
+            <h5>Stay in control of your habits, daily tasks, and to-do lists with Habitica's intuitive mobile apps and
+              web
+              interfaces, keeping a vigilant eye on your personal goals.</h5>
+          </div>
+
+        </div>
+        <div class="col-6">
+          <div class="expedition-text">
+            <h4><strong>Celebrate Every Victory</strong></h4>
+            <h5> Advance in the game by completing tasks, evolve your characters, and unlock captivating treasures such as
+              exotic
+              armors, mysterious companions, enchanting powers, and thrilling quests!</h5>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -225,7 +225,11 @@ export class CombatInstanceComponent implements OnInit {
 
     if (tooltip) {
       if (slot == 'ARMOR') {
-        return combatIndex.headArmor != null ? combatIndex.headArmor.armorValue : 0 + combatIndex.bodyArmor.armorValue;
+        let headArmorValue = 0
+        if (combatIndex.headArmor != null) {
+          headArmorValue = combatIndex.headArmor.armorValue;
+        }
+        return combatIndex.headArmor.armorValue + combatIndex.bodyArmor.armorValue;
       }
 
       if (slot == 'WEAPON') {

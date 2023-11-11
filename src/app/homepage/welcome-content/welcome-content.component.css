@@ -1,22 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
+.expedition-background, .second-form-background {
+    min-height: 100vh; /* This makes each section take up the full viewport height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .expedition-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    min-height: 100vh;
     background-image: url('../../../assets/images/bg.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1;
-    display: flex;
-    justify-content: center;
-    /* Center the text horizontally */
-    align-items: center;
-    /* Center the text vertically */
-    pointer-events: none;
+}
+
+.container {
+    width: 100%; /* Adjust width as needed */
+    max-width: 1200px; /* Set a max width if necessary */
+}
+
+/* Rest of your CSS remains the same */
+
+.second-form-background {
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #0d1314;
 }
 
 .expedition-text {
@@ -56,15 +73,4 @@
 ::-ms-input-placeholder {
     /* Microsoft Edge */
     color: white;
-}
-
-.container-top-space {
-    margin-top: 125px;
-}
-
-/* Use a media query to remove the margin-top for screens smaller than 576px */
-@media (max-width: 575.98px) {
-    .container-top-space {
-        margin-top: 30px;
-    }
 }
