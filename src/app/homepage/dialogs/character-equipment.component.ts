@@ -131,4 +131,9 @@ export class CharacterEquipment implements OnInit {
   save() {
     this.activeModal.close();
   }
+
+  getProgress(char: any): number {
+    return (char.experiencePoint / (char.level * 1000)) * 100;
+  }
+  
 }
