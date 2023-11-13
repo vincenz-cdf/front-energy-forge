@@ -14,20 +14,23 @@
                     <ng-template #charHeroInfoTooltip>
                         <div style="display: flex; align-items: center;">{{heroCharacters[i].name}}
                             Lvl.{{heroCharacters[i].level}}</div>
-                        <div style="display: flex; align-items: center;"><img [src]="uiPaths.hp"
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img [src]="uiPaths.hp"
                                 style="width: 35px; height: 35px; margin-left: -2px;" />
                             {{heroCharacters[i].hp}}/{{heroCharacters[i].maxHp}}</div>
-                        <div style="display: flex; align-items: center;">Ar :
-                            {{heroCharacters[i].armor}}/{{heroCharacters[i].maxArmor}}</div>
-                        <div style="display: flex; align-items: center;">Atk : {{heroCharacters[i].atk}}</div>
+                        <div style="display: flex; align-items: center;" class="reduced-margin"><img
+                                [src]="uiPaths.armor" style="width: 32px; height: 32px;" />
+                            {{heroCharacters[i].armor}}</div>
+                            <div style="display: flex; align-items: center;" class="reduced-margin"><img
+                                [src]="uiPaths.attack" style="width: 32px; height: 32px;" />
+                            {{heroCharacters[i].atk}}</div>
                         <img *ngIf="heroCharacters[i].morale > 0.65 * heroCharacters[i].maxMorale"
-                            [src]="uiPaths.moodHigh" style="width: 35px; height: 35px;" />
+                            [src]="uiPaths.moodHigh" style="width: 35px; height: 35px; margin-left: -4px;" />
                         <!-- For Mid Mood -->
                         <img *ngIf="heroCharacters[i].morale <= 0.65 * heroCharacters[i].maxMorale && heroCharacters[i].morale >= 0.35 * npcCharacters[i].maxMorale"
-                            [src]="uiPaths.moodMid" style="width: 35px; height: 35px;" />
+                            [src]="uiPaths.moodMid" style="width: 35px; height: 35px; margin-left: -4px;" />
                         <!-- For Low Mood -->
                         <img *ngIf="heroCharacters[i].morale < 0.35 * heroCharacters[i].maxMorale"
-                            [src]="uiPaths.moodLow" style="width: 35px; height: 35px;" />
+                            [src]="uiPaths.moodLow" style="width: 35px; height: 35px; margin-left: -4px;" />
                         {{heroCharacters[i].morale}}/{{heroCharacters[i].maxMorale}}
                     </ng-template>
                     <div *ngIf="heroCharacters && heroCharacters[i]" [ngbTooltip]="charHeroInfoTooltip">
