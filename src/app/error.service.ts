@@ -49,6 +49,8 @@ export class ErrorService {
         html: `
         ${combatInstance.combatReward.coins}
         <img src="../assets/sprites/ui/coin.png" alt="gold" width="20"> 
+        ${combatInstance.combatReward.diamonds}
+        <img src="../assets/sprites/ui/diamond.png" alt="diamond" width="20"> 
         ${combatInstance.combatReward.experiencePoints} xp
       `,
         showConfirmButton: true,

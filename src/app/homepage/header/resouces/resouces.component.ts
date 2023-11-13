@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AxiosService } from 'src/app/axios.service';
+import { UIPATHS } from 'src/app/consts/ui-paths.constants';
 import { ErrorService } from 'src/app/error.service';
 import { ProfileService } from 'src/app/profile.service';
 
@@ -13,6 +14,7 @@ export class ResoucesComponent implements OnInit, OnDestroy {
 
   data: any;
   private subscription: Subscription;
+  public uiPaths = UIPATHS;
 
   constructor(private profileService: ProfileService, private errorService: ErrorService, private axiosService: AxiosService) {
     this.subscription = this.profileService.notifyD$.subscribe(() => {

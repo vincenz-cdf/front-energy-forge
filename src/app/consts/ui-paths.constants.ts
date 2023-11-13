@@ -9,5 +9,6 @@ export const UIPATHS = {
     battle: "assets/sprites/ui/battle.png", // Assuming you intended "battle" instead of a second "recover"
     coin: "assets/sprites/ui/coin.png",
     energy: "assets/sprites/ui/energy.png",
-    skull: "assets/sprites/ui/skull.png"
+    skull: "assets/sprites/ui/skull.png",
+    diamond: "assets/sprites/ui/diamond.png"
 };
