@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AxiosService } from '../axios.service';
 import { CharacterEquipment } from '../homepage/dialogs/character-equipment.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GenericInputComponent } from '../homepage/auth-content/dialogs/generic-input/generic-input.component';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,16 @@ export class PlayerService {
 
   buyItem(id: any, type: any) {
     return this.axiosService.request("POST", "/buy/" + id + "/" + type , {});
+  }
+
+  genericDialog(title: any) {
+    const modalRef = this.modalService.open(GenericInputComponent, { size: 'md', backdrop: 'static' });
+    modalRef.componentInstance.title = title;
+
+    return modalRef;
+  }
+
+  renameCharacter(id: any, name: any) {
+    return this.axiosService.request("PUT", "/characters/" + id + "/rename/" + name , {});
   }
 }

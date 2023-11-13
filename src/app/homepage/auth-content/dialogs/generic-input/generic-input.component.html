@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h3 style="margin-right: 16px;">{{title}}</h3>
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <input type="output" id="output" name="output" class="form-control"
+    [(ngModel)]="output" placeholder="" />
+</div>
+<div class="modal-footer">
+        <button class="btn btn-sm btn-success" (click)="save()"><i class="fa fa-check"></i></button>
+</div>

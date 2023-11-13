@@ -5,6 +5,7 @@ import { UIPATHS } from 'src/app/consts/ui-paths.constants';
 import { EquipmentService } from 'src/app/dbservice/equipment.service';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ErrorService } from 'src/app/error.service';
+import { ProfileService } from 'src/app/profile.service';
 
 @Component({
   selector: 'app-character_equipment',
@@ -31,6 +32,7 @@ export class CharacterEquipment implements OnInit {
     private equipmentService: EquipmentService,
     private errorService: ErrorService,
     private playerService: PlayerService,
+    private profileService: ProfileService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -136,4 +138,20 @@ export class CharacterEquipment implements OnInit {
     return (char.experiencePoint / (char.level * 1000)) * 100;
   }
   
+  renameCharacter() {
+
+    const modalRef = this.playerService.genericDialog("Rename this character");
+    modalRef.result.then(
+      (result) => {
+        if(result != null) {
+          this.playerService.renameCharacter(this.character.id, result).then(() => {
+            this.profileService.notifyChildD();
+            this.character.name = result;
+          }, (error) => {
+            this.errorService.handleError(error);
+          });
+        }
+      },
+    );
+  }
 }

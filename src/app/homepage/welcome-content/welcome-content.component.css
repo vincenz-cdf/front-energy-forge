@@ -1,16 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-.expedition-background, .second-form-background {
-    min-height: 100vh; /* This makes each section take up the full viewport height */
+.expedition-background,
+.second-form-background,
+.third-form-background {
+    min-height: 100vh;
+    /* This makes each section take up the full viewport height */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .expedition-background {
-    display: flex; /* Enable Flexbox */
-    justify-content: center; /* Horizontally center content */
-    align-items: center; /* Vertically center content */
+    display: flex;
+    /* Enable Flexbox */
+    justify-content: center;
+    /* Horizontally center content */
+    align-items: center;
+    /* Vertically center content */
     min-height: 100vh;
     background-image: url('../../../assets/images/bg.jpeg');
     background-size: cover;
@@ -18,23 +24,84 @@
     background-repeat: no-repeat;
 }
 
-.container {
-    width: 100%; /* Adjust width as needed */
-    max-width: 1200px; /* Set a max width if necessary */
-}
-
-/* Rest of your CSS remains the same */
-
 .second-form-background {
-    display: flex; /* Enable Flexbox */
-    justify-content: center; /* Horizontally center content */
-    align-items: center; /* Vertically center content */
+    display: flex;
+    /* Enable Flexbox */
+    justify-content: center;
+    /* Horizontally center content */
+    align-items: center;
+    /* Vertically center content */
     min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: #0d1314;
 }
+
+.third-form-background {
+    display: flex;
+    /* Enable Flexbox */
+    justify-content: center;
+    /* Horizontally center content */
+    align-items: center;
+    /* Vertically center content */
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/images/bg3.png');
+}
+
+.container {
+    width: 100%;
+    /* Adjust width as needed */
+    max-width: 1200px;
+    /* Set a max width if necessary */
+}
+
+
+.background-section {
+    position: relative;
+    /* Needed for absolute positioning of the :after element */
+    overflow: hidden;
+    /* Ensures the pseudo-element doesn't overflow outside the section */
+}
+
+.background-section:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    /* Adjust the height as needed */
+    background: #0d1314;
+    /* Match the background color of your site */
+    transform: skewY(-2deg);
+    /* Adjust the angle as needed */
+    transform-origin: 100%;
+    /* This ensures the skew starts from the bottom right */
+}
+
+.background-section-top {
+    position: relative;
+    /* Needed for absolute positioning of the :after element */
+    overflow: hidden;
+    /* Ensures the pseudo-element doesn't overflow outside the section */
+}
+
+.background-section-top:after {
+    content: '';
+    position: absolute;
+    top: 0; /* Position at the top */
+    left: 0;
+    width: 100%;
+    height: 100px; /* Adjust the height as needed */
+    background: #0d1314; /* Match the background color of your site */
+    transform: skewY(-2deg); /* Adjust the angle as needed */
+    transform-origin: 0%; /* This ensures the skew starts from the top left */
+}
+
 
 .expedition-text {
     font-family: 'Inter', sans-serif;

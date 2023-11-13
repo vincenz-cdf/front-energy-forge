@@ -1,12 +1,10 @@
 <div *ngIf="this.data" style="display: flex; align-items: center;">
-        <img src="../../../../assets/sprites/ui/energy.png" style="width: 50%;" alt="logo" />
+        <img [src]="uiPaths.energy" style="width: 50%;" alt="logo" />
         <span style="margin-left: -2px; margin-top: 1px;">{{this.data.energy}}</span>
     
-        <img src="../../../../assets/sprites/ui/coin.png" style="width: 50%;" alt="logo" />
+        <img [src]="uiPaths.coin" style="width: 50%;" alt="logo" />
         <span style="margin-left: -2px; margin-top: 1px;">{{this.data.coin}}</span>
 
-        <!--
-        <img src="../../../../assets/sprites/ui/diamond.png" style="width: 50%;" alt="logo" />
-        <span style="margin-left: -2px; margin-top: 1px;">0</span>
-        -->
+        <img [src]="uiPaths.diamond" style="width: 50%;" alt="logo" />
+        <span style="margin-left: -2px; margin-top: 1px;">{{this.data.diamond}}</span>
 </div>
