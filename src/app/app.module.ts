@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MidnightCountdownComponent } from './utils/midnight-countdown/midnight-countdown.component';
 import { HelpComponent } from './homepage/auth-content/help/help.component';
 import { GenericInputComponent } from './homepage/auth-content/dialogs/generic-input/generic-input.component';
+import { StripeDiamondComponent } from './homepage/auth-content/stripe-diamond/stripe-diamond.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { GenericInputComponent } from './homepage/auth-content/dialogs/generic-i
     MidnightCountdownComponent,
     HelpComponent,
     GenericInputComponent,
+    StripeDiamondComponent,
   ],
   imports: [
     BrowserModule,

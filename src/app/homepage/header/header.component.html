@@ -33,23 +33,28 @@
 					</li>
 				</ul>
 			</div>
-			<!-- Resources and Logout/Login Buttons omitted for brevity -->
-			<div class="ms-auto">
-				<div class="row">
-					<div *ngIf="isAuth" class="col-6 mt-3">
-						<app-resouces />
-					</div>
-					<div class="col-6">
-						<button *ngIf="!isAuth" class="btn btn-danger active" style="margin: 10px"
-							(click)="loginEvent.emit()">
-							Login
-						</button>
-						<button *ngIf="isAuth" class="btn btn-dark" style="margin: 10px" (click)="logoutEvent.emit()">
-							Logout
-						</button>
+			<div style="display: flex; align-items: center; justify-content: space-between;">
+				<!-- Resources -->
+				<app-resouces />
+
+				<!-- User Button -->
+				<div *ngIf="isAuth" ngbDropdown class="btn-group user-dropdown">
+					<button class="btn btn-sm btn-dark" ngbDropdownToggle style="margin: 10px">
+						<i class="fas fa-user"></i>
+					</button>
+					<div ngbDropdownMenu class="dropdown-menu-left">
+						<button ngbDropdownItem (click)="buyDiamonds()">Buy diamonds <img [src]="uiPaths.diamond"
+								style="width: 25%; height: auto; margin-top: -3px; margin-left: -3px;"
+								alt="logo" /></button>
+						<button ngbDropdownItem (click)="logoutEvent.emit()">Logout</button>
 					</div>
 				</div>
+
 			</div>
+			<button *ngIf="!isAuth" class="btn btn-danger active" style="position: absolute; right: 10px; top: 10px;"
+				(click)="loginEvent.emit()">
+				Login
+			</button>
 		</nav>
 	</div>
 </header>
