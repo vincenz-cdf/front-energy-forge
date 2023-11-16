@@ -141,30 +141,32 @@ export class CombatInstanceComponent implements OnInit {
   async seeCombatResult() {
     await this.errorService.notifyCombatResult(this.combatInstance);
 
-    const equipmentCount: { [key: string]: number } = {};
-    for (let s of this.combatInstance.combatReward.equipments) {
-      if (!equipmentCount[s.spritePath]) {
-        equipmentCount[s.spritePath] = 0;
+    if (this.combatInstance.status != 'LOST_FINAL') {
+      const equipmentCount: { [key: string]: number } = {};
+      for (let s of this.combatInstance.combatReward.equipments) {
+        if (!equipmentCount[s.spritePath]) {
+          equipmentCount[s.spritePath] = 0;
+        }
+        equipmentCount[s.spritePath]++;
       }
-      equipmentCount[s.spritePath]++;
-    }
-
-    const consumableCount: { [key: string]: number } = {};
-    for (let c of this.combatInstance.combatReward.consumables) {
-      if (!consumableCount[c.spritePath]) {
-        consumableCount[c.spritePath] = 0;
+  
+      const consumableCount: { [key: string]: number } = {};
+      for (let c of this.combatInstance.combatReward.consumables) {
+        if (!consumableCount[c.spritePath]) {
+          consumableCount[c.spritePath] = 0;
+        }
+        consumableCount[c.spritePath]++;
       }
-      consumableCount[c.spritePath]++;
-    }
-
-    for (let spritePath in equipmentCount) {
-      const count = equipmentCount[spritePath];
-      await this.errorService.notifyNewItem(spritePath, count);
-    }
-
-    for (let spritePath in consumableCount) {
-      const count = consumableCount[spritePath];
-      await this.errorService.notifyNewItem(spritePath, count);
+  
+      for (let spritePath in equipmentCount) {
+        const count = equipmentCount[spritePath];
+        await this.errorService.notifyNewItem(spritePath, count);
+      }
+  
+      for (let spritePath in consumableCount) {
+        const count = consumableCount[spritePath];
+        await this.errorService.notifyNewItem(spritePath, count);
+      }
     }
 
     this.expeditionService.gatherRewards(this.combatInstance.id).then(() => {

@@ -39,7 +39,11 @@ export class CharactersComponent implements OnInit {
 
   loadAllYourCharacter() {
     this.expeditionService.listAllCharactersByUserId(this.fromHabitScreen).then((response) => {
-      this.characters = response.data.data;
+      if (this.fromHabitScreen) {
+        this.characters = response.data.data;
+      } else {
+        this.characters = response.data.data.filter((char: any) => char.hp > 0);
+      }
     }, (error) => {
       this.errorService.handleError(error);
     })
