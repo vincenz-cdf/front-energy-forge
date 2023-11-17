@@ -120,4 +120,12 @@ export class BuildingsComponent implements OnInit {
     })
   }
 
+  refreshMarket() {
+    this.playerService.refreshMarket().then(() => {
+      this.loadBuildings();
+    }, (error) => {
+      this.errorService.notifyError(error);
+    });
+  }
+
 }

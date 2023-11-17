@@ -84,4 +84,8 @@ export class PlayerService {
 
     return modalRef;
   }
+
+  refreshMarket() {
+    return this.axiosService.request("PUT", "/market/refresh" , {});
+  }
 }

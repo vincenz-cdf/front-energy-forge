@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-midnight-countdown',
@@ -8,6 +8,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class MidnightCountdownComponent implements OnInit, OnDestroy {
   timeToMidnight: any;
   private timerInterval: any;
+
+  @Input() italic: any;
 
   constructor() {
     this.updateTimeToMidnight();

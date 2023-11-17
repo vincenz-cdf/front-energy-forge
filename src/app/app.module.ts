@@ -24,6 +24,7 @@ import { MidnightCountdownComponent } from './utils/midnight-countdown/midnight-
 import { HelpComponent } from './homepage/auth-content/help/help.component';
 import { GenericInputComponent } from './homepage/auth-content/dialogs/generic-input/generic-input.component';
 import { StripeDiamondComponent } from './homepage/auth-content/stripe-diamond/stripe-diamond.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { StripeDiamondComponent } from './homepage/auth-content/stripe-diamond/s
     FormsModule,
     NgbModule,
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
+    RouterModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]
