@@ -123,6 +123,7 @@ export class BuildingsComponent implements OnInit {
   refreshMarket() {
     this.playerService.refreshMarket().then(() => {
       this.loadBuildings();
+      this.profileService.notifyChildD();
     }, (error) => {
       this.errorService.notifyError(error);
     });

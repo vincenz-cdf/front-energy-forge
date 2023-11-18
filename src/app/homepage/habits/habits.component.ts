@@ -2,8 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PlayerService } from 'src/app/dbservice/player.service';
 import { ProfileService } from 'src/app/profile.service';
 
-import { AnimationEvent } from '@angular/animations';
-
 import { bounceFadeOutAnimation } from 'src/app/animations/bounceFadeOutAnimation';
 import { ErrorService } from 'src/app/error.service';
 
@@ -26,7 +24,8 @@ export class HabitsComponent implements OnInit {
   showImage = false;
 
   ngOnInit(): void {
-    this.showHabits()
+    this.showHabits();
+    this.profileService.notifyChildD();
   }
 
   showHabits() {
