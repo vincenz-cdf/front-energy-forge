@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { loadStripe } from '@stripe/stripe-js';
 import { AxiosService } from './axios.service';
 import { ErrorService } from './error.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { ErrorService } from './error.service';
 export class PaymentService {
 
   //pk_test_51OD65nBYeCrNLX32ORnZ8RGweEoN6IlqhxFXSP2JEWnrQuW4cpASxiUn1TE7Gh9QuZeyaNfOt8nOX8KmJprXIBYm00wHtzerlJ
-  stripePromise = loadStripe('pk_test_51OD65nBYeCrNLX32ORnZ8RGweEoN6IlqhxFXSP2JEWnrQuW4cpASxiUn1TE7Gh9QuZeyaNfOt8nOX8KmJprXIBYm00wHtzerlJ');
+  stripePromise = loadStripe(environment.stripeKey);
 
   constructor(private axiosService: AxiosService, private errorService: ErrorService) { }
 
