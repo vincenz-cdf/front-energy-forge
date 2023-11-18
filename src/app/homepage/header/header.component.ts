@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { UIPATHS } from 'src/app/consts/ui-paths.constants';
+import { PlayerService } from 'src/app/dbservice/player.service';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +13,10 @@ export class HeaderComponent {
 
   @Input() isAuth!: boolean;
 
+  uiPaths = UIPATHS;
+
   currentPage: string = "homepage";
-  
+
   @Output() logoutEvent = new EventEmitter();
   @Output() loginEvent = new EventEmitter();
   @Output() homepageEvent = new EventEmitter();
@@ -21,8 +25,10 @@ export class HeaderComponent {
   @Output() helpEvent = new EventEmitter();
 
   isNavbarCollapsed = true; // Initially collapsed
-  
-  constructor() {
+
+  constructor(
+    private playerService: PlayerService
+  ) {
   }
 
   emitEvent(page: string) {
@@ -43,5 +49,9 @@ export class HeaderComponent {
     }
 
     this.currentPage = page;
+  }
+
+  buyDiamonds() {
+    this.playerService.manageBuyDiamondDialog();
   }
 }

@@ -42,15 +42,46 @@ export class ErrorService {
   }
 
   notifyCombatResult(combatInstance: any) {
+    let rewardHtml = `
+      ${combatInstance.combatReward.coins}
+      <img src="../assets/sprites/ui/coin.png" alt="gold" width="20"> 
+      ${combatInstance.combatReward.experiencePoints} xp
+    `;
+  
+    // Only add diamonds to the HTML if they are part of the reward
+    if (combatInstance.combatReward.diamonds > 0) {
+      rewardHtml += `
+        ${combatInstance.combatReward.diamonds}
+        <img src="../assets/sprites/ui/diamond.png" alt="diamond" width="20"> 
+      `;
+    }
+  
+    if (combatInstance.status == "WON_FINAL") {
+      return Swal.fire({
+        icon: 'info',
+        title: 'Victory',
+        html: rewardHtml,
+        showConfirmButton: true,
+      });
+    } else {
+      return Swal.fire({
+        icon: 'info',
+        title: 'Defeat',
+        text: 'All equipped items have been lost and your heroes need to be healed back at the Temple',
+        showConfirmButton: true,
+      });
+    }
+  }
+  
+
+  notifyCombatResultWithoutDiamond(combatInstance: any) {
     if (combatInstance.status == "WON_FINAL") {
       return Swal.fire({
         icon: 'info',
         title: 'Victory',
         html: `
         ${combatInstance.combatReward.coins}
-        <img src="../assets/sprites/ui/coin.png" alt="gold" width="20"> 
-        ${combatInstance.combatReward.diamonds}
-        <img src="../assets/sprites/ui/diamond.png" alt="diamond" width="20"> 
+        <img src="../assets/sprites/ui/coin.png" alt="gold" width="20">
         ${combatInstance.combatReward.experiencePoints} xp
       `,
         showConfirmButton: true,

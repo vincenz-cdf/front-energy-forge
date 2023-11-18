@@ -3,6 +3,7 @@ import { AxiosService } from '../axios.service';
 import { CharacterEquipment } from '../homepage/dialogs/character-equipment.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenericInputComponent } from '../homepage/auth-content/dialogs/generic-input/generic-input.component';
+import { StripeDiamondComponent } from '../homepage/auth-content/stripe-diamond/stripe-diamond.component';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +77,15 @@ export class PlayerService {
 
   renameCharacter(id: any, name: any) {
     return this.axiosService.request("PUT", "/characters/" + id + "/rename/" + name , {});
+  }
+
+  manageBuyDiamondDialog() {
+    const modalRef = this.modalService.open(StripeDiamondComponent, { size: 'md', backdrop: 'static' });
+
+    return modalRef;
+  }
+
+  refreshMarket() {
+    return this.axiosService.request("PUT", "/market/refresh" , {});
   }
 }

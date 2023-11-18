@@ -1,6 +1,8 @@
 <div class="modal-header">
     <h3 style="margin-right: 16px;">{{character.name}}</h3>
-    <button (click)="renameCharacter()" class="btn btn-sm btn-warning">50 <img [src]="uiPaths.diamond" style="width: 50%;" alt="logo" /></button>
+    <button (click)="renameCharacter()" class="btn btn-info text-white" style="padding: 1px 3px;
+    font-size: 9px;
+    line-height: 0.7;">50<img [src]="uiPaths.diamond" style="width: 50%; height: auto;" alt="logo" /></button>
     <button type="button" class="btn-close" aria-label="Close" (click)="save()"></button>
 </div>
 <div class="modal-body">
@@ -70,13 +72,13 @@
         <div class="col-8 col-sm-9">
             <div class="row">
                 <div class="col-4">
-                    <button (click)="switchDisplayingItems('E')" class="btn btn-sm btn-secondary">Equipments</button>
+                    <button (click)="switchDisplayingItems('E')" [ngClass]="displayedItems == 'E' ? 'btn btn-sm btn-warning active' : 'btn btn-sm btn-outline-warning'">Equipments</button>
                 </div>
                 <div class="col-4">
-                    <button (click)="switchDisplayingItems('C')" class="btn btn-sm btn-secondary">Consumables</button>
+                    <button (click)="switchDisplayingItems('C')" [ngClass]="displayedItems == 'C' ? 'btn btn-sm btn-warning active' : 'btn btn-sm btn-outline-warning'">Consumables</button>
                 </div>
                 <div class="col-4">
-                    <button (click)="switchDisplayingItems('S')" class="btn btn-sm btn-secondary">Skills</button>
+                    <button (click)="switchDisplayingItems('S')" [ngClass]="displayedItems == 'S' ? 'btn btn-sm btn-warning active' : 'btn btn-sm btn-outline-warning'">Skills</button>
                 </div>
             </div>
             <div *ngIf="displayedItems == 'E'">

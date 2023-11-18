@@ -80,8 +80,9 @@ export class BuildingsComponent implements OnInit {
   }
 
   allCharactersHealthy(): boolean {
-    // This function checks if all characters are healthy
-    return !this.characters.some((char:any) => !char.recovering && char.hp !== char.maxHp);
+      // This function checks if all characters are healthy
+      return !this.characters.some((char: any) => !char.recovering && char.hp !== char.maxHp);
+
   }
 
   allCharactersHappy(): boolean {
@@ -117,6 +118,15 @@ export class BuildingsComponent implements OnInit {
         return;
       }
     })
+  }
+
+  refreshMarket() {
+    this.playerService.refreshMarket().then(() => {
+      this.loadBuildings();
+      this.profileService.notifyChildD();
+    }, (error) => {
+      this.errorService.notifyError(error);
+    });
   }
 
 }

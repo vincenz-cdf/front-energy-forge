@@ -28,3 +28,11 @@
 .dropdown-toggle:not(:focus) {
   outline: 0;
 }
+
+.user-dropdown .dropdown-menu-left {
+  transform: translateX(-50%);
+}
+
+.user-dropdown .dropdown-toggle::after {
+  display: none;
+}
